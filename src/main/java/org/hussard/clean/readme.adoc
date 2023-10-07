@@ -1,0 +1,19 @@
+= Clean architecture
+
+:doctype: manpage
+:encoding: utf-8
+:lang: en
+:toc: left
+:imagesdir: images
+:toclevels: 6
+:source-highlighter: rouge
+:rouge-style: github
+//ref: ttps://www.compart.com/fr/unicode/
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+
+
+Dans ce package, il sera défini les différents qui composent une *clean architecture*

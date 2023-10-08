@@ -1,0 +1,114 @@
+= Clean architecture
+
+:doctype: book
+:encoding: utf-8
+:lang: en
+:toc: left
+:imagesdir: images
+:toclevels: 6
+:source-highlighter: rouge
+:rouge-style: github
+//ref: ttps://www.compart.com/fr/unicode/
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+
+Dans ce package, il sera défini les différents qui composent une *clean architecture*
+[NOTE]
+* Tout ce qui écrit dans ce document est mon interpretation personnel du sujet
+* Il est tout à fait possible de mettre les packages suivants en module maven
+
+== Introduction
+La *clean architecture* est une organisation structuruelle mais aussi une méthode de travail.
+
+* Permet de ranger les différentes parties d'un projet dans des packages précis
+* Une méthode qui demande une rigueur, du coup demande un apprentissage qui n'est pas forcément simple
+
+== La composition
+Dans cette partie, nous allons voir les éléments importants qui constituent la **clean architecture**
+
+=== La répartition
+
+Elle se compose en 3 parties :
+
+* Une partie application, cette partie est le point d'entrée du backEnd.
+* Une partie métier(business), celle-ci contiendra uniquement toutes les règles métiers
+* Une partie infrastructure, elle aura pour but de communiquer avec les différents services de l'entreprise, tel-que : une base de données, un service, des fichiers .etc
+
+[IMPORTANT]
+Il est interdit d'avoir plus de partie
+
+=== Les règles
+Elles vont permettre de bien mettre en place l'utilisation de la solution **clean architecture**
+
+==== Métier
+*La plus importante de toutes, il est strictement de faire communiquer un élément du package métier(business) avec les deux autres(application, architecture). Ce qui veut dire par exemple, il n'est pas possible d'avoir des mappers*
+
+==== Application
+Cette partie peut communiquer avec les deux autres parties de la façon suivante :
+
+* Implémentera une interface de la partie métier pour utiliser un service de la partie métier
+* Implémentera une interface de la partie métier pour utiliser un service de la partie infrastructure
+
+==== Infrastructure
+Cette partie implémentera une interface de la partie métier pour créer des services
+
+=== La structure
+Nous allons définir les éléments qui seront dans chacune des parties
+
+==== Métier
+[plantuml, format=svg, opts="inline"]
+----
+!include ./style/nodot-asciidoctor-style.iuml
+legend
+clean
+|_ metier
+  |_ models : Les data
+  |_ port
+    |_ in : interfaces pour la partie application
+    |_ out : interfaces pour la partie infrastructure
+  |_ services : services métier implémentant des interfaces du package port.in
+  |_ commun : ensemble de classes qui seront utilisées dans le package services
+end legend
+----
+==== Application
+[plantuml, format=svg, opts="inline"]
+----
+!include ./style/nodot-asciidoctor-style.iuml
+legend
+clean
+|_ application
+  |_ dto : Les data
+  |_ controllers : Controller spring boot
+  |_ services : Services spring boot, ici seront utilisés les services du métier
+  |_ mappers : Mapper des application.dto en metier.models et inversement
+end legend
+----
+==== Infrastructure
+
+[plantuml, format=svg, opts="inline"]
+----
+!include ./style/nodot-asciidoctor-style.iuml
+legend
+clean
+|_ infrastructure
+  |_ rest : Les appels vers des services rest
+    |_ entities : Les data
+    |_ services : Component spring boot, implément une interface contenue dans metier.port.out
+    |_ mappers : Mapper des rest.entities en metier.models et inversement
+  |_ soap : Les appels vers des services soap
+    |_ entities : Les data
+    |_ services : Component spring boot, implément une interface contenue dans metier.port.out
+    |_ mappers : Mapper des soap.entities en metier.models et inversement
+  |_ repository : Les appels vers des services db
+     |_ entities : Les data
+     |_ services : Repository spring boot, implément une interface contenue dans metier.port.out
+     |_ mappers : Mapper des repository.entities en metier.models et inversement
+end legend
+----
+
+
+
+

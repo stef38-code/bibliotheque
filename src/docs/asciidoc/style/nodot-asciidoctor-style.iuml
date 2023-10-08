@@ -1,0 +1,19 @@
+skinparam Legend {
+	BackgroundColor transparent
+	BorderColor transparent
+	BorderThickness 0
+	FontName "Noto Serif", "DejaVu Serif", serif
+	FontSize 17
+}
+skinparam SequenceLifeLineBorderThickness 0
+skinparam SequenceLifeLineBorderColor transparent
+skinparam SequenceParticipant {
+	BackgroundColor transparent
+	BorderColor transparent
+	Shadowing true
+	FontSize 0
+	BorderThickness 0
+	Padding 0
+}
+hide footbox
+participant dummy

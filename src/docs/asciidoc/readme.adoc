@@ -109,6 +109,11 @@ clean
 end legend
 ----
 
-
+== ressources
+* https://leandeep.com/clean-architecture/[leandeep.com]
+* https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/[software-craftsmanship]
+* https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)[wikipedia]
+* https://www.thoughtworks.com/insights/blog/architecture/demystify-software-architecture-patterns[demystify-software-architecture-patterns]
+* https://www.milanjovanovic.tech/blog/why-clean-architecture-is-great-for-complex-projects[milanjovanovic]
 
 

@@ -1,5 +1,4 @@
 = Clean architecture
-
 :doctype: book
 :encoding: utf-8
 :lang: en
@@ -16,15 +15,16 @@
 :caution-caption: pass:[&#9761;]
 
 Dans ce package, il sera défini les différents qui composent une *clean architecture*
-[NOTE]
-* Tout ce qui écrit dans ce document est mon interpretation personnel du sujet
-* Il est tout à fait possible de mettre les packages suivants en module maven
 
 == Introduction
 La *clean architecture* est une organisation structuruelle mais aussi une méthode de travail.
 
 * Permet de ranger les différentes parties d'un projet dans des packages précis
 * Une méthode qui demande une rigueur, du coup demande un apprentissage qui n'est pas forcément simple
+
+[NOTE]
+* Tout ce qui écrit dans ce document est mon interpretation personnel du sujet
+* Il est tout à fait possible de mettre les packages suivants en module maven
 
 == La composition
 Dans cette partie, nous allons voir les éléments importants qui constituent la **clean architecture**
@@ -116,4 +116,6 @@ end legend
 * https://www.thoughtworks.com/insights/blog/architecture/demystify-software-architecture-patterns[demystify-software-architecture-patterns]
 * https://www.milanjovanovic.tech/blog/why-clean-architecture-is-great-for-complex-projects[milanjovanovic]
 
+exemple:
 
+* https://github.com/spring-projects/spring-petclinic/blob/main/readme.md[Todo]

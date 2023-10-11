@@ -1,0 +1,87 @@
+= Pattern fluent
+:doctype: book
+:encoding: utf-8
+:lang: en
+:toc: left
+:imagesdir: images
+:toclevels: 6
+:source-highlighter: rouge
+:rouge-style: github
+== A propos
+Le pattern fluent est une solution de pattern Builder qui presente un avantage intéressant.
+
+== Exemples
+
+La classe de notre exemple est la suivante, elle est composée de
+
+* 3 propriétés obligatoires : `nom, prenom, dNaiss`
+* 2 propriétés optionnelles : `emploi, marie`
+
+[source,java]
+----
+public class Personne {
+    //Les propriétés OBLIGATOIRES
+    private final String nom;
+    private final String prenom;
+    private final LocalDate dNaiss;
+    //Les propriétés optionnelles
+    private final String emploi;
+    private final boolean marie;
+}
+----
+=== Builder
+==== Source
+Voici un exemple du pattern builder :
+[source,java]
+----
+include::../../main/java/org/hussard/pattern/builder/Personne.java[]
+----
+
+==== Test unitaire
+Le test unitaire associé
+[source,java]
+----
+include::../../test/java/org/hussard/pattern/builder/PersonneTest.java[]
+----
+
+=== Constat
+
+[IMPORTANT]
+On peut remarque que si dans le premier test, le développeur a bien renseigné toutes les propriétés. +
+Par-contre, dans le deuxième test, il n'a renseigné que le `nom` alors qu'il y a encore deux propriétés **obligatoires** (`prenom, dNaiss`). +
+Sans parler du dernier test....
+
+On peut facilement le voir avec l'aide à la saisie des IDE, l'image ci-dessous montre la liste des méthodes possibles. Du coup, le développeur peut faire comme il le souhaite alors que notre classe `Personne` a des restrictions.
+
+image::../images/builderProperties.png[]
+
+=== Schema
+[plantuml, format=svg, opts="inline"]
+----
+left to right direction
+circle PersonneBuilder
+circle nom
+circle prenom
+circle dNaiss
+circle emploi
+circle marie
+circle create
+PersonneBuilder --> nom
+PersonneBuilder --> prenom
+PersonneBuilder --> dNaiss
+PersonneBuilder --> emploi
+PersonneBuilder --> marie
+PersonneBuilder --> create
+----
+
+== Fluent
+Nous venons de voir que le pattern builder comporte un problème de taille. +
+Il ne contraint pas le développeur à saisir les propriétés obligatoires.
+
+Le pattern Build Fluent oblige aux développeurs de suivre le schema directeur pour bien construire un objet.
+Mais cela demande aussi à la personne qui va créer cette solution un apprentissage et une reflexion souvent pas simple au début.
+
+Je vous propose de voir ensemble comme faire cela
+
+
+

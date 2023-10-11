@@ -4,6 +4,7 @@
 :lang: en
 :toc: left
 :imagesdir: images
+:stylesdir: styles
 :toclevels: 6
 :source-highlighter: rouge
 :rouge-style: github
@@ -61,7 +62,6 @@ Nous allons définir les éléments qui seront dans chacune des parties
 ==== Métier
 [plantuml, format=svg, opts="inline"]
 ----
-!include ./style/nodot-asciidoctor-style.iuml
 legend
 clean
 |_ metier
@@ -76,7 +76,6 @@ end legend
 ==== Application
 [plantuml, format=svg, opts="inline"]
 ----
-!include ./style/nodot-asciidoctor-style.iuml
 legend
 clean
 |_ application
@@ -90,7 +89,6 @@ end legend
 
 [plantuml, format=svg, opts="inline"]
 ----
-!include ./style/nodot-asciidoctor-style.iuml
 legend
 clean
 |_ infrastructure

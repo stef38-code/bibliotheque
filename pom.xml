@@ -8,8 +8,9 @@
     <artifactId>bibliotheque</artifactId>
     <version>1.0</version>
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -19,12 +20,21 @@
         <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
         <extra-enforcer-rules.version>1.7.0</extra-enforcer-rules.version>
         <slf4jVersion>1.6.1</slf4jVersion>
+        <asciidoctorj.version>2.5.10</asciidoctorj.version>
+        <surefire-plugin.version>3.1.2</surefire-plugin.version>
+        <failsafe-plugin.version>3.1.2</failsafe-plugin.version>
+        <javadoc-plugin.version>3.5.0</javadoc-plugin.version>
+        <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
+        <asciidoctor-plugin.version>2.2.4</asciidoctor-plugin.version>
+        <project-info-reports-plugin.version>2.9</project-info-reports-plugin.version>
+        <maven.version>1.14.0</maven.version>
+        <pitest-junit5.version>1.1.2</pitest-junit5.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctorj</artifactId>
-            <version>2.5.10</version>
+            <version>${asciidoctorj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -101,7 +111,7 @@
                                 </dependencyConvergence>
                                 <banDuplicatePomDependencyVersions/>
                                 <requireJavaVersion>
-                                    <version>17</version>
+                                    <version>${java.version}</version>
                                 </requireJavaVersion>
                                 <bannedDependencies>
                                     <searchTransitive>false</searchTransitive>
@@ -134,16 +144,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${failsafe-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -156,7 +167,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
+                <version>${jacoco-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>report-aggregate</id>
@@ -170,7 +181,7 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>2.2.4</version>
+                <version>${asciidoctor-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>asciidoc-to-html</id>
@@ -195,7 +206,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--<sourceDirectory>./doc</sourceDirectory>-->
                     <outputDirectory>./docs</outputDirectory>
                     <headerFooter>true</headerFooter>
 
@@ -204,12 +214,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.9</version>
+                <version>${project-info-reports-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.14.0</version>
+                <version>${maven.version}</version>
                 <configuration>
                     <timestampedReports>false</timestampedReports>
                     <failWhenNoMutations>false</failWhenNoMutations>
@@ -228,7 +238,7 @@
                     <dependency>
                         <groupId>org.pitest</groupId>
                         <artifactId>pitest-junit5-plugin</artifactId>
-                        <version>1.1.2</version>
+                        <version>${pitest-junit5.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

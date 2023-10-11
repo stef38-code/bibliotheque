@@ -76,12 +76,193 @@ PersonneBuilder --> create
 
 == Fluent
 Nous venons de voir que le pattern builder comporte un problème de taille. +
-Il ne contraint pas le développeur à saisir les propriétés obligatoires.
+**[red]#Il ne contraint pas le développeur à saisir les propriétés obligatoires.#**
 
-Le pattern Build Fluent oblige aux développeurs de suivre le schema directeur pour bien construire un objet.
+Le pattern Build Fluent oblige le développeur de suivre le schema directeur pour bien construire un objet.
 Mais cela demande aussi à la personne qui va créer cette solution un apprentissage et une reflexion souvent pas simple au début.
 
 Je vous propose de voir ensemble comme faire cela
 
+=== Schemas && Tests unitaires
+Nous voulons avoir le déroulement suivant :
 
+==== Premier cas
+[blue]``Une Personne non marié, sans emploi``
+
+[plantuml, format=svg, opts="inline"]
+----
+left to right direction
+circle PersonneBuilder
+circle get
+circle nom
+circle prenom
+circle dNaiss
+circle create
+PersonneBuilder --> get
+get --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> create
+----
+[source,java]
+----
+class CreatePersonne{
+    @Test
+    @Display("Une personne pas marié, sans emploi")
+    void create_PersonnePasMarieSansEmploi(){
+        Personne personne = PersonneApi.get()
+                .nom("Bob")
+                .prenom("Eponge")
+                .dNaiss(LocalDate.of(2000, 2, 25))
+                .create();
+    }
+}
+----
+==== Deuxième cas
+[blue]``Une personne marié sans emploi``
+[plantuml, format=svg, opts="inline"]
+----
+left to right direction
+circle PersonneBuilder
+circle get
+circle nom
+circle prenom
+circle dNaiss
+circle marie
+circle create
+PersonneBuilder --> get
+get --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> marie
+marie --> create
+----
+[source,java]
+----
+class CreatePersonne{
+    @Test
+    @Display("Une personne marié sans emploi")
+    void create_UnePersonneMarieSansEmploi(){
+        Personne personne = PersonneApi.get()
+                .nom("Bob")
+                .prenom("Eponge")
+                .dNaiss(LocalDate.of(2000, 2, 25))
+                .marie(true)
+                .create();
+    }
+}
+----
+==== Troisième cas
+[blue]``Une personne pas marié avec emploi``
+[plantuml, format=svg, opts="inline"]
+----
+left to right direction
+circle PersonneBuilder
+circle nom
+circle prenom
+circle dNaiss
+circle emploi
+circle create
+PersonneBuilder --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> emploi
+emploi --> create
+----
+[source,java]
+----
+class CreatePersonne{
+
+    @Test
+    @Display("Une personne pas marié avec emploi")
+    void create_UnePersonnePasMarieAvecUnEmploi(){
+        Personne personne = PersonneApi.get()
+                .nom("Bob")
+                .prenom("Eponge")
+                .dNaiss(LocalDate.of(2000, 2, 25))
+                .emploi("Garagiste")
+                .create();
+    }
+}
+----
+==== Quatrième cas
+[blue]``Une personne pas marié avec emploi``
+Ce cas est intéressant car il doit être possible de saisir soit :
+
+* marie puis emploi
+
+[plantuml, format=svg, opts="inline"]
+----
+left to right direction
+circle PersonneBuilder
+circle nom
+circle prenom
+circle dNaiss
+circle emploi
+circle marie
+circle create
+PersonneBuilder --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> marie
+marie --> emploi
+emploi --> create
+----
+* emploi puis marie
+
+[plantuml, format=svg, opts="inline"]
+----
+left to right direction
+circle PersonneBuilder
+circle nom
+circle prenom
+circle dNaiss
+circle emploi
+circle marie
+circle create
+PersonneBuilder --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> emploi
+emploi --> marie
+marie --> create
+----
+
+[source,java]
+----
+class CreatePersonne{
+    /**
+    * Les deux cas qui suivent sont identiques pour
+    * ce qui est de l'objet final, mais la saisie des
+    * propriétés emploi et marie sont pas dans le même ordre
+    */
+    @Test
+    @Display("Cas 1: Une personne marié avec un emploi")
+    void create_Cas1__UnePersonneMarieAvecUnEmploi(){
+        Personne personne = PersonneApi.get()
+                .nom("Bob")
+                .prenom("Eponge")
+                .dNaiss(LocalDate.of(2000, 2, 25))
+                .emploi("Garagiste")
+                .marie(true)
+                .create();
+    }
+    @Test
+    @Display("Cas 2: Une personne marié avec un emploi")
+    void create_Cas2_UnePersonneMarieAvecUnEmploi(){
+        Personne personne = PersonneApi.get()
+                .nom("Bob")
+                .prenom("Eponge")
+                .dNaiss(LocalDate.of(2000, 2, 25))
+                .marie(true)
+                .emploi("Garagiste")
+                .create();
+    }
+}
+----
+=== Mise en application
+==== Premier cas
+==== Deuxième cas
+==== Troisième cas
+==== Quatrième cas
 

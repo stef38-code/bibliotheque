@@ -7,8 +7,9 @@
 :toclevels: 6
 :source-highlighter: rouge
 :rouge-style: github
+
 == A propos
-Le pattern fluent est une solution de pattern Builder qui presente un avantage intéressant.
+Le *pattern fluent* est une solution de *pattern Builder* qui presente un avantage intéressant.
 
 == Exemples
 
@@ -53,7 +54,8 @@ Sans parler du dernier test....
 
 On peut facilement le voir avec l'aide à la saisie des IDE, l'image ci-dessous montre la liste des méthodes possibles. Du coup, le développeur peut faire comme il le souhaite alors que notre classe `Personne` a des restrictions.
 
-image::../images/builderProperties.png[]
+//image::../images/builderProperties.png[]
+Todo
 
 === Schema
 [plantuml, format=svg, opts="inline"]
@@ -72,6 +74,7 @@ PersonneBuilder --> dNaiss
 PersonneBuilder --> emploi
 PersonneBuilder --> marie
 PersonneBuilder --> create
+
 ----
 
 == Fluent
@@ -261,7 +264,32 @@ class CreatePersonne{
 }
 ----
 === Mise en application
+
+Nous avons besoin de définir 3 classes :
+
+* Une interface [green]``xxxStep`` : elle permet la mise en place des enchaînements des saisies
+* Une classe [green]``xxxApi`` : elle implémentera des éléments de l'interface [green]``xxxStep``
+* Une classe [green]``xxxBuilder`` : Cette classe sera notre builder
+Le code source sera toujours sous la forme
+
+[NOTE]
+Remplacer les [red]``xxx`` par le nom de la classe de données
+
+[source,java]
+----
+public class xxxBuilder {
+    private xxxBuilder() {
+        throw new UnsupportedOperationException("Is a utility class and cannot be instantiated");
+    }
+    public static xxxStep get() {
+        return new xxxApi();
+    }
+}
+----
+
+
 ==== Premier cas
+
 ==== Deuxième cas
 ==== Troisième cas
 ==== Quatrième cas

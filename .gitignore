@@ -1,4 +1,5 @@
 docs/
+!**/src/docs/
 target/
 .mvn/
 !**/src/main/**/target/

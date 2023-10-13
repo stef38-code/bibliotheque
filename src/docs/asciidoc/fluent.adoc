@@ -60,6 +60,8 @@ Todo
 === Schema
 [plantuml, format=svg, opts="inline"]
 ----
+!pragma layout smetana
+
 left to right direction
 circle PersonneBuilder
 circle nom
@@ -68,13 +70,13 @@ circle dNaiss
 circle emploi
 circle marie
 circle create
+
 PersonneBuilder --> nom
 PersonneBuilder --> prenom
 PersonneBuilder --> dNaiss
 PersonneBuilder --> emploi
 PersonneBuilder --> marie
 PersonneBuilder --> create
-
 ----
 
 == Fluent
@@ -92,21 +94,8 @@ Nous voulons avoir le déroulement suivant :
 ==== Premier cas
 [blue]``Une Personne non marié, sans emploi``
 
-[plantuml, format=svg, opts="inline"]
-----
-left to right direction
-circle PersonneBuilder
-circle get
-circle nom
-circle prenom
-circle dNaiss
-circle create
-PersonneBuilder --> get
-get --> nom
-nom --> prenom
-prenom --> dNaiss
-dNaiss --> create
-----
+image::fluentCas1.png[]
+
 [source,java]
 ----
 class CreatePersonne{
@@ -123,23 +112,9 @@ class CreatePersonne{
 ----
 ==== Deuxième cas
 [blue]``Une personne marié sans emploi``
-[plantuml, format=svg, opts="inline"]
-----
-left to right direction
-circle PersonneBuilder
-circle get
-circle nom
-circle prenom
-circle dNaiss
-circle marie
-circle create
-PersonneBuilder --> get
-get --> nom
-nom --> prenom
-prenom --> dNaiss
-dNaiss --> marie
-marie --> create
-----
+
+image::fluentCas2.png[]
+
 [source,java]
 ----
 class CreatePersonne{
@@ -157,21 +132,9 @@ class CreatePersonne{
 ----
 ==== Troisième cas
 [blue]``Une personne pas marié avec emploi``
-[plantuml, format=svg, opts="inline"]
-----
-left to right direction
-circle PersonneBuilder
-circle nom
-circle prenom
-circle dNaiss
-circle emploi
-circle create
-PersonneBuilder --> nom
-nom --> prenom
-prenom --> dNaiss
-dNaiss --> emploi
-emploi --> create
-----
+
+image::fluentCas3.png[]
+
 [source,java]
 ----
 class CreatePersonne{
@@ -194,42 +157,11 @@ Ce cas est intéressant car il doit être possible de saisir soit :
 
 * marie puis emploi
 
-[plantuml, format=svg, opts="inline"]
-----
-left to right direction
-circle PersonneBuilder
-circle nom
-circle prenom
-circle dNaiss
-circle emploi
-circle marie
-circle create
-PersonneBuilder --> nom
-nom --> prenom
-prenom --> dNaiss
-dNaiss --> marie
-marie --> emploi
-emploi --> create
-----
+image::fluentCas4_1.png[]
+
 * emploi puis marie
 
-[plantuml, format=svg, opts="inline"]
-----
-left to right direction
-circle PersonneBuilder
-circle nom
-circle prenom
-circle dNaiss
-circle emploi
-circle marie
-circle create
-PersonneBuilder --> nom
-nom --> prenom
-prenom --> dNaiss
-dNaiss --> emploi
-emploi --> marie
-marie --> create
-----
+image::fluentCas4_2.png[]
 
 [source,java]
 ----
@@ -286,8 +218,6 @@ public class xxxBuilder {
     }
 }
 ----
-
-
 ==== Premier cas
 
 ==== Deuxième cas

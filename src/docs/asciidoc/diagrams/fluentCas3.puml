@@ -1,0 +1,16 @@
+@startuml
+
+left to right direction
+circle PersonneBuilder
+circle nom
+circle prenom
+circle dNaiss
+circle emploi
+circle create
+PersonneBuilder --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> emploi
+emploi --> create
+
+@enduml

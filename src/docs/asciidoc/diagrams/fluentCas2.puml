@@ -1,0 +1,18 @@
+@startuml
+
+left to right direction
+circle PersonneBuilder
+circle get
+circle nom
+circle prenom
+circle dNaiss
+circle marie
+circle create
+PersonneBuilder --> get
+get --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> marie
+marie --> create
+
+@enduml

@@ -7,6 +7,11 @@
 :toclevels: 6
 :source-highlighter: rouge
 :rouge-style: github
+:includedir: _includes
+:sourcedir: ../../main/java
+:testdir: ../../test/java
+
+
 
 == A propos
 Le *pattern fluent* est une solution de *pattern Builder* qui presente un avantage intéressant.
@@ -35,14 +40,14 @@ public class Personne {
 Voici un exemple du pattern builder :
 [source,java]
 ----
-include::../../main/java/org/hussard/pattern/builder/Personne.java[]
+include::{sourcedir}/org/hussard/pattern/builder/Personne.java[]
 ----
 
 ==== Test unitaire
 Le test unitaire associé
 [source,java]
 ----
-include::../../test/java/org/hussard/pattern/builder/PersonneTest.java[]
+include::{testdir}/org/hussard/pattern/builder/PersonneTest.java[]
 ----
 
 === Constat

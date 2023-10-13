@@ -2,13 +2,15 @@
 
 left to right direction
 circle PersonneBuilder
+circle get
 circle nom
 circle prenom
 circle dNaiss
 circle emploi
 circle marie
 circle create
-PersonneBuilder --> nom
+PersonneBuilder --> get
+get --> nom
 nom --> prenom
 prenom --> dNaiss
 dNaiss --> emploi

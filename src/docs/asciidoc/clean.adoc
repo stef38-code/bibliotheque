@@ -1,13 +1,5 @@
 = Clean architecture
-:doctype: book
-:encoding: utf-8
-:lang: en
-:toc: left
-:imagesdir: images
-:stylesdir: styles
-:toclevels: 6
-:source-highlighter: rouge
-:rouge-style: github
+include::default-preferences.adoc[]
 //ref: ttps://www.compart.com/fr/unicode/
 :tip-caption: pass:[&#x1F441;]
 :warning-caption: pass:[&#9888]

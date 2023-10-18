@@ -1,16 +1,5 @@
 = Pattern fluent
-:doctype: book
-:encoding: utf-8
-:lang: en
-:toc: left
-:imagesdir: images
-:toclevels: 6
-:source-highlighter: rouge
-:rouge-style: github
-:includedir: _includes
-:sourcedir: ../../main/java
-:testdir: ../../test/java
-
+include::default-preferences.adoc[]
 
 
 == A propos
@@ -20,7 +9,7 @@ Le *pattern fluent* est une solution de *pattern Builder* qui presente un avanta
 
 La classe de notre exemple est la suivante, elle est composée de
 
-* 3 propriétés obligatoires : `nom, prenom, dNaiss`
+* 3 propriétés obligatoires et dans l'ordre suivant : `nom, prenom, dNaiss`
 * 2 propriétés optionnelles : `emploi, marie`
 
 [source,java]
@@ -57,32 +46,13 @@ On peut remarque que si dans le premier test, le développeur a bien renseigné 
 Par-contre, dans le deuxième test, il n'a renseigné que le `nom` alors qu'il y a encore deux propriétés **obligatoires** (`prenom, dNaiss`). +
 Sans parler du dernier test....
 
-On peut facilement le voir avec l'aide à la saisie des IDE, l'image ci-dessous montre la liste des méthodes possibles. Du coup, le développeur peut faire comme il le souhaite alors que notre classe `Personne` a des restrictions.
+On peut facilement le voir avec l'aide à la saisie des IDE, l'image ci-dessous montre la liste des méthodes possibles. Du coup, le développeur peut faire comme il le souhaite alors que notre classe `Personne` contient des restrictions.
 
-//image::../images/builderProperties.png[]
-Todo
+.IDE intellij
+image::builderProperties.png[]
 
-=== Schema
-[plantuml, format=svg, opts="inline"]
-----
-!pragma layout smetana
-
-left to right direction
-circle PersonneBuilder
-circle nom
-circle prenom
-circle dNaiss
-circle emploi
-circle marie
-circle create
-
-PersonneBuilder --> nom
-PersonneBuilder --> prenom
-PersonneBuilder --> dNaiss
-PersonneBuilder --> emploi
-PersonneBuilder --> marie
-PersonneBuilder --> create
-----
+.Schema
+image::Builder.png[]
 
 == Fluent
 Nous venons de voir que le pattern builder comporte un problème de taille. +

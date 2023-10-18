@@ -1,0 +1,28 @@
+@startuml
+
+legend
+PersonneBuilder
+|_ nom
+  |_ prenom
+    |_ nom
+    |_ dNaiss
+    |_ emploi
+    |_ marie
+    |_ create
+  |_ dNaiss
+  |_ emploi
+  |_ marie
+  |_ create
+|_ prenom
+  |_ nom
+  |_ dNaiss
+  |_ emploi
+  |_ marie
+  |_ create
+|_ dNaiss
+|_ emploi
+|_ marie
+|_ create
+
+end legend
+@enduml

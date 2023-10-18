@@ -1,0 +1,12 @@
+:doctype: book
+:encoding: utf-8
+:lang: en
+:toc: left
+:imagesdir: images
+:toclevels: 6
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:sourcedir: ../../main/java
+:intellijTemplateFiledir: intellij/fileTemplates
+:testdir: ../../test/java

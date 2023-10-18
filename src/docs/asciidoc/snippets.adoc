@@ -1,15 +1,5 @@
 = Snippets
-:doctype: book
-:encoding: utf-8
-:lang: en
-:toc: left
-:imagesdir: images
-:toclevels: 6
-:source-highlighter: rouge
-:rouge-style: github
-:includedir: _includes
-:sourcedir: ../../main/java
-:testdir: ../../test/java
+include::default-preferences.adoc[]
 
 Dans ce document, nous allons voir quelques solutions de code qui permettront d'être plus clair mais, aussi dans le principe du **clean code**
 

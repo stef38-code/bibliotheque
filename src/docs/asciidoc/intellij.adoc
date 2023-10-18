@@ -1,0 +1,60 @@
+= Intellij
+include::default-preferences.adoc[]
+
+== File and Code Templates
+
+=== Ressources
+https://www.jetbrains.com/help/idea/using-file-and-code-templates.html[using-file-and-code-templates]
+
+=== Access
+image::FileAndTemplate.png[]
+
+=== répertoire
+Les fichiers template peuvent-être copiés dans
+
+
+|===
+|Emplacement |Windows |Linux
+
+|Installation
+|%APPDATA%\JetBrains\<product><version>\fileTemplates
+|~/.config/JetBrains/<product><version>/fileTemplates
+
+|Projet
+|[red]** TODO **
+|[red]** TODO **
+
+|User home
+|[red]** TODO **
+|[red]** TODO **
+
+|===
+
+=== Templates
+
+==== Singleton
+
+include::{intellijTemplateFiledir}/singleton.ftl[]
+
+[source,java]
+----
+public class MySingleton extends Singleton<MySingleton> {
+
+    private MySingleton() {
+    }
+
+    @Override
+    protected MySingleton createInstance() {
+        return new MySingleton();
+    }
+
+    public static MySingleton getInstance() {
+        return Singleton.getInstance();
+    }
+}
+----
+
+[source,java]
+----
+MySingleton singleton = MySingleton.getInstance();
+----

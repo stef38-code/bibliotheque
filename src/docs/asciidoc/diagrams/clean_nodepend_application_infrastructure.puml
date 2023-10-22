@@ -1,0 +1,20 @@
+@startuml
+
+package "Couche d'application" {
+  class "Service" {
+    --
+    + trouverLivre()
+    + emprunterLivre()
+  }
+}
+
+package "Couche d'infrastructure" {
+  class "BaseDeDonnees" {
+    --
+    + trouverLivre(id)
+  }
+}
+
+Service o-- BaseDeDonnees
+
+@enduml

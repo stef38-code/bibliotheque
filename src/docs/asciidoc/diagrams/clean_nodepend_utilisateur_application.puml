@@ -1,0 +1,21 @@
+@startuml
+
+package "Couche d'interface utilisateur" {
+  class "Controleur" {
+    --
+    + afficherPage()
+    + traiterFormulaire()
+  }
+}
+
+package "Couche d'application" {
+  class "Service" {
+    --
+    + trouverLivre()
+    + emprunterLivre()
+  }
+}
+
+Controleur -> Service
+
+@enduml

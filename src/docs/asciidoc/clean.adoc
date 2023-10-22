@@ -10,7 +10,8 @@ include::default-preferences.adoc[]
 Dans ce package, il sera défini les différents qui composent une *clean architecture*
 
 == Introduction
-La **clean architecture** est une approche de l'architecture logicielle qui vise à créer des systèmes logiciels qui sont faciles à comprendre, à maintenir et à évoluer. Elle est basée sur une série de principes et de pratiques qui permettent de séparer les différents aspects d'un système logiciel, tels que les données, les règles métier et l'interface utilisateur.
+
+La **clean architecture** est une approche de l'architecture logicielle qui vise à créer des systèmes logiciels qui sont [.underline]#*`_faciles à comprendre, à maintenir et à évoluer_`*#. Elle est basée sur une série de principes et de pratiques qui permettent de séparer les différents aspects d'un système logiciel, tels que [.underline]#*`_les données, les règles métier et l'interface utilisateur_`*#.
 
 === Les principes de la clean architecture
 
@@ -19,7 +20,10 @@ La clean architecture repose sur les principes suivants :
 * [green]*Indépendance des composants :*
 
  Les différents composants d'un système logiciel doivent être indépendants les uns des autres. Cela permet de faciliter la maintenance et l'évolution du système.
-    Responsabilité unique : Chaque composant d'un système logiciel doit avoir une responsabilité unique. Cela permet d'améliorer la clarté et la compréhension du système.
+
+* [green]*Responsabilité unique :*
+
+ Chaque composant d'un système logiciel doit avoir une responsabilité unique. Cela permet d'améliorer la clarté et la compréhension du système.
 
 * [green]*Inversion des dépendances :*
 
@@ -40,6 +44,7 @@ La clean architecture est également basée sur une série de pratiques qui perm
 * [green]*L'utilisation de couches :*
 
  Un système logiciel peut être divisé en différentes couches, chacune ayant une responsabilité unique.
+
 * [green]*L'utilisation d'interfaces :*
 
  Les composants d'un système logiciel doivent communiquer entre eux via des interfaces. Cela permet de séparer les détails d'implémentation.
@@ -64,7 +69,96 @@ Un exemple de clean architecture est la suivante :
 
   Cette couche est responsable de la gestion des données et des ressources externes.
 
-Dans cette architecture, les différentes couches sont indépendantes les unes des autres. La couche d'interface utilisateur ne dépend pas de la couche d'application, et la couche d'application ne dépend pas de la couche d'infrastructure.
+Dans cette architecture,
+ [red]#les différentes couches sont indépendantes les unes des autres#.
+
+[.listing]
+* La couche d'interface utilisateur ne dépend pas de la couche d'application,
+
+image::clean_nodepend_utilisateur_application.png[]
+[source,java]
+----
+// Contrôleur
+public class Controleur {
+    private Service service;
+    public Controleur(Service service) {
+        this.service = service;
+    }
+    public void afficherPage() {
+        // Afficher la page Web
+    }
+    public void traiterFormulaire() {
+        // Traiter le formulaire
+        // Appeler le service pour trouver le livre
+        Livre livre = service.trouverLivre(id);
+        // Afficher le livre
+    }
+}
+
+// Service
+public interface Service {
+    Livre trouverLivre(int id);
+}
+
+// Implémentation du service
+public class ServiceImpl implements Service {
+    private BaseDeDonnees baseDeDonnees;
+
+    public ServiceImpl(BaseDeDonnees baseDeDonnees) {
+        this.baseDeDonnees = baseDeDonnees;
+    }
+    @Override
+    public Livre trouverLivre(int id) {
+        // Trouver le livre dans la base de données
+        return baseDeDonnees.trouverLivre(id);
+    }
+}
+----
+[NOTE]
+Dans ce code, le contrôleur ne dépend pas de l'implémentation du service. Il suffit que le service implémente l'interface "Service". Cela permet au contrôleur d'être utilisé avec n'importe quelle implémentation du service, par exemple une implémentation qui utilise une base de données ou une implémentation qui utilise un service Web.
+
+
+* La couche d'application ne dépend pas de la couche d'infrastructure.
+
+image::clean_nodepend_application_infrastructure.png[]
+[source,java]
+----
+// Service
+public class Service {
+    private BaseDeDonnees baseDeDonnees;
+
+    public Service(BaseDeDonnees baseDeDonnees) {
+        this.baseDeDonnees = baseDeDonnees;
+    }
+    public Livre trouverLivre(int id) {
+        // Appeler la base de données pour trouver le livre
+        return baseDeDonnees.trouverLivre(id);
+    }
+}
+
+// BaseDeDonnees
+public interface BaseDeDonnees {
+    Livre trouverLivre(int id);
+}
+
+// Implémentation de la base de données
+public class BaseDeDonneesImpl implements BaseDeDonnees {
+    private JdbcTemplate jdbcTemplate;
+
+    public BaseDeDonneesImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    @Override
+    public Livre trouverLivre(int id) {
+        // Trouver le livre dans la base de données
+        return jdbcTemplate.queryForObject("SELECT * FROM livre WHERE id = ?", new Object[]{id}, new LivreRowMapper());
+    }
+}
+
+----
+
+[NOTE]
+Dans ce code, le service ne dépend pas de l'implémentation de la base de données. Il suffit que la base de données implémente l'interface "BaseDeDonnees". Cela permet au service d'être utilisé avec n'importe quelle implémentation de la base de données, par exemple une implémentation qui utilise une base de données relationnelle ou une implémentation qui utilise une base de données NoSQL.
 
 === Avantages de la clean architecture
 

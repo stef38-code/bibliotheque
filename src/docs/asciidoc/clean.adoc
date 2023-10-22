@@ -10,10 +10,121 @@ include::default-preferences.adoc[]
 Dans ce package, il sera défini les différents qui composent une *clean architecture*
 
 == Introduction
-La *clean architecture* est une organisation structuruelle mais aussi une méthode de travail.
+La **clean architecture** est une approche de l'architecture logicielle qui vise à créer des systèmes logiciels qui sont faciles à comprendre, à maintenir et à évoluer. Elle est basée sur une série de principes et de pratiques qui permettent de séparer les différents aspects d'un système logiciel, tels que les données, les règles métier et l'interface utilisateur.
 
-* Permet de ranger les différentes parties d'un projet dans des packages précis
-* Une méthode qui demande une rigueur, du coup demande un apprentissage qui n'est pas forcément simple
+=== Les principes de la clean architecture
+
+La clean architecture repose sur les principes suivants :
+
+* [green]*Indépendance des composants :*
+
+ Les différents composants d'un système logiciel doivent être indépendants les uns des autres. Cela permet de faciliter la maintenance et l'évolution du système.
+    Responsabilité unique : Chaque composant d'un système logiciel doit avoir une responsabilité unique. Cela permet d'améliorer la clarté et la compréhension du système.
+
+* [green]*Inversion des dépendances :*
+
+ Les composants d'un système logiciel ne doivent pas dépendre de détails d'implémentation. Cela permet de faciliter la maintenance et l'évolution du système.
+
+* [green]*Portabilité :*
+
+ Les composants d'un système logiciel doivent être portables. Cela permet de les réutiliser dans d'autres systèmes.
+
+* [green]*Testabilité :*
+
+ Les composants d'un système logiciel doivent être testables. Cela permet de garantir leur qualité.
+
+=== Les pratiques de la clean architecture
+
+La clean architecture est également basée sur une série de pratiques qui permettent de mettre en œuvre les principes ci-dessus. Ces pratiques incluent :
+
+* [green]*L'utilisation de couches :*
+
+ Un système logiciel peut être divisé en différentes couches, chacune ayant une responsabilité unique.
+* [green]*L'utilisation d'interfaces :*
+
+ Les composants d'un système logiciel doivent communiquer entre eux via des interfaces. Cela permet de séparer les détails d'implémentation.
+
+* [green]*L'utilisation de tests :*
+
+ Les composants d'un système logiciel doivent être testés. Cela permet de garantir leur qualité.
+
+=== Exemple de clean architecture
+
+Un exemple de clean architecture est la suivante :
+
+* [yellow]*Couche d'interface utilisateur :*
+
+ Cette couche est responsable de l'affichage des données et de la collecte des entrées de l'utilisateur.
+
+* [green]*Couche d'application :*
+
+ Cette couche est responsable de la logique métier du système.
+
+* [red]*Couche d'infrastructure :*
+
+  Cette couche est responsable de la gestion des données et des ressources externes.
+
+Dans cette architecture, les différentes couches sont indépendantes les unes des autres. La couche d'interface utilisateur ne dépend pas de la couche d'application, et la couche d'application ne dépend pas de la couche d'infrastructure.
+
+=== Avantages de la clean architecture
+
+La clean architecture offre de nombreux avantages, notamment :
+
+* [green]*La facilité de compréhension et de maintenance :*
+
+  La clean architecture permet de créer des systèmes logiciels qui sont faciles à comprendre et à maintenir. Cela est dû à la séparation des différents aspects du système.
+
+* [green]*La facilité d'évolution :*
+
+ La clean architecture permet de faire évoluer les systèmes logiciels de manière simple et efficace. Cela est dû à la faible dépendance entre les différents composants.
+
+* [green]*La portabilité :*
+
+ La clean architecture permet de réutiliser les composants d'un système logiciel dans d'autres systèmes. Cela est dû à l'utilisation d'interfaces.
+
+* [green]*La testabilité :*
+
+ La clean architecture permet de tester les composants d'un système logiciel de manière simple et efficace. Cela est dû à l'utilisation d'interfaces et de tests.
+
+=== Les inconveniants de la clean architecture
+
+* [red]*La complexité :* La clean architecture peut être complexe à mettre en œuvre et à maintenir. Cela est dû à la séparation des différents aspects du système.
+* [red]*La performance :* La clean architecture peut avoir un impact négatif sur les performances du système. Cela est dû à l'utilisation d'interfaces et à la nécessité de convertir les données entre les différentes couches.
+* [red]*La flexibilité :* La clean architecture peut limiter la flexibilité du système. Cela est dû à la séparation des différents aspects du système.
+
+=== Quelques exemples d'inconvénients de la clean architecture :
+
+* [red]*La complexité :*
+
+ La clean architecture peut être difficile à comprendre et à maintenir, en particulier pour les développeurs qui ne sont pas familiers avec cette approche.
+
+* [red]*La performance :*
+
+ L'utilisation d'interfaces et la nécessité de convertir les données entre les différentes couches peuvent avoir un impact négatif sur les performances du système.
+
+* [red]*La flexibilité :*
+
+ La séparation des différents aspects du système peut limiter la flexibilité du système, en particulier pour les changements qui nécessitent des modifications dans plusieurs couches.
+
+==== Surmonter les inconvénients de la clean architecture
+
+Il existe plusieurs moyens de surmonter les inconvénients de la clean architecture. Voici quelques conseils :
+
+* [green]*Simplifier la conception :*
+
+ Il est important de simplifier la conception de l'architecture autant que possible. Cela permettra de réduire la complexité et d'améliorer la performance.
+
+* [green]*Utiliser des outils appropriés :*
+
+ Il existe des outils qui peuvent aider à simplifier la mise en œuvre et la maintenance de la clean architecture.
+
+* [green]*Être flexible :*
+
+ Il est important d'être flexible dans l'application de la clean architecture. Il n'est pas nécessaire de respecter aveuglément tous les principes et pratiques.
+
+=== Conclusion
+
+La clean architecture est une approche de l'architecture logicielle qui offre de nombreux avantages. Elle permet de créer des systèmes logiciels qui sont faciles à comprendre, à maintenir et à évoluer. Cependant, il est important d'être conscient des inconvénients potentiels avant de l'adopter.
 
 [NOTE]
 * Tout ce qui écrit dans ce document est mon interpretation personnel du sujet

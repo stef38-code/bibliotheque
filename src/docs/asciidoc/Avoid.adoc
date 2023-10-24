@@ -1,0 +1,51 @@
+= Le principe Avoid
+include::default-preferences.adoc[]
+
+Le principe Avoid est un principe d'ingénierie logicielle qui stipule qu'il faut éviter d'utiliser des fonctionnalités ou des constructions qui peuvent nuire à la qualité du code.
+
+Il existe de nombreuses façons d'utiliser le principe Avoid en Java. 
+
+== Voici quelques conseils :
+
+=== Évitez les boucles imbriquées. 
+
+Les boucles imbriquées peuvent être difficiles à comprendre et à maintenir. Il est préférable de les remplacer par des structures de données ou des algorithmes plus efficaces.
+
+=== Évitez les variables globales. 
+
+Les variables globales peuvent rendre votre code plus difficile à comprendre et à maintenir. Il est préférable de les remplacer par des variables locales ou des objets.
+
+=== Évitez les fonctions qui font trop de choses. 
+
+Les fonctions qui font trop de choses peuvent être difficiles à comprendre et à tester. Il est préférable de les diviser en fonctions plus petites et plus spécifiques.
+
+=== Évitez les classes qui font trop de choses. 
+
+Les classes qui font trop de choses peuvent être difficiles à comprendre et à maintenir. Il est préférable de les diviser en classes plus petites et plus spécialisées.
+
+=== Évitez les exceptions qui sont levées trop souvent. 
+
+Les exceptions qui sont levées trop souvent peuvent rendre votre code plus difficile à comprendre et à maintenir. Il est préférable de traiter les erreurs de manière plus appropriée.
+
+= Voici quelques exemples
+
+==  concrets d'utilisation :
+
+* Au lieu d'utiliser une boucle imbriquée pour parcourir un tableau, vous pouvez utiliser une boucle for-each.
+* Au lieu d'utiliser une variable globale pour stocker un état, vous pouvez utiliser un objet.
+* Au lieu d'utiliser une fonction qui fait trop de choses, vous pouvez la diviser en deux fonctions plus petites.
+* Au lieu d'utiliser une classe qui fait trop de choses, vous pouvez la diviser en plusieurs classes plus petites.
+* Au lieu d'utiliser une exception pour signaler une erreur courante, vous pouvez traiter l'erreur de manière plus appropriée.
+
+
+En suivant ces conseils, vous pouvez aider à garantir que votre code est plus facile à comprendre, à maintenir et à tester.
+
+== Bien utiliser le principe Avoid en Java :
+
+* Soyez conscient des effets secondaires potentiels de vos fonctions et de vos classes.
+* Testez votre code pour vous assurer qu'il fonctionne correctement dans tous les cas.
+* Demandez à d'autres personnes de revoir votre code pour obtenir des commentaires.
+
+.Conclusion
+
+En suivant ces conseils, vous pouvez aider à garantir que votre code est exempt des problèmes potentiels associés à l'utilisation de fonctionnalités ou de constructions qui peuvent nuire à la qualité du code.

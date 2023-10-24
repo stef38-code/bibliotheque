@@ -1,0 +1,132 @@
+= substitution de Liskov
+include::default-preferences.adoc[]
+
+== Exemple du principe de substitution de Liskov en Java 
+Bien sûr, voici la définition du principe solid :
+
+**Principe de substitution de Liskov**
+
+Un objet de type sous-jacent peut être substitué à un objet de type parent sans que le code ne s'en rende compte.
+
+En d'autres termes, une classe dérivée doit être compatible avec sa classe de base. Cela signifie que les objets de la classe dérivée doivent pouvoir être utilisés dans les mêmes contextes que les objets de la classe de base sans causer de problèmes.
+
+Le principe de substitution de Liskov est important pour la conception de logiciels maintenables et évolutifs. En le respectant, nous pouvons nous assurer que notre code est flexible et adaptable aux changements.
+
+Voici quelques exemples de violations du principe de substitution de Liskov :
+
+* Une classe dérivée qui ajoute de nouvelles méthodes qui ne sont pas compatibles avec les méthodes de la classe de base.
+* Une classe dérivée qui modifie le comportement des méthodes de la classe de base.
+* Une classe dérivée qui ajoute de nouvelles propriétés qui ne sont pas compatibles avec les propriétés de la classe de base.
+
+Pour éviter ces violations, nous devons veiller à ce que les classes dérivées soient compatibles avec leurs classes de base. Cela signifie que les méthodes et les propriétés des classes dérivées doivent être compatibles avec les méthodes et les propriétés des classes de base.
+
+Voici quelques conseils pour respecter le principe de substitution de Liskov :
+
+* Utilisez l'héritage avec prudence. L'héritage peut être un outil puissant, mais il est important de l'utiliser de manière responsable.
+* Concentrez-vous sur l'abstraction. Les classes dérivées devraient être des spécialisations des classes de base.
+* Testez votre code. Le test est un excellent moyen de détecter les violations du principe de substitution de Liskov.
+
+[source,java]
+----
+public class Figure {
+    public abstract double getArea();
+}
+
+public class Rectangle extends Figure {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double getArea() {
+        return width * height;
+    }
+}
+
+public class Circle extends Figure {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Figure> figures = new ArrayList<>();
+        figures.add(new Rectangle(10, 20));
+        figures.add(new Circle(10));
+
+        for (Figure figure : figures) {
+            System.out.println(figure.getArea());
+        }
+    }
+}
+----
+
+Dans cet exemple, la classe `Figure` est une interface qui définit une méthode abstraite `getArea()`. Les classes `Rectangle` et `Circle` sont des implémentations de `Figure`.
+
+
+Le principe de substitution de Liskov stipule qu'un objet de type sous-jacent peut être substitué à un objet de type parent sans que le code ne s'en rende compte. Dans cet exemple, la liste `figures` contient des objets de type `Figure`. Nous pouvons donc ajouter des objets de type `Rectangle` et `Circle` sans modifier le code qui utilise la liste.
+
+Par exemple, la méthode suivante utilise la liste `figures` pour calculer la somme des surfaces des figures :
+
+[source,java]
+----
+public double getSumOfAreas(List<Figure> figures) {
+    double sum = 0;
+    for (Figure figure : figures) {
+        sum += figure.getArea();
+    }
+    return sum;
+}
+----
+
+Cette méthode fonctionne correctement, même si la liste `figures` contient des objets de type `Rectangle` et `Circle`. En effet, les méthodes `getArea()` des classes `Rectangle` et `Circle` retournent des valeurs qui peuvent être additionnées.
+
+[IMPORTANT]
+Si le principe de substitution de Liskov n'était pas respecté, la méthode `getSumOfAreas()` ne fonctionnerait pas correctement. Par exemple, si la classe `Circle` avait une méthode `getArea()` qui retournait un entier, la méthode `getSumOfAreas()` retournerait un résultat incorrect.
+
+Voici un autre exemple du principe de substitution de Liskov en Java :
+
+[source,java]
+----
+public class Car {
+    public void drive() {
+        System.out.println("Le véhicule roule.");
+    }
+}
+
+public class Truck extends Car {
+    public void tow() {
+        System.out.println("Le véhicule remorque une remorque.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.drive();
+
+        Truck truck = new Truck();
+        truck.drive();
+        truck.tow();
+    }
+}
+----
+
+Dans cet exemple, la classe `Car` est une interface qui définit une méthode abstraite `drive()`. La classe `Truck` est une implémentation de `Car` qui ajoute une nouvelle méthode `tow()`.
+
+.Conclusion
+Le principe de substitution de Liskov stipule que l'objet `truck` peut être substitué à l'objet `car` sans que le code ne s'en rende compte. Dans cet exemple, la méthode `main()` appelle la méthode `drive()` sur les objets `car` et `truck`. La méthode `drive()` est définie dans la classe `Car`, donc elle est accessible aux objets de type `Car` et `Truck`.
+
+De plus, la méthode `tow()` est accessible aux objets de type `Truck`. Par conséquent, le code de la méthode `main()` fonctionne correctement, même si la liste `figures` contient des objets de type `Rectangle` et `Circle`.

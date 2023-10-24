@@ -16,9 +16,9 @@ La classe de notre exemple est la suivante, elle est composée de
 ----
 public class Personne {
     //Les propriétés OBLIGATOIRES
-    private final String nom;
-    private final String prenom;
-    private final LocalDate dNaiss;
+    private final String nom; // premier
+    private final String prenom; // deuxième
+    private final LocalDate dNaiss; // troisième
     //Les propriétés optionnelles
     private final String emploi;
     private final boolean marie;
@@ -126,7 +126,9 @@ class CreatePersonne{
     }
 }
 ----
+
 ==== Quatrième cas
+
 [blue]``Une personne pas marié avec emploi``
 Ce cas est intéressant car il doit être possible de saisir soit :
 
@@ -170,6 +172,7 @@ class CreatePersonne{
     }
 }
 ----
+
 === Mise en application
 
 Nous avons besoin de définir 3 classes :
@@ -193,7 +196,30 @@ public class xxxBuilder {
     }
 }
 ----
+
+==== préalable
+La première étape consiste à créer les éléments indiqués ci-dessus à savoir :
+
+. Une interface [green]``xxxStep``
+. Une classe [green]``xxxApi`` implements [green]``xxxStep``
+. Une classe [green]``xxxBuilder``
+
+NOTE::
+
+L'exemple est dans le package `org.hussard.pattern.fluent`
+
+IMPORTANT::
+Le constructeur de la classe `Data Object` ne doit pas être défini comme : *[red]`public, protected ou private`*
+
 ==== Premier cas
+[blue]``Une Personne non marié, sans emploi``
+
+Nous allons partir sur la base du TDD, ce qui nous donne le test suivant :
+[source,java]
+----
+
+----
+
 
 ==== Deuxième cas
 ==== Troisième cas

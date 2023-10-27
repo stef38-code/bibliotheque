@@ -3,6 +3,7 @@
 :lang: en
 :toc: left
 :imagesdir: images
+:icons: font
 :toclevels: 6
 :source-highlighter: rouge
 :rouge-style: github
@@ -10,3 +11,5 @@
 :sourcedir: ../../main/java
 :intellijTemplateFiledir: intellij/fileTemplates
 :testdir: ../../test/java
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr

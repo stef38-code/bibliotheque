@@ -1,0 +1,40 @@
+= Test Unitaire en java
+include::default-preferences.adoc[]
+
+== Préambule
+
+Dans ce document, nous allons aborder le sujet des *Tests unitaires*.
+Malheureusement, ils ne sont souvent soit
+
+* Pas fait ou bien
+* Fait mais, juste ce qu'il faut pour répondre au besoin à la qualimètrie
+* Fait mais, après ou voir longtemps après l'écriture du code
+
+
+[WARNING]
+Je peux me passe des tests unitaires car, je teste mon application régulièrement. Et puis il y a une recette
+
+Finalement, on peut en déduire qu'ils ne sont pas bien compris
+
+== A quoi ça sert !!
+
+Les tests unitaires servent à vérifier le bon fonctionnement d'une petite partie bien précise d'une application.
+Ils permettent de s'assurer que la fonction d'une unité est conforme à sa spécification.
+
+=== Les avantages
+
+Ils permettent de détecter les bugs dès le début du développement, ce qui permet de les corriger plus facilement et rapidement.
+
+* Ils contribuent à améliorer la qualité du code, en réduisant le nombre de bugs.
+* Ils facilitent la maintenance du code, en permettant de modifier une unité sans impacter les autres unités.
+* Ils peuvent être utilisés pour automatiser les tests, ce qui permet de gagner du temps et de réduire les coûts.
+
+=== Les inconvénients
+.Temps et effort
+
+L'écriture de tests unitaires peut prendre du temps et de l'effort. Il faut identifier les unités à tester, concevoir les tests, et les implémenter. Dans les grands projets, la quantité de tests unitaires peut être importante, ce qui peut nécessiter un investissement important en temps et en ressources.
+
+.Complexité
+
+L'écriture de tests unitaires complexes peut être difficile. Il faut comprendre le code de l'unité à tester, et il faut être capable de concevoir des tests qui couvrent tous les cas d'utilisation possibles.
+

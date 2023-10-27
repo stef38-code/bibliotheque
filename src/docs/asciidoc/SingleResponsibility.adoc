@@ -1,6 +1,7 @@
 = Responsabilité unique (Single responsibility)
 include::default-preferences.adoc[]
-Bien sûr. Voici un exemple de violation du principe de responsabilité unique en Java :
+
+== Exemple de violation du principe de responsabilité :
 
 ```java
 public class Article {
@@ -66,7 +67,7 @@ Cette classe viole le principe de responsabilité unique car elle a deux respons
 
 Ces deux responsabilités devraient être dans des classes ou des modules séparés. Par exemple, la classe `Article` pourrait être responsable du stockage des informations, et une autre classe `ArticleView` pourrait être responsable de l'affichage des informations.
 
-Voici un exemple de code qui respecte le principe de responsabilité unique :
+== Exemple de code qui respecte le principe de responsabilité unique :
 
 ```java
 public class Article {

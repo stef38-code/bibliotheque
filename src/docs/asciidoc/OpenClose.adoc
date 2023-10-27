@@ -1,7 +1,7 @@
 = Ouvert/fermé ( Open/closed)
 include::default-preferences.adoc[]
 
-Bien sûr, voici un exemple complexe de principe ouvert/fermé en Java :
+== Un exemple complexe de principe Open/closed
 
 Supposons que nous avons une application qui permet aux utilisateurs de créer des listes de tâches. Nous voulons que les utilisateurs puissent ajouter, supprimer et modifier des tâches dans leurs listes.
 
@@ -17,9 +17,10 @@ Par exemple, nous pourrions créer une classe `TaskToDo` qui représente une tâ
 
 La classe `TaskList` serait alors responsable de la gestion d'une liste de tâches. Elle utiliserait l'interface `Task` pour interagir avec les tâches.
 
-Voici un exemple de code pour mettre en œuvre cette approche :
+.Exemple de code pour mettre en œuvre cette approche
 
-```java
+[source,java]
+----
 public interface Task {
   void doTask();
 }
@@ -71,13 +72,13 @@ public class TaskList {
     }
   }
 }
-```
+----
 
 Cette approche respecte le principe ouvert/fermé. Si nous voulons ajouter un nouveau type de tâche, nous pouvons simplement créer une nouvelle classe qui implémente l'interface `Task`. Nous n'avons pas besoin de modifier la classe `TaskList`.
 
-Voici un exemple de code pour utiliser cette approche :
-
-```java
+.Exemple de code pour utiliser cette approche :
+[source,java]
+----
 TaskList taskList = new TaskList();
 
 taskList.addTask(new TaskToDo());
@@ -85,14 +86,14 @@ taskList.addTask(new TaskMeeting());
 taskList.addTask(new TaskDeadline());
 
 taskList.doTasks();
-```
+----
 
 Cette approche permet d'ajouter de nouveaux types de tâches sans avoir à modifier le code existant. Cela rend l'application plus flexible et plus facile à maintenir.
 
-Voici quelques autres avantages du principe ouvert/fermé :
+Quelques autres avantages du principe Open/closed :
 
 * Il permet de réduire le code redondant.
 * Il facilite la réutilisation du code.
 * Il permet d'améliorer la maintenabilité du code.
 
-En suivant le principe ouvert/fermé, nous pouvons créer des applications plus flexibles, plus faciles à maintenir et plus évolutives.
+En suivant le principe Open/closed, nous pouvons créer des applications plus flexibles, plus faciles à maintenir et plus évolutives.

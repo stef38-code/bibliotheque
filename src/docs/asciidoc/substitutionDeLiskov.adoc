@@ -2,17 +2,12 @@
 include::default-preferences.adoc[]
 
 == Exemple du principe de substitution de Liskov en Java 
-Bien sûr, voici la définition du principe solid :
 
-**Principe de substitution de Liskov**
-
-Un objet de type sous-jacent peut être substitué à un objet de type parent sans que le code ne s'en rende compte.
-
-En d'autres termes, une classe dérivée doit être compatible avec sa classe de base. Cela signifie que les objets de la classe dérivée doivent pouvoir être utilisés dans les mêmes contextes que les objets de la classe de base sans causer de problèmes.
+Une classe dérivée doit être compatible avec sa classe de base. Cela signifie que les objets de la classe dérivée doivent pouvoir être utilisés dans les mêmes contextes que les objets de la classe de base sans causer de problèmes.
 
 Le principe de substitution de Liskov est important pour la conception de logiciels maintenables et évolutifs. En le respectant, nous pouvons nous assurer que notre code est flexible et adaptable aux changements.
 
-Voici quelques exemples de violations du principe de substitution de Liskov :
+=== Quelques exemples de violations du principe de substitution de Liskov :
 
 * Une classe dérivée qui ajoute de nouvelles méthodes qui ne sont pas compatibles avec les méthodes de la classe de base.
 * Une classe dérivée qui modifie le comportement des méthodes de la classe de base.
@@ -20,7 +15,7 @@ Voici quelques exemples de violations du principe de substitution de Liskov :
 
 Pour éviter ces violations, nous devons veiller à ce que les classes dérivées soient compatibles avec leurs classes de base. Cela signifie que les méthodes et les propriétés des classes dérivées doivent être compatibles avec les méthodes et les propriétés des classes de base.
 
-Voici quelques conseils pour respecter le principe de substitution de Liskov :
+=== Quelques conseils pour respecter le principe de substitution de Liskov :
 
 * Utilisez l'héritage avec prudence. L'héritage peut être un outil puissant, mais il est important de l'utiliser de manière responsable.
 * Concentrez-vous sur l'abstraction. Les classes dérivées devraient être des spécialisations des classes de base.
@@ -76,7 +71,9 @@ public class Main {
 Dans cet exemple, la classe `Figure` est une interface qui définit une méthode abstraite `getArea()`. Les classes `Rectangle` et `Circle` sont des implémentations de `Figure`.
 
 
-Le principe de substitution de Liskov stipule qu'un objet de type sous-jacent peut être substitué à un objet de type parent sans que le code ne s'en rende compte. Dans cet exemple, la liste `figures` contient des objets de type `Figure`. Nous pouvons donc ajouter des objets de type `Rectangle` et `Circle` sans modifier le code qui utilise la liste.
+Le principe de substitution de Liskov stipule qu'un objet de type sous-jacent peut être substitué à un objet de type parent sans que le code ne s'en rende compte.
+
+Dans cet exemple, la liste `figures` contient des objets de type `Figure`. Nous pouvons donc ajouter des objets de type `Rectangle` et `Circle` sans modifier le code qui utilise la liste.
 
 Par exemple, la méthode suivante utilise la liste `figures` pour calculer la somme des surfaces des figures :
 
@@ -96,7 +93,7 @@ Cette méthode fonctionne correctement, même si la liste `figures` contient des
 [IMPORTANT]
 Si le principe de substitution de Liskov n'était pas respecté, la méthode `getSumOfAreas()` ne fonctionnerait pas correctement. Par exemple, si la classe `Circle` avait une méthode `getArea()` qui retournait un entier, la méthode `getSumOfAreas()` retournerait un résultat incorrect.
 
-Voici un autre exemple du principe de substitution de Liskov en Java :
+=== Un autre exemple du principe de substitution de Liskov :
 
 [source,java]
 ----

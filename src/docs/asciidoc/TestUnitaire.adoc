@@ -39,3 +39,12 @@ L'écriture de tests unitaires peut prendre du temps et de l'effort. Il faut ide
 
 L'écriture de tests unitaires complexes peut être difficile. Il faut comprendre le code de l'unité à tester, et il faut être capable de concevoir des tests qui couvrent tous les cas d'utilisation possibles.
 
+== Comment faire des (bons) tests unitaires ?
+
+
+Je dirais qu'ils en existent plusieurs :
+
+* Etre bien outillé : c'est à avoir des réflexions ou des solutions qui façilite l'écriture
+* Ils doivent être simples et faciles à comprendre
+* Eviter les tests croisés, c'est test un mapper puis tester un service qui utilise le même mapper
+* Eviter de test une class mais plus une fonctionnalité

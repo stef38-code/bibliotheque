@@ -30,6 +30,7 @@ Ils permettent de détecter les bugs dès le début du développement, ce qui pe
 * Ils peuvent être utilisés pour automatiser les tests, ce qui permet de gagner du temps et de réduire les coûts.
 
 === Les inconvénients
+
 .Temps et effort
 
 L'écriture de tests unitaires peut prendre du temps et de l'effort. Il faut identifier les unités à tester, concevoir les tests, et les implémenter. Dans les grands projets, la quantité de tests unitaires peut être importante, ce qui peut nécessiter un investissement important en temps et en ressources.

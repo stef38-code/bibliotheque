@@ -211,7 +211,7 @@
                                 <toc>left</toc>
                                 <linkcss>true</linkcss>
                                 <source-highlighter>rouge</source-highlighter>
-                                <imagesdir>./doc/images</imagesdir>
+                                <imagesdir>./images</imagesdir>
                                 <icons>font</icons>
                                 <sectanchors>true</sectanchors>
                             </attributes>

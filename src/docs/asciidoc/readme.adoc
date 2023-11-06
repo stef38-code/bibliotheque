@@ -11,5 +11,6 @@ include::SingleResponsibility.adoc[]
 include::substitutionDeLiskov.adoc[]
 
 include::TestUnitaire.adoc[]
+include::ArchUnit.adoc[]
 include::snippets.adoc[]
 include::intellij.adoc[]

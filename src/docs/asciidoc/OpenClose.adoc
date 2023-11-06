@@ -1,4 +1,4 @@
-== Ouvert/fermé ( Open/closed)
+== Open/closed
 include::default-preferences.adoc[]
 
 === Un exemple complexe de principe Open/closed
@@ -18,74 +18,30 @@ Par exemple, nous pourrions créer une classe `TaskToDo` qui représente une tâ
 La classe `TaskList` serait alors responsable de la gestion d'une liste de tâches. Elle utiliserait l'interface `Task` pour interagir avec les tâches.
 
 .Exemple de code pour mettre en œuvre cette approche
-
 [source,java]
 ----
-public interface Task {
-  void doTask();
-}
-
-public class TaskToDo implements Task {
-  @Override
-  public void doTask() {
-    // Effectue la tâche à faire
-  }
-}
-
-public class TaskMeeting implements Task {
-  @Override
-  public void doTask() {
-    // Effectue la réunion
-  }
-}
-
-public class TaskDeadline implements Task {
-  @Override
-  public void doTask() {
-    // Effectue la tâche avant la date limite
-  }
-}
-
-public class TaskList {
-  private List<Task> tasks;
-
-  public TaskList() {
-    this.tasks = new ArrayList<>();
-  }
-
-  public void addTask(Task task) {
-    this.tasks.add(task);
-  }
-
-  public void removeTask(Task task) {
-    this.tasks.remove(task);
-  }
-
-  public void modifyTask(Task task, Task newTask) {
-    this.tasks.remove(task);
-    this.tasks.add(newTask);
-  }
-
-  public void doTasks() {
-    for (Task task : this.tasks) {
-      task.doTask();
-    }
-  }
-}
+include::{sourcedir}/org/hussard/pattern/openclose/Task.java[]
+----[source,java]
 ----
+include::{sourcedir}/org/hussard/pattern/openclose/TaskToDo.java[]
+----[source,java]
+----
+include::{sourcedir}/org/hussard/pattern/openclose/TaskMeeting.java[]
+----[source,java]
+----
+include::{sourcedir}/org/hussard/pattern/openclose/TaskDeadline.java[]
+----[source,java]
+----
+include::{sourcedir}/org/hussard/pattern/openclose/TaskList.java[]
+----
+
 
 Cette approche respecte le principe ouvert/fermé. Si nous voulons ajouter un nouveau type de tâche, nous pouvons simplement créer une nouvelle classe qui implémente l'interface `Task`. Nous n'avons pas besoin de modifier la classe `TaskList`.
 
 .Exemple de code pour utiliser cette approche :
 [source,java]
 ----
-TaskList taskList = new TaskList();
-
-taskList.addTask(new TaskToDo());
-taskList.addTask(new TaskMeeting());
-taskList.addTask(new TaskDeadline());
-
-taskList.doTasks();
+include::{testdir}/org/hussard/pattern/openclose/TaskListTest.java[]
 ----
 
 Cette approche permet d'ajouter de nouveaux types de tâches sans avoir à modifier le code existant. Cela rend l'application plus flexible et plus facile à maintenir.

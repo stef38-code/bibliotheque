@@ -1,19 +1,11 @@
-= Clean architecture
+== Clean architecture
 include::default-preferences.adoc[]
-//ref: ttps://www.compart.com/fr/unicode/
-:tip-caption: pass:[&#x1F441;]
-:warning-caption: pass:[&#9888]
-:important-caption: pass:[&#9763;]
-:note-caption: pass:[&#33;]
-:caution-caption: pass:[&#9761;]
 
-Dans ce package, il sera défini les différents qui composent une *clean architecture*
-
-== Introduction
+=== Introduction
 
 La **clean architecture** est une approche de l'architecture logicielle qui vise à créer des systèmes logiciels qui sont [.underline]#*`_faciles à comprendre, à maintenir et à évoluer_`*#. Elle est basée sur une série de principes et de pratiques qui permettent de séparer les différents aspects d'un système logiciel, tels que [.underline]#*`_les données, les règles métier et l'interface utilisateur_`*#.
 
-=== Les principes de la clean architecture
+==== Les principes de la clean architecture
 
 La clean architecture repose sur les principes suivants :
 
@@ -37,7 +29,7 @@ La clean architecture repose sur les principes suivants :
 
  Les composants d'un système logiciel doivent être testables. Cela permet de garantir leur qualité.
 
-=== Les pratiques de la clean architecture
+==== Les pratiques de la clean architecture
 
 La clean architecture est également basée sur une série de pratiques qui permettent de mettre en œuvre les principes ci-dessus. Ces pratiques incluent :
 
@@ -53,7 +45,7 @@ La clean architecture est également basée sur une série de pratiques qui perm
 
  Les composants d'un système logiciel doivent être testés. Cela permet de garantir leur qualité.
 
-=== Exemple de clean architecture
+==== Exemple de clean architecture
 
 Un exemple de clean architecture est la suivante :
 
@@ -76,44 +68,20 @@ Dans cette architecture,
 * La couche d'interface utilisateur ne dépend pas de la couche d'application,
 
 image::clean_nodepend_utilisateur_application.png[]
+
 [source,java]
 ----
-// Contrôleur
-public class Controleur {
-    private Service service;
-    public Controleur(Service service) {
-        this.service = service;
-    }
-    public void afficherPage() {
-        // Afficher la page Web
-    }
-    public void traiterFormulaire() {
-        // Traiter le formulaire
-        // Appeler le service pour trouver le livre
-        Livre livre = service.trouverLivre(id);
-        // Afficher le livre
-    }
-}
-
-// Service
-public interface Service {
-    Livre trouverLivre(int id);
-}
-
-// Implémentation du service
-public class ServiceImpl implements Service {
-    private BaseDeDonnees baseDeDonnees;
-
-    public ServiceImpl(BaseDeDonnees baseDeDonnees) {
-        this.baseDeDonnees = baseDeDonnees;
-    }
-    @Override
-    public Livre trouverLivre(int id) {
-        // Trouver le livre dans la base de données
-        return baseDeDonnees.trouverLivre(id);
-    }
-}
+include::{sourcedir}/org/hussard/samples/clean/Controleur.java[]
 ----
+[source,java]
+----
+include::{sourcedir}/org/hussard/samples/clean/Service.java[]
+----
+[source,java]
+----
+include::{sourcedir}/org/hussard/samples/clean/ServiceDefault.java[]
+----
+
 [NOTE]
 Dans ce code, le contrôleur ne dépend pas de l'implémentation du service. Il suffit que le service implémente l'interface "Service". Cela permet au contrôleur d'être utilisé avec n'importe quelle implémentation du service, par exemple une implémentation qui utilise une base de données ou une implémentation qui utilise un service Web.
 
@@ -121,46 +89,24 @@ Dans ce code, le contrôleur ne dépend pas de l'implémentation du service. Il 
 * La couche d'application ne dépend pas de la couche d'infrastructure.
 
 image::clean_nodepend_application_infrastructure.png[]
+
 [source,java]
 ----
-// Service
-public class Service {
-    private BaseDeDonnees baseDeDonnees;
-
-    public Service(BaseDeDonnees baseDeDonnees) {
-        this.baseDeDonnees = baseDeDonnees;
-    }
-    public Livre trouverLivre(int id) {
-        // Appeler la base de données pour trouver le livre
-        return baseDeDonnees.trouverLivre(id);
-    }
-}
-
-// BaseDeDonnees
-public interface BaseDeDonnees {
-    Livre trouverLivre(int id);
-}
-
-// Implémentation de la base de données
-public class BaseDeDonneesImpl implements BaseDeDonnees {
-    private JdbcTemplate jdbcTemplate;
-
-    public BaseDeDonneesImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-    @Override
-    public Livre trouverLivre(int id) {
-        // Trouver le livre dans la base de données
-        return jdbcTemplate.queryForObject("SELECT * FROM livre WHERE id = ?", new Object[]{id}, new LivreRowMapper());
-    }
-}
-
+include::{sourcedir}/org/hussard/samples/clean/Service.java[]
+----
+[source,java]
+----
+include::{sourcedir}/org/hussard/samples/clean/BaseDeDonnees.java[]
+----
+[source,java]
+----
+include::{sourcedir}/org/hussard/samples/clean/BaseDeDonneesDefault.java[]
 ----
 
 [NOTE]
 Dans ce code, le service ne dépend pas de l'implémentation de la base de données. Il suffit que la base de données implémente l'interface "BaseDeDonnees". Cela permet au service d'être utilisé avec n'importe quelle implémentation de la base de données, par exemple une implémentation qui utilise une base de données relationnelle ou une implémentation qui utilise une base de données NoSQL.
 
-=== Avantages de la clean architecture
+==== Avantages de la clean architecture
 
 La clean architecture offre de nombreux avantages, notamment :
 
@@ -180,13 +126,13 @@ La clean architecture offre de nombreux avantages, notamment :
 
  La clean architecture permet de tester les composants d'un système logiciel de manière simple et efficace. Cela est dû à l'utilisation d'interfaces et de tests.
 
-=== Les inconveniants de la clean architecture
+==== Les inconveniants de la clean architecture
 
 * [red]*La complexité :* La clean architecture peut être complexe à mettre en œuvre et à maintenir. Cela est dû à la séparation des différents aspects du système.
 * [red]*La performance :* La clean architecture peut avoir un impact négatif sur les performances du système. Cela est dû à l'utilisation d'interfaces et à la nécessité de convertir les données entre les différentes couches.
 * [red]*La flexibilité :* La clean architecture peut limiter la flexibilité du système. Cela est dû à la séparation des différents aspects du système.
 
-=== Quelques exemples d'inconvénients de la clean architecture :
+==== Quelques exemples d'inconvénients de la clean architecture
 
 * [red]*La complexité :*
 
@@ -200,7 +146,7 @@ La clean architecture offre de nombreux avantages, notamment :
 
  La séparation des différents aspects du système peut limiter la flexibilité du système, en particulier pour les changements qui nécessitent des modifications dans plusieurs couches.
 
-==== Surmonter les inconvénients de la clean architecture
+===== Surmonter les inconvénients de la clean architecture
 
 Il existe plusieurs moyens de surmonter les inconvénients de la clean architecture. Voici quelques conseils :
 
@@ -216,7 +162,7 @@ Il existe plusieurs moyens de surmonter les inconvénients de la clean architect
 
  Il est important d'être flexible dans l'application de la clean architecture. Il n'est pas nécessaire de respecter aveuglément tous les principes et pratiques.
 
-=== Conclusion
+==== Conclusion
 
 La clean architecture est une approche de l'architecture logicielle qui offre de nombreux avantages. Elle permet de créer des systèmes logiciels qui sont faciles à comprendre, à maintenir et à évoluer. Cependant, il est important d'être conscient des inconvénients potentiels avant de l'adopter.
 
@@ -224,10 +170,10 @@ La clean architecture est une approche de l'architecture logicielle qui offre de
 * Tout ce qui écrit dans ce document est mon interpretation personnel du sujet
 * Il est tout à fait possible de mettre les packages suivants en module maven
 
-== La composition
+=== La composition
 Dans cette partie, nous allons voir les éléments importants qui constituent la **clean architecture**
 
-=== La répartition
+==== La répartition
 
 Elle se compose en 3 parties :
 
@@ -238,73 +184,34 @@ Elle se compose en 3 parties :
 [IMPORTANT]
 Il est interdit d'avoir plus de partie
 
-=== Les règles
+==== Les règles
 Elles vont permettre de bien mettre en place l'utilisation de la solution **clean architecture**
 
-==== Métier
+===== Métier
 *La plus importante de toutes, il est strictement de faire communiquer un élément du package métier(business) avec les deux autres(application, architecture). Ce qui veut dire par exemple, il n'est pas possible d'avoir des mappers*
 
-==== Application
+===== Application
 Cette partie peut communiquer avec les deux autres parties de la façon suivante :
 
 * Implémentera une interface de la partie métier pour utiliser un service de la partie métier
 * Implémentera une interface de la partie métier pour utiliser un service de la partie infrastructure
 
-==== Infrastructure
+===== Infrastructure
 Cette partie implémentera une interface de la partie métier pour créer des services
 
-=== La structure
+==== La structure
 Nous allons définir les éléments qui seront dans chacune des parties
 
-==== Métier
-[plantuml, format=svg, opts="inline"]
-----
-legend
-clean
-|_ metier
-  |_ models : Les data
-  |_ port
-    |_ in : interfaces pour la partie application
-    |_ out : interfaces pour la partie infrastructure
-  |_ services : services métier implémentant des interfaces du package port.in
-  |_ commun : ensemble de classes qui seront utilisées dans le package services
-end legend
-----
-==== Application
-[plantuml, format=svg, opts="inline"]
-----
-legend
-clean
-|_ application
-  |_ dto : Les data
-  |_ controllers : Controller spring boot
-  |_ services : Services spring boot, ici seront utilisés les services du métier
-  |_ mappers : Mapper des application.dto en metier.models et inversement
-end legend
-----
-==== Infrastructure
+===== Métier
+image::clean_metier_structure.png[]
 
-[plantuml, format=svg, opts="inline"]
-----
-legend
-clean
-|_ infrastructure
-  |_ rest : Les appels vers des services rest
-    |_ entities : Les data
-    |_ services : Component spring boot, implément une interface contenue dans metier.port.out
-    |_ mappers : Mapper des rest.entities en metier.models et inversement
-  |_ soap : Les appels vers des services soap
-    |_ entities : Les data
-    |_ services : Component spring boot, implément une interface contenue dans metier.port.out
-    |_ mappers : Mapper des soap.entities en metier.models et inversement
-  |_ repository : Les appels vers des services db
-     |_ entities : Les data
-     |_ services : Repository spring boot, implément une interface contenue dans metier.port.out
-     |_ mappers : Mapper des repository.entities en metier.models et inversement
-end legend
-----
+===== Application
+image::clean_application_structure.png[]
 
-== ressources
+===== Infrastructure
+image::clean_infrastructure_structure.png[]
+
+=== ressources
 * https://leandeep.com/clean-architecture/[leandeep.com]
 * https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/[software-craftsmanship]
 * https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)[wikipedia]

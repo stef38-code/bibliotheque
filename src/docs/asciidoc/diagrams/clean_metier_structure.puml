@@ -1,0 +1,12 @@
+@startuml
+legend
+clean
+|_ metier
+  |_ models : Les data
+  |_ port
+    |_ in : interfaces pour la partie application
+    |_ out : interfaces pour la partie infrastructure
+  |_ services : services métier implémentant des interfaces du package port.in
+  |_ commun : ensemble de classes qui seront utilisées dans le package services
+end legend
+@enduml

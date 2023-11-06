@@ -1,11 +1,11 @@
-= Pattern fluent
+== Pattern fluent
 include::default-preferences.adoc[]
 
 
-== A propos
+=== A propos
 Le *pattern fluent* est une solution de *pattern Builder* qui presente un avantage intéressant.
 
-== Exemples
+=== Exemples
 
 La classe de notre exemple est la suivante, elle est composée de
 
@@ -24,22 +24,22 @@ public class Personne {
     private final boolean marie;
 }
 ----
-=== Builder
-==== Source
+==== Builder
+===== Source
 Voici un exemple du pattern builder :
 [source,java]
 ----
 include::{sourcedir}/org/hussard/pattern/builder/Personne.java[]
 ----
 
-==== Test unitaire
+===== Test unitaire
 Le test unitaire associé
 [source,java]
 ----
 include::{testdir}/org/hussard/pattern/builder/PersonneTest.java[]
 ----
 
-=== Constat
+==== Constat
 
 [IMPORTANT]
 On peut remarque que si dans le premier test, le développeur a bien renseigné toutes les propriétés. +
@@ -54,7 +54,7 @@ image::builderProperties.png[]
 .Schema
 image::Builder.png[]
 
-== Fluent
+=== Fluent
 Nous venons de voir que le pattern builder comporte un problème de taille. +
 **[red]#Il ne contraint pas le développeur à saisir les propriétés obligatoires.#**
 
@@ -63,10 +63,10 @@ Mais cela demande aussi à la personne qui va créer cette solution un apprentis
 
 Je vous propose de voir ensemble comme faire cela
 
-=== Schemas && Tests unitaires
+==== Schemas && Tests unitaires
 Nous voulons avoir le déroulement suivant :
 
-==== Premier cas
+===== Premier cas
 [blue]``Une Personne non marié, sans emploi``
 
 image::fluentCas1.png[]
@@ -85,7 +85,7 @@ class CreatePersonne{
     }
 }
 ----
-==== Deuxième cas
+===== Deuxième cas
 [blue]``Une personne marié sans emploi``
 
 image::fluentCas2.png[]
@@ -105,7 +105,7 @@ class CreatePersonne{
     }
 }
 ----
-==== Troisième cas
+===== Troisième cas
 [blue]``Une personne pas marié avec emploi``
 
 image::fluentCas3.png[]
@@ -127,7 +127,7 @@ class CreatePersonne{
 }
 ----
 
-==== Quatrième cas
+===== Quatrième cas
 
 [blue]``Une personne pas marié avec emploi``
 Ce cas est intéressant car il doit être possible de saisir soit :
@@ -173,7 +173,7 @@ class CreatePersonne{
 }
 ----
 
-=== Mise en application
+==== Mise en application
 
 Nous avons besoin de définir 3 classes :
 
@@ -197,7 +197,7 @@ public class xxxBuilder {
 }
 ----
 
-==== préalable
+===== préalable
 La première étape consiste à créer les éléments indiqués ci-dessus à savoir :
 
 . Une interface [green]``xxxStep``
@@ -211,7 +211,7 @@ L'exemple est dans le package `org.hussard.pattern.fluent`
 IMPORTANT::
 Le constructeur de la classe `Data Object` ne doit pas être défini comme : *[red]`public, protected ou private`*
 
-==== Premier cas
+===== Premier cas
 [blue]``Une Personne non marié, sans emploi``
 
 Nous allons partir sur la base du TDD, ce qui nous donne le test suivant :
@@ -221,7 +221,7 @@ Nous allons partir sur la base du TDD, ce qui nous donne le test suivant :
 ----
 
 
-==== Deuxième cas
-==== Troisième cas
-==== Quatrième cas
+===== Deuxième cas
+===== Troisième cas
+===== Quatrième cas
 

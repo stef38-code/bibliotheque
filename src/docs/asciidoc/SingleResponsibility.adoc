@@ -1,64 +1,11 @@
-= Responsabilité unique (Single responsibility)
+== Responsabilité unique (Single responsibility)
 include::default-preferences.adoc[]
 
-== Exemple de violation du principe de responsabilité :
-
-```java
-public class Article {
-
-    private String titre;
-    private String auteur;
-    private String contenu;
-
-    public Article(String titre, String auteur, String contenu) {
-        this.titre = titre;
-        this.auteur = auteur;
-        this.contenu = contenu;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public String getAuteur() {
-        return auteur;
-    }
-
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
-    }
-
-    public String getContenu() {
-        return contenu;
-    }
-
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
-    }
-
-    public void afficher() {
-        System.out.println("Titre : " + titre);
-        System.out.println("Auteur : " + auteur);
-        System.out.println("Contenu : " + contenu);
-    }
-
-    public void modifierTitre(String nouveauTitre) {
-        titre = nouveauTitre;
-    }
-
-    public void modifierAuteur(String nouvelAuteur) {
-        auteur = nouvelAuteur;
-    }
-
-    public void modifierContenu(String nouveauContenu) {
-        contenu = nouveauContenu;
-    }
-}
-```
+=== Exemple de violation du principe de responsabilité :
+[source,java]
+----
+include::{sourcedir}/org/hussard/pattern/singleresponsibility/violation/Article.java[]
+----
 
 Cette classe viole le principe de responsabilité unique car elle a deux responsabilités distinctes :
 
@@ -67,55 +14,16 @@ Cette classe viole le principe de responsabilité unique car elle a deux respons
 
 Ces deux responsabilités devraient être dans des classes ou des modules séparés. Par exemple, la classe `Article` pourrait être responsable du stockage des informations, et une autre classe `ArticleView` pourrait être responsable de l'affichage des informations.
 
-== Exemple de code qui respecte le principe de responsabilité unique :
+=== Exemple de code qui respecte le principe de responsabilité unique
 
-```java
-public class Article {
-
-    private String titre;
-    private String auteur;
-    private String contenu;
-
-    public Article(String titre, String auteur, String contenu) {
-        this.titre = titre;
-        this.auteur = auteur;
-        this.contenu = contenu;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public String getAuteur() {
-        return auteur;
-    }
-
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
-    }
-
-    public String getContenu() {
-        return contenu;
-    }
-
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
-    }
-}
-
-public class ArticleView {
-
-    public void afficher(Article article) {
-        System.out.println("Titre : " + article.getTitre());
-        System.out.println("Auteur : " + article.getAuteur());
-        System.out.println("Contenu : " + article.getContenu());
-    }
-}
-```
+[source,java]
+----
+include::{sourcedir}/org/hussard/pattern/singleresponsibility/respecte/Article.java[]
+----
+[source,java]
+----
+include::{sourcedir}/org/hussard/pattern/singleresponsibility/respecte/ArticleView.java[]
+----
 
 Dans cet exemple, la classe `Article` est responsable du stockage des informations, et la classe `ArticleView` est responsable de l'affichage des informations. Cela permet de respecter le principe de responsabilité unique, car chaque classe a une seule responsabilité.
 
@@ -126,3 +34,4 @@ Voici quelques avantages du respect du principe de responsabilité unique :
 * Le code est plus flexible et adaptable au changement.
 
 Il est important de respecter le principe de responsabilité unique dans la conception et la mise en œuvre de tout code.
+

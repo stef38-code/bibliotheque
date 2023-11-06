@@ -1,0 +1,18 @@
+@startuml
+legend
+clean
+|_ infrastructure
+  |_ rest : Les appels vers des services rest
+    |_ entities : Les data
+    |_ services : Component spring boot, implément une interface contenue dans metier.port.out
+    |_ mappers : Mapper des rest.entities en metier.models et inversement
+  |_ soap : Les appels vers des services soap
+    |_ entities : Les data
+    |_ services : Component spring boot, implément une interface contenue dans metier.port.out
+    |_ mappers : Mapper des soap.entities en metier.models et inversement
+  |_ repository : Les appels vers des services db
+     |_ entities : Les data
+     |_ services : Repository spring boot, implément une interface contenue dans metier.port.out
+     |_ mappers : Mapper des repository.entities en metier.models et inversement
+end legend
+@enduml

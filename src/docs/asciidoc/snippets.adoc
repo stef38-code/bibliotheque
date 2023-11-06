@@ -1,10 +1,10 @@
-= Snippets
+== Snippets
 include::default-preferences.adoc[]
 
 Dans ce document, nous allons voir quelques solutions de code qui permettront d'être plus clair mais, aussi dans le principe du **clean code**
 
 
-== For && Continue
+=== For && Continue
 Combien d'entre avons eu besoin de faire une boucle sur une liste d'éléments avec la contrainte de ne pas traiter certains cas
 
 [NOTE]
@@ -14,13 +14,13 @@ Dans notre exemple, nous voulons traiter que les chiffres positifs et ajouter `+
 * Le résultat attendu : [green]#**2, 3, 4, 5, 6, 7, 10, 8, 9, 1**#
 
 
-=== Code Source
+==== Code Source
 [source,java]
 ----
 include::{sourcedir}/org/hussard/snippets/ForAndContinue.java[]
 ----
 
-=== Test unitaire
+==== Test unitaire
 [source,java]
 ----
 include::{testdir}/org/hussard/snippets/ForAndContinueTest.java[only="18"]

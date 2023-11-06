@@ -1,0 +1,10 @@
+@startuml
+legend
+clean
+|_ application
+  |_ dto : Les data
+  |_ controllers : Controller spring boot
+  |_ services : Services spring boot, ici seront utilisés les services du métier
+  |_ mappers : Mapper des application.dto en metier.models et inversement
+end legend
+@enduml

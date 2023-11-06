@@ -1,15 +1,15 @@
-= Intellij
+== Intellij
 include::default-preferences.adoc[]
 
-== File and Code Templates
+=== File and Code Templates
 
-=== Ressources
+==== Ressources
 https://www.jetbrains.com/help/idea/using-file-and-code-templates.html[using-file-and-code-templates]
 
-=== Access
+==== Access
 image::FileAndTemplate.png[]
 
-=== répertoire
+==== répertoire
 Les fichiers template peuvent-être copiés dans
 
 
@@ -30,9 +30,9 @@ Les fichiers template peuvent-être copiés dans
 
 |===
 
-=== Templates
+==== Templates
 
-==== Singleton
+===== Singleton
 
 include::{intellijTemplateFiledir}/singleton.ftl[]
 

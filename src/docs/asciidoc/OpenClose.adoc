@@ -1,7 +1,7 @@
-= Ouvert/fermé ( Open/closed)
+== Ouvert/fermé ( Open/closed)
 include::default-preferences.adoc[]
 
-== Un exemple complexe de principe Open/closed
+=== Un exemple complexe de principe Open/closed
 
 Supposons que nous avons une application qui permet aux utilisateurs de créer des listes de tâches. Nous voulons que les utilisateurs puissent ajouter, supprimer et modifier des tâches dans leurs listes.
 

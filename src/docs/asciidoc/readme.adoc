@@ -1,0 +1,15 @@
+= Bibliothèque
+include::default-preferences.adoc[]
+
+Référencement du document pour l'aide au développement
+
+include::Avoid.adoc[]
+include::clean.adoc[]
+include::fluent.adoc[]
+include::OpenClose.adoc[]
+include::SingleResponsibility.adoc[]
+include::substitutionDeLiskov.adoc[]
+
+include::TestUnitaire.adoc[]
+include::snippets.adoc[]
+include::intellij.adoc[]

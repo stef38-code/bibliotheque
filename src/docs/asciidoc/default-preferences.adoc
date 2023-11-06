@@ -2,7 +2,7 @@
 :encoding: utf-8
 :lang: en
 :toc: left
-:imagesdir: images
+:imagesdir: ./images
 :icons: font
 :toclevels: 6
 :source-highlighter: rouge

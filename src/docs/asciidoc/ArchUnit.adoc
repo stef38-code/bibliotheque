@@ -1,2 +1,4 @@
 == ArchUnit
 include::default-preferences.adoc[]
+=== Ressources
+https://youtu.be/JApPbseRU2I?si=ImYiGrFepf-GNukC[]

@@ -209,10 +209,10 @@ NOTE::
 L'exemple est dans le package `org.hussard.pattern.fluent`
 
 IMPORTANT::
-Le constructeur de la classe `Data Object` ne doit pas être défini comme : *[red]`public, protected ou private`*
+Le constructeur de la classe `Data Object(Personne)` ne doit pas être défini comme : *[red]`public, protected ou private`*
 
 ===== Premier cas
-[blue]``Une Personne non marié, sans emploi``
+[blue]``Une Personne non marié et sans emploi``
 
 Nous allons partir sur la base du TDD, ce qui nous donne le test suivant :
 [source,java]

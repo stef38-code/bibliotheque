@@ -90,6 +90,9 @@ public class PersonnService{
 }
 ----
 // creation d'un class PersonnDao qui va sauvegarder une personne en base de données
+
+Au moment du développement, nous n'avons pas encore de base de données, nous allons donc simuler la sauvegarde en base de données.
+
 [source,java]
 ----
 package org.hussard.testunitaire.mock.deuxiemepas;
@@ -101,7 +104,10 @@ public class PersonnDao {
     }
 }
 ----
+
 // creation d'un class MailService qui va envoyer un mail
+Au moment du développement, nous n'avons pas encore de serveur de mail, nous allons donc simuler l'envoi du mail.
+
 [source,java]
 ----
 package org.hussard.testunitaire.mock.deuxiemepas;

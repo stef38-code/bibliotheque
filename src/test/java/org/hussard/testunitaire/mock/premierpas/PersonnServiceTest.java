@@ -10,9 +10,9 @@ class PersonnServiceTest {
         //declaration du service à tester
         PersonnService personnService = new PersonnService();
         // appel de la méthode à tester
-        Personn personn = personnService.getPersonn();
+        Personn resultat = personnService.getPersonn();
         // on vérifie que le résultat est bien celui attendu
-        assertThat(personn.getNom()).isEqualTo("Doe");
-        assertThat(personn.getPrenom()).isEqualTo("John");
+        assertThat(resultat.getNom()).isEqualTo("Doe");
+        assertThat(resultat.getPrenom()).isEqualTo("John");
     }
 }

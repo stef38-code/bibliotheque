@@ -1,9 +1,13 @@
 @startuml
 left to right direction
+
+circle Create
 circle PersonnService
 circle getPersonn
 circle create_Doe_John
-PersonnService --> getPersonn
-getPersonn --> create_Doe_John
-create_Doe_John --> PersonnService
+Create -> PersonnService : "Creation du service"
+PersonnService --> getPersonn : "Appel de la méthode"
+getPersonn <--> create_Doe_John : "Creation d'un objet Personn"
+getPersonn --> PersonnService : "Retour de l'objet Personn"
+
 @enduml

@@ -3,6 +3,7 @@ include::default-preferences.adoc[]
 
 == Premier pas
 Nous allons voir comment utiliser un mock pour tester une methode d'une class.
+La classe `PersonnService` a une methode `getPersonn` qui retourne un objet de type `Personn`.
 
 === Définition des classes
 // creation d'un class personn avec les attributs nom et prenom
@@ -39,4 +40,99 @@ include::{testdir}/org/hussard/testunitaire/mock/premierpas/PersonnServiceMockTe
 .Diagramme d'enchainement
 image::TestUnitaireMock_sequence_premierpas_2.png[]
 
+== Deuxieme pas
+Nous allons traiter le cas d'un service qui va faire appel a une sauvegarde d'une personne en base de données puis envoyer un mail de confirmation.
+
+=== Définition des classes
+// creation d'un class PersonnService qui va faire appel a une sauvegarde d'une personne en base de données puis envoyer un mail de confirmation
+[source,java]
+----
+package org.hussard.testunitaire.mock.deuxiemepas;
+
+public class Personn {
+    private final String nom;
+    private final String prenom;
+    private final String email;
+    public Personn(String nom, String prenom, String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }
+    public String getNom() {
+        return nom;
+    }
+    public String getPrenom() {
+        return prenom;
+    }
+    public String getEmail() {
+        return email;
+    }
+}
+----
+// creation d'un class PersonnService qui va faire appel a une sauvegarde d'une personne en base de données puis envoyer un mail de confirmation
+[source,java]
+----
+package org.hussard.testunitaire.mock.deuxiemepas;
+
+public class PersonnService{
+    private final PersonnDao personnDao;
+    private final MailService mailService;
+
+    public PersonnService(PersonnDao personnDao, MailService mailService) {
+        this.personnDao = personnDao;
+        this.mailService = mailService;
+    }
+    public boolean savePersonn(Personn personn) {
+        boolean isEnregistrer = personnDao.save(personn);
+        boolean isMailEnvoyer = mailService.sendMail(personn.getEmail(), "Confirmation", "Votre personne a bien été enregistrée");
+        return isEnregistrer && isMailEnvoyer;
+    }
+}
+----
+// creation d'un class PersonnDao qui va sauvegarder une personne en base de données
+[source,java]
+----
+package org.hussard.testunitaire.mock.deuxiemepas;
+
+public class PersonnDao {
+    public boolean save(Personn personn) {
+        // sauvegarde en base de données
+        return true;
+    }
+}
+----
+// creation d'un class MailService qui va envoyer un mail
+[source,java]
+----
+package org.hussard.testunitaire.mock.deuxiemepas;
+
+public class MailService {
+    public boolean sendMail(String email, String subject, String message) {
+        // envoi du mail
+        return true;
+    }
+}
+----
+=== Test Unitaire
+==== Test simple sans mock
+Le test suivant va tester la methode savePersonn de la class PersonnService sans avoir recours a un mock.
+
+// creation d'un class PersonnServiceTest qui test la methode savePersonn de la class PersonnService
+[source,java]
+----
+public class PersonnServiceTest {
+    @Test
+    public void testSavePersonn() {
+        PersonnDao personnDao = new PersonnDao();
+        MailService mailService = new MailService();
+        PersonnService personnService = new PersonnService(personnDao, mailService);
+        Personn personn = new Personn("DUPONT", "Jean", "jean.dupont@yahoo.fr");
+        boolean resulat = personnService.savePersonn(personn);
+        assertThat(resulat).isTrue();
+    }
+}
+----
+À ce moment-là, nous sommes bien content puisque nous avons un test qui fonctionne.
+Mais si nous regardons de plus près, nous nous rendons compte que nous avons un problème.
+En effet, nous avons un test qui va sauvegarder une personne en base de données et envoyer un mail. Mais dans tous les cas, nous aurons un test qui va retourner true.
 

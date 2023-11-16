@@ -1,0 +1,9 @@
+@startuml
+left to right direction
+circle PersonnService
+circle getPersonn
+circle create_Doe_John
+PersonnService --> getPersonn
+getPersonn --> create_Doe_John
+create_Doe_John --> PersonnService
+@enduml

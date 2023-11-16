@@ -1,0 +1,42 @@
+= Test Unitaire Mock
+include::default-preferences.adoc[]
+
+== Premier pas
+Nous allons voir comment utiliser un mock pour tester une methode d'une class.
+
+=== Définition des classes
+// creation d'un class personn avec les attributs nom et prenom
+[source,java]
+----
+include::{sourcedir}/org/hussard/testunitaire/mock/premierpas/Personn.java[]
+----
+// creation d'un class PersonnService avec une methode qui retourne un objet de type Personn
+[source,java]
+----
+include::{sourcedir}/org/hussard/testunitaire/mock/premierpas/PersonnService.java[]
+----
+=== Test Unitaire
+==== Test simple sans mock
+Le test suivant va tester la methode getPersonn de la class PersonnService sans avoir recours a un mock.
+
+// creation d'un class PersonnServiceTest qui test la methode getPersonn de la class PersonnService
+[source,java]
+----
+include::{testdir}/org/hussard/testunitaire/mock/premierpas/PersonnServiceTest.java[]
+----
+.Diagramme d'enchainement
+image::TestUnitaireMock_sequence_premierpas_1.png[]
+
+==== Test avec mock
+Le test suivant va tester la methode getPersonn de la class PersonnService avec un mock.
+C'est-à-dire que nous allons simuler le comportement de la methode getPersonn de la class PersonnService.
+
+// creation d'un class PersonnServiceMockTest qui test la methode getPersonn de la class PersonnService avec un mock
+[source,java]
+----
+include::{testdir}/org/hussard/testunitaire/mock/premierpas/PersonnServiceMockTest.java[]
+----
+.Diagramme d'enchainement
+image::TestUnitaireMock_sequence_premierpas_2.png[]
+
+

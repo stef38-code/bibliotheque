@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+circle Create
+circle PersonnService
+circle getPersonn
+circle create_Smithee_Adam
+Create --> PersonnService : " mock(PersonnService.class)"
+PersonnService --> getPersonn : "simulation via given(personnService.getPersonn()).willReturn(personn)"
+getPersonn <-- create_Smithee_Adam : "new Personn("Smithee", "Adam")"
+getPersonn --> PersonnService : "retourne person("Smithee", "Adam")"
+@enduml

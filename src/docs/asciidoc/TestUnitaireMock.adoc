@@ -9,12 +9,34 @@ La classe `PersonnService` a une methode `getPersonn` qui retourne un objet de t
 // creation d'un class personn avec les attributs nom et prenom
 [source,java]
 ----
-include::{sourcedir}/org/hussard/testunitaire/mock/premierpas/Personn.java[]
+package org.hussard.testunitaire.mock.premierpas;
+
+public class Personn {
+    private final String nom;
+    private final String prenom;
+    public Personn(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+    public String getNom() {
+        return nom;
+    }
+    public String getPrenom() {
+        return prenom;
+    }
+}
 ----
+
 // creation d'un class PersonnService avec une methode qui retourne un objet de type Personn
 [source,java]
 ----
-include::{sourcedir}/org/hussard/testunitaire/mock/premierpas/PersonnService.java[]
+package org.hussard.testunitaire.mock.premierpas;
+
+public class PersonnService {
+    public Personn getPersonn() {
+        return new Personn("Doe", "John");
+    }
+}
 ----
 === Test Unitaire
 ==== Test simple sans mock
@@ -23,7 +45,24 @@ Le test suivant va tester la methode getPersonn de la class PersonnService sans 
 // creation d'un class PersonnServiceTest qui test la methode getPersonn de la class PersonnService
 [source,java]
 ----
-include::{testdir}/org/hussard/testunitaire/mock/premierpas/PersonnServiceTest.java[]
+package org.hussard.testunitaire.mock.premierpas;
+
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class PersonnServiceTest {
+    @Test
+    void getPersonn() {
+        //declaration du service à tester
+        PersonnService personnService = new PersonnService();
+        // appel de la méthode à tester
+        Personn resultat = personnService.getPersonn();
+        // on vérifie que le résultat est bien celui attendu
+        assertThat(resultat.getNom()).isEqualTo("Doe");
+        assertThat(resultat.getPrenom()).isEqualTo("John");
+    }
+}
 ----
 .Diagramme d'enchainement
 image::TestUnitaireMock_sequence_premierpas_1.png[]
@@ -35,7 +74,30 @@ C'est-à-dire que nous allons simuler le comportement de la methode getPersonn d
 // creation d'un class PersonnServiceMockTest qui test la methode getPersonn de la class PersonnService avec un mock
 [source,java]
 ----
-include::{testdir}/org/hussard/testunitaire/mock/premierpas/PersonnServiceMockTest.java[]
+package org.hussard.testunitaire.mock.premierpas;
+
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+
+class PersonnServiceMockTest {
+    @Test
+    void getPersonn() {
+        //Décclaration du mock, on va simuler le comportement de la classe PersonnService
+        PersonnService personnService = mock(PersonnService.class);
+        // definition de la valeur de retour de la méthode getPersonn()
+        Personn personn = new Personn("Smithee", "Adam");
+        // on simule le comportement de la méthode getPersonn()
+        given(personnService.getPersonn()).willReturn(personn);
+        // on appelle la méthode getPersonn()
+        Personn resultat = personnService.getPersonn();
+        // on vérifie que le résultat est bien celui attendu
+        assertThat(resultat.getNom()).isEqualTo("Smithee");
+        assertThat(resultat.getPrenom()).isEqualTo("Adam");
+    }
+}
 ----
 .Diagramme d'enchainement
 image::TestUnitaireMock_sequence_premierpas_2.png[]

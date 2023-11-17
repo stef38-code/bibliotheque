@@ -14,6 +14,7 @@
 :rouge-style: github
 :includedir: _includes
 :sourcedir: ../../main/java
+:imagesdir: ../../docs/images
 :intellijTemplateFiledir: intellij/fileTemplates
 :testdir: ../../test/java
 :author: Stéphane BETTON

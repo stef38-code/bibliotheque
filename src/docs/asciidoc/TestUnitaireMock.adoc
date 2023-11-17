@@ -65,7 +65,7 @@ class PersonnServiceTest {
 }
 ----
 .Diagramme d'enchainement
-image::../images/TestUnitaireMock_sequence_premierpas_1.png[]
+image::../asciidoc/images/TestUnitaireMock_sequence_premierpas_1.png[]
 
 ==== Test avec mock
 Le test suivant va tester la methode getPersonn de la class PersonnService avec un mock.

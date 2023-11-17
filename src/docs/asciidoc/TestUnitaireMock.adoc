@@ -100,7 +100,7 @@ class PersonnServiceMockTest {
 }
 ----
 .Diagramme d'enchainement
-image::TestUnitaireMock_sequence_premierpas_2.png[]
+image::../asciidoc/images/TestUnitaireMock_sequence_premierpas_2.png[]
 
 == Deuxieme pas
 Nous allons traiter le cas d'un service qui va faire appel à une sauvegarde d'une personne en base de données puis envoyer un mail de confirmation.

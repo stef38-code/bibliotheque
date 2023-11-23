@@ -1,0 +1,54 @@
+= Test Avec AssertJ
+include::default-preferences.adoc[]
+
+
+==  Test Exception
+Avant
+
+[source,java]
+----
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+
+class UrlHttpTest {
+
+    @Test
+    void get_Quand_UrlEstVide_Alors_UrlHttpErreur() {
+        assertThatThrownBy(() -> UrlHttpBuilder.get()
+                .url("")
+                .build())
+                .isInstanceOf(UrlHttpErreur.class)
+                .hasMessage("The value(url) must not be null or blank");
+
+    }
+}
+----
+
+Après
+
+[source,java]
+----
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+
+class UrlHttpTest {
+
+    @Test
+    void get_Quand_UrlEstVide_Alors_UrlHttpErreur() {
+        Throwable thrown = catchThrowable(() -> UrlHttpBuilder.get()
+                .url("")
+                .build());
+        Assertions.assertThat(thrown)
+                .isInstanceOf(UrlHttpErreur.class)
+                .hasMessage("The value(url) must not be null or blank");
+
+    }
+}
+----

@@ -12,13 +12,14 @@
 :toclevels: 6
 :source-highlighter: rouge
 :rouge-style: github
-//:includedir: _includes
+:includedir: _includes
 :sourcedir: ../../main/java
 //:imagesdir: ../../docs/asciidoc/images
 :intellijTemplateFiledir: intellij/fileTemplates
 :testdir: ../../test/java
 :author: Stéphane BETTON
 :email: stéphane.betton@ag2rlamondiale.fr
+
 //sur github
 ifdef::env-github[]
 :imagesrep: ../../docs/asciidoc/images

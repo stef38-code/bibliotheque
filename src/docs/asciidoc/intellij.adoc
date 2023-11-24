@@ -1,30 +1,24 @@
-== Intellij
 :doctype: book
 :encoding: utf-8
 :lang: en
-[tocify_asciidoc]
-:toc: left
-//:imagesdir: ./images
 :icons: font
 :tip-caption: pass:[&#x1F441;]
 :warning-caption: pass:[&#9888]
 :important-caption: pass:[&#9763;]
 :note-caption: pass:[&#33;]
 :caution-caption: pass:[&#9761;]
-:toclevels: 6
 :source-highlighter: rouge
 :rouge-style: github
 :includedir: _includes
-:sourcedir: ../../main/java
-//:imagesdir: ../../docs/asciidoc/images
-:intellijTemplateFiledir: intellij/fileTemplates
-:testdir: ../../test/java
 :author: Stéphane BETTON
 :email: stéphane.betton@ag2rlamondiale.fr
 
+[tocify_asciidoc]
+:toc: left
+:toclevels: 6
 
+== Intellij
 === File and Code Templates
-
 ==== Ressources
 https://www.jetbrains.com/help/idea/using-file-and-code-templates.html[using-file-and-code-templates]
 

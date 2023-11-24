@@ -20,12 +20,4 @@
 :author: Stéphane BETTON
 :email: stéphane.betton@ag2rlamondiale.fr
 
-//sur github
-ifdef::env-github[]
-:imagesrep: ../../docs/asciidoc/images
-endif::[]
-//en local
-ifndef::env-github[]
-:imagesrep: ./images
-endif::[]
 

@@ -3,8 +3,8 @@ include::default-preferences.adoc[]
 
 Référencement du document pour l'aide au développement
 
-include::Avoid.adoc[]
-include::clean.adoc[]
+include::../asciidoc/Avoid.adoc[]
+include::../asciidoc/clean.adoc[]
 include::fluent.adoc[]
 include::OpenClose.adoc[]
 include::SingleResponsibility.adoc[]

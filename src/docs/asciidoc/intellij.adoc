@@ -54,7 +54,7 @@ Le répertoire de stockage du template est le suivant
 
 `C:\Users\{User}\AppData\Roaming\JetBrains\{Version IntelliJIdea}\plugins\intellij-postfix-templates_templates\templates\java\TemplateFileJava.postfixTemplates.xml`
 
-{toto}
+{imagesrep}
 
 
 

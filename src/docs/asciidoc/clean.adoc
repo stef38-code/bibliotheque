@@ -1,5 +1,21 @@
+:doctype: book
+:encoding: utf-8
+:lang: en
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
+
 == Clean architecture
-include::default-preferences.adoc[]
 
 === Introduction
 
@@ -67,7 +83,7 @@ Dans cette architecture,
 [.listing]
 * La couche d'interface utilisateur ne dépend pas de la couche d'application,
 
-image::clean_nodepend_utilisateur_application.png[]
+image::../asciidoc/images/clean_nodepend_utilisateur_application.png[]
 
 [source,java]
 ----
@@ -88,7 +104,7 @@ Dans ce code, le contrôleur ne dépend pas de l'implémentation du service. Il 
 
 * La couche d'application ne dépend pas de la couche d'infrastructure.
 
-image::clean_nodepend_application_infrastructure.png[]
+image::../asciidoc/images/clean_nodepend_application_infrastructure.png[]
 
 [source,java]
 ----
@@ -203,13 +219,13 @@ Cette partie implémentera une interface de la partie métier pour créer des se
 Nous allons définir les éléments qui seront dans chacune des parties
 
 ===== Métier
-image::clean_metier_structure.png[]
+image::../asciidoc/images/clean_metier_structure.png[]
 
 ===== Application
-image::clean_application_structure.png[]
+image::../asciidoc/images/clean_application_structure.png[]
 
 ===== Infrastructure
-image::clean_infrastructure_structure.png[]
+image::../asciidoc/images/clean_infrastructure_structure.png[]
 
 === ressources
 * https://leandeep.com/clean-architecture/[leandeep.com]

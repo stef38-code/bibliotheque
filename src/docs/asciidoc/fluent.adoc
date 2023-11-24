@@ -49,10 +49,10 @@ Sans parler du dernier test....
 On peut facilement le voir avec l'aide à la saisie des IDE, l'image ci-dessous montre la liste des méthodes possibles. Du coup, le développeur peut faire comme il le souhaite alors que notre classe `Personne` contient des restrictions.
 
 .IDE intellij
-image::builderProperties.png[]
+image::../asciidoc/images/builderProperties.png[]
 
 .Schema
-image::Builder.png[]
+image::../asciidoc/images/Builder.png[]
 
 === Fluent
 Nous venons de voir que le pattern builder comporte un problème de taille. +
@@ -69,7 +69,7 @@ Nous voulons avoir le déroulement suivant :
 ===== Premier cas
 [blue]``Une Personne non marié, sans emploi``
 
-image::fluentCas1.png[]
+image::../asciidoc/images/fluentCas1.png[]
 
 [source,java]
 ----
@@ -88,7 +88,7 @@ class CreatePersonne{
 ===== Deuxième cas
 [blue]``Une personne marié sans emploi``
 
-image::fluentCas2.png[]
+image::../asciidoc/images/fluentCas2.png[]
 
 [source,java]
 ----
@@ -108,7 +108,7 @@ class CreatePersonne{
 ===== Troisième cas
 [blue]``Une personne pas marié avec emploi``
 
-image::fluentCas3.png[]
+image::../asciidoc/images/fluentCas3.png[]
 
 [source,java]
 ----
@@ -134,11 +134,11 @@ Ce cas est intéressant car il doit être possible de saisir soit :
 
 * marie puis emploi
 
-image::fluentCas4_1.png[]
+image::../asciidoc/images/fluentCas4_1.png[]
 
 * emploi puis marie
 
-image::fluentCas4_2.png[]
+image::../asciidoc/images/fluentCas4_2.png[]
 
 [source,java]
 ----

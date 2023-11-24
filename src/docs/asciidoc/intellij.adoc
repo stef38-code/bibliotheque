@@ -12,8 +12,6 @@
 :includedir: _includes
 :author: Stéphane BETTON
 :email: stéphane.betton@ag2rlamondiale.fr
-
-[tocify_asciidoc]
 :toc: left
 :toclevels: 6
 

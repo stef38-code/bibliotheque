@@ -1,5 +1,26 @@
 == Intellij
-include::default-preferences.adoc[]
+:doctype: book
+:encoding: utf-8
+:lang: en
+:toc: left
+//:imagesdir: ./images
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:toclevels: 6
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:sourcedir: ../../main/java
+//:imagesdir: ../../docs/asciidoc/images
+:intellijTemplateFiledir: intellij/fileTemplates
+:testdir: ../../test/java
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+
 
 === File and Code Templates
 

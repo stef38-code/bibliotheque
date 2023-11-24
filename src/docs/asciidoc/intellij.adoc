@@ -32,29 +32,29 @@ Les fichiers template peuvent-être copiés dans
 
 ==== Templates
 
-===== Singleton
+[red]** TODO **
 
-include::{intellijTemplateFiledir}/singleton.ftl[]
+=== Custom Postfix Templates
+https://plugins.jetbrains.com/plugin/9862-custom-postfix-templates[https://plugins.jetbrains.com/]
 
-[source,java]
-----
-public class MySingleton extends Singleton<MySingleton> {
+Ce plugin permet de créer des templates de code qui peuvent être utilisés.
 
-    private MySingleton() {
-    }
+==== Documentation
 
-    @Override
-    protected MySingleton createInstance() {
-        return new MySingleton();
-    }
+https://github.com/xylo/intellij-postfix-templates#custom-postfix-templates-for-intellij-idea[Doc]
 
-    public static MySingleton getInstance() {
-        return Singleton.getInstance();
-    }
-}
-----
+==== Créer un template
 
-[source,java]
-----
-MySingleton singleton = MySingleton.getInstance();
-----
+image::{imagesrep}/intellij_CustomPostfixTemplates_Menu.adoc.png[]
+image::{imagesrep}/intellij_CustomPostfixTemplates_Menu_add.adoc.png[]
+image::{imagesrep}/intellij_CustomPostfixTemplates_Menu_add_select.adoc.png[]
+image::{imagesrep}/intellij_CustomPostfixTemplates_Menu_add_fileName.adoc.png[]
+
+Le répertoire de stockage du template est le suivant
+
+`C:\Users\{User}\AppData\Roaming\JetBrains\{Version IntelliJIdea}\plugins\intellij-postfix-templates_templates\templates\java\TemplateFileJava.postfixTemplates.xml`
+
+{toto}
+
+
+

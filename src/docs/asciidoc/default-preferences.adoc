@@ -2,7 +2,7 @@
 :encoding: utf-8
 :lang: en
 :toc: left
-:imagesdir: ./images
+//:imagesdir: ./images
 :icons: font
 :tip-caption: pass:[&#x1F441;]
 :warning-caption: pass:[&#9888]
@@ -12,10 +12,19 @@
 :toclevels: 6
 :source-highlighter: rouge
 :rouge-style: github
-:includedir: _includes
+//:includedir: _includes
 :sourcedir: ../../main/java
-:imagesdir: ../../docs/asciidoc/images
+//:imagesdir: ../../docs/asciidoc/images
 :intellijTemplateFiledir: intellij/fileTemplates
 :testdir: ../../test/java
 :author: Stéphane BETTON
 :email: stéphane.betton@ag2rlamondiale.fr
+//sur github
+ifdef::env-github[]
+:imagesrep: ../../docs/asciidoc/images
+endif::[]
+//en local
+ifndef::env-github[]
+:imagesrep: ./images
+endif::[]
+

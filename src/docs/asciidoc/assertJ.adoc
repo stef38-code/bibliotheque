@@ -3,7 +3,8 @@ include::default-preferences.adoc[]
 
 
 ==  Test Exception
-Avant
+=== Déconseillé
+Voici quelques exemples de test pour gérer les exceptions
 
 [source,java]
 ----
@@ -28,7 +29,7 @@ class UrlHttpTest {
 }
 ----
 
-Après
+=== Conseillé
 
 [source,java]
 ----
@@ -51,4 +52,14 @@ class UrlHttpTest {
 
     }
 }
+----
+=== Code Custom Postfix Templates
+[code,text]
+----
+.testThrowException : assertj assertThrowException
+    ANY                 [org.assertj.core.api.Assertions]     →  java.lang.Throwable thrown = org.assertj.core.api.AssertionsForClassTypes.catchThrowable(() -> $expr$); \
+                                                                org.assertj.core.api.Assertions.assertThat(thrown) \
+                                                                .isInstanceOf($except$) \
+                                                                .hasMessage($msg$); \
+                                                                $END$                                                       [USE_STATIC_IMPORTS]
 ----

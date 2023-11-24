@@ -7,7 +7,7 @@ include::default-preferences.adoc[]
 https://www.jetbrains.com/help/idea/using-file-and-code-templates.html[using-file-and-code-templates]
 
 ==== Access
-image::FileAndTemplate.png[]
+image::../asciidoc/images/FileAndTemplate.png[]
 
 ==== répertoire
 Les fichiers template peuvent-être copiés dans
@@ -45,16 +45,15 @@ https://github.com/xylo/intellij-postfix-templates#custom-postfix-templates-for-
 
 ==== Créer un template
 
-image::{imagesrep}/intellij_CustomPostfixTemplates_Menu.adoc.png[]
-image::{imagesrep}/intellij_CustomPostfixTemplates_Menu_add.adoc.png[]
-image::{imagesrep}/intellij_CustomPostfixTemplates_Menu_add_select.adoc.png[]
-image::{imagesrep}/intellij_CustomPostfixTemplates_Menu_add_fileName.adoc.png[]
+image::../asciidoc/images/intellij_CustomPostfixTemplates_Menu.adoc.png[]
+image::../asciidoc/images/intellij_CustomPostfixTemplates_Menu_add.adoc.png[]
+image::../asciidoc/images/intellij_CustomPostfixTemplates_Menu_add_select.adoc.png[]
+image::../asciidoc/images/intellij_CustomPostfixTemplates_Menu_add_fileName.adoc.png[]
 
 Le répertoire de stockage du template est le suivant
 
 `C:\Users\{User}\AppData\Roaming\JetBrains\{Version IntelliJIdea}\plugins\intellij-postfix-templates_templates\templates\java\TemplateFileJava.postfixTemplates.xml`
 
-{imagesrep}
 
 
 

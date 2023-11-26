@@ -1,0 +1,48 @@
+== Plugin Custom Postfix Templates
+Memo sur ma liste de postfix de template pour le plugin [blue]**Custom Postfix Templates**
+
+=== java
+
+.Fichier: TemplateFileJava
+[source,text]
+----
+# Les tests
+.ifCollectIsEmpty : if d'une collection vide
+	ANY	[org.apache.commons.collections4.CollectionUtils] -> if (CollectionUtils.isEmpty($expr$)) { \
+																$END$ \
+																}
+.ifCollectIsNotEmpty : if d'une collection non vide
+	ANY	[org.apache.commons.collections4.CollectionUtils] -> if (CollectionUtils.isNotEmpty($expr$)) { \
+																$END$ \
+																}
+.ifObjectIsNotNull : if d'un objet non null
+	ANY  -> if (Objects.nonNull($expr$)) {
+			$END$ \
+			}
+.ifObjectIsNull : if d'un objet null
+	ANY  -> if (Objects.isNull($expr$)) {
+			$END$ \
+			}
+# Astuces
+.filterListe : filtrer les elements d'une liste
+	ANY -> List<Integer> positifList = $expr$.stream()\
+										.filter(element -> $test$).toList();$END$
+
+# Tests unitaires
+.tuThrowException : Test unitaire d'une exception
+	ANY                 [org.assertj.core.api.Assertions]     →  java.lang.Throwable thrown = org.assertj.core.api.AssertionsForClassTypes.catchThrowable(() -> $expr$); \
+                                                                org.assertj.core.api.Assertions.assertThat(thrown) \
+                                                                .isInstanceOf($except$) \
+                                                                .hasMessage($msg$); \
+                                                                $END$                                                       [USE_STATIC_IMPORTS]
+# Les Mocks
+.mockGivenThrowVoidMethode : Mocker une Exception sur une methode void
+	ANY	[org.mockito.BDDMockito] -> willThrow($Exception$).willDoNothing().given($expr$).$Methode$;$END$	[USE_STATIC_IMPORTS]
+.mockGivenWillDoNothing : Mocker une methode void
+	ANY	[org.mockito.BDDMockito] -> willDoNothing().given($expr$).$methode$;$END$	[USE_STATIC_IMPORTS]
+.mockGivenWillReturn : Mocker une methode avec une valeur de retour
+	ANY	[org.mockito.BDDMockito] -> given($expr$).willReturn($value$);$END$	[USE_STATIC_IMPORTS]
+.mockGivenWillThrow : Mocker une methode avec une exception
+	ANY [org.mockito.BDDMockito] -> given($expr$).willThrow($exception$);$END$ [USE_STATIC_IMPORTS]
+
+----

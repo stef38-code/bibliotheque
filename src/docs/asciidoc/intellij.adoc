@@ -66,9 +66,11 @@ image::../asciidoc/images/intellij_CustomPostfixTemplates_Menu_add_fileName.adoc
 
 Le répertoire de stockage du template est le suivant
 
-`C:\Users\{User}\AppData\Roaming\JetBrains\{Version IntelliJIdea}\plugins\intellij-postfix-templates_templates\templates\java\TemplateFileJava.postfixTemplates.xml`
+* windows : `C:\Users\{User}\AppData\Roaming\JetBrains\{Version IntelliJIdea}\plugins\intellij-postfix-templates_templates\templates\java\TemplateFileJava.postfixTemplates.xml`
+* linux : `/home/{user-home}/.local/share/JetBrains/{Version IntelliJIdea}/intellij-postfix-templates_templates/templates/java/TemplateFileJava.postfixTemplates.xml`
 
-
+[NOTE]
+Un document est disponible dans ce répertoire : PluginCustomPostfixTemplates.adoc
 
 
 

@@ -33,9 +33,6 @@ Les fichiers template peuvent-être copiés dans
 |Installation
 |%APPDATA%\JetBrains\<product><version>\fileTemplates
 |~/.config/JetBrains/<product><version>/fileTemplates
-
-
-
 |===
 
 ==== Templates

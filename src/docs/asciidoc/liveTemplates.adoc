@@ -31,6 +31,15 @@ Voici les templates Java que j'utilise le plus souvent.
 
 Il suffit de copier le code ci-dessous dans un fichier `JavaLiveTemplate.xml` et de le placer dans le répertoire `config/templates` de votre installation Intellij. Puis de redémarrer Intellij.
 
+|===
+|Emplacement |Windows |Linux
+
+|Installation
+|%APPDATA%\JetBrains\<product><version>\fileTemplates
+|~/.config/JetBrains/<product><version>/fileTemplates
+|===
+
+
 [.source,xml]
 .JavaLiveTemplate.xml
 [source,xml]

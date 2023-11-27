@@ -1,6 +1,21 @@
-== Pattern fluent
-include::default-preferences.adoc[]
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
 
+== Pattern fluent
 
 === A propos
 Le *pattern fluent* est une solution de *pattern Builder* qui presente un avantage intéressant.
@@ -29,14 +44,14 @@ public class Personne {
 Voici un exemple du pattern builder :
 [source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/builder/Personne.java[]
+include::../../main/java/org/hussard/pattern/builder/Personne.java[]
 ----
 
 ===== Test unitaire
 Le test unitaire associé
 [source,java]
 ----
-include::{testdir}/org/hussard/pattern/builder/PersonneTest.java[]
+include::../../test/java/org/hussard/pattern/builder/PersonneTest.java[]
 ----
 
 ==== Constat

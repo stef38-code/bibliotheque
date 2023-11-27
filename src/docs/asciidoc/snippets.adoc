@@ -1,5 +1,22 @@
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
+
 == Snippets
-include::default-preferences.adoc[]
+
 
 Dans ce document, nous allons voir quelques solutions de code qui permettront d'être plus clair mais, aussi dans le principe du **clean code**
 
@@ -17,11 +34,11 @@ Dans notre exemple, nous voulons traiter que les chiffres positifs et ajouter `+
 ==== Code Source
 [source,java]
 ----
-include::{sourcedir}/org/hussard/snippets/ForAndContinue.java[]
+include::../../main/java/org/hussard/snippets/ForAndContinue.java[]
 ----
 
 ==== Test unitaire
 [source,java]
 ----
-include::{testdir}/org/hussard/snippets/ForAndContinueTest.java[only="18"]
+include::../../test/java/org/hussard/snippets/ForAndContinueTest.java[only="18"]
 ----

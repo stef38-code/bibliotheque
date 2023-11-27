@@ -87,15 +87,15 @@ image::../asciidoc/images/clean_nodepend_utilisateur_application.png[]
 
 [source,java]
 ----
-include::{sourcedir}/org/hussard/samples/clean/Controleur.java[]
+include::../../main/java/org/hussard/samples/clean/Controleur.java[]
 ----
 [source,java]
 ----
-include::{sourcedir}/org/hussard/samples/clean/Service.java[]
+include::../../main/java/org/hussard/samples/clean/Service.java[]
 ----
 [source,java]
 ----
-include::{sourcedir}/org/hussard/samples/clean/ServiceDefault.java[]
+include::../../main/java/org/hussard/samples/clean/ServiceDefault.java[]
 ----
 
 [NOTE]
@@ -108,15 +108,15 @@ image::../asciidoc/images/clean_nodepend_application_infrastructure.png[]
 
 [source,java]
 ----
-include::{sourcedir}/org/hussard/samples/clean/Service.java[]
+include::../../main/java/org/hussard/samples/clean/Service.java[]
 ----
 [source,java]
 ----
-include::{sourcedir}/org/hussard/samples/clean/BaseDeDonnees.java[]
+include::../../main/java/org/hussard/samples/clean/BaseDeDonnees.java[]
 ----
 [source,java]
 ----
-include::{sourcedir}/org/hussard/samples/clean/BaseDeDonneesDefault.java[]
+include::../../main/java/org/hussard/samples/clean/BaseDeDonneesDefault.java[]
 ----
 
 [NOTE]
@@ -234,6 +234,6 @@ image::../asciidoc/images/clean_infrastructure_structure.png[]
 * https://www.thoughtworks.com/insights/blog/architecture/demystify-software-architecture-patterns[demystify-software-architecture-patterns]
 * https://www.milanjovanovic.tech/blog/why-clean-architecture-is-great-for-complex-projects[milanjovanovic]
 
-exemple:
+Exemple:
 
 * https://github.com/spring-projects/spring-petclinic/blob/main/readme.md[Todo]

@@ -1,5 +1,20 @@
 = Test Avec AssertJ
-include::default-preferences.adoc[]
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
 
 
 ==  Test Exception
@@ -52,14 +67,4 @@ class UrlHttpTest {
 
     }
 }
-----
-=== Code Custom Postfix Templates
-[code,text]
-----
-.testThrowException : assertj assertThrowException
-    ANY                 [org.assertj.core.api.Assertions]     →  java.lang.Throwable thrown = org.assertj.core.api.AssertionsForClassTypes.catchThrowable(() -> $expr$); \
-                                                                org.assertj.core.api.Assertions.assertThat(thrown) \
-                                                                .isInstanceOf($except$) \
-                                                                .hasMessage($msg$); \
-                                                                $END$                                                       [USE_STATIC_IMPORTS]
 ----

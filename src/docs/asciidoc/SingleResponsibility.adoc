@@ -1,10 +1,25 @@
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
 == Responsabilité unique (Single responsibility)
-include::default-preferences.adoc[]
 
 === Exemple de violation du principe de responsabilité :
 [source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/singleresponsibility/violation/Article.java[]
+include::../../main/java/org/hussard/pattern/singleresponsibility/violation/Article.java[]
 ----
 
 Cette classe viole le principe de responsabilité unique car elle a deux responsabilités distinctes :
@@ -18,11 +33,11 @@ Ces deux responsabilités devraient être dans des classes ou des modules sépar
 
 [source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/singleresponsibility/respecte/Article.java[]
+include::../../main/java/org/hussard/pattern/singleresponsibility/respecte/Article.java[]
 ----
 [source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/singleresponsibility/respecte/ArticleView.java[]
+include::../../main/java/org/hussard/pattern/singleresponsibility/respecte/ArticleView.java[]
 ----
 
 Dans cet exemple, la classe `Article` est responsable du stockage des informations, et la classe `ArticleView` est responsable de l'affichage des informations. Cela permet de respecter le principe de responsabilité unique, car chaque classe a une seule responsabilité.

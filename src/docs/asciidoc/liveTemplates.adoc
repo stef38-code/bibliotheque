@@ -1,0 +1,74 @@
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
+
+== Live templates
+Les templates sont des fichiers de type `*.ft` ou `*.java` qui sont utilisés pour générer des fichiers ou du code.
+
+https://www.jetbrains.com/help/idea/using-live-templates.html[using live templates]
+
+=== Java
+Voici les templates Java que j'utilise le plus souvent.
+
+* privateContructor : génère un constructeur privé
+* testAssertAll : génère un test avec AssertJ qui collecte toutes les assertions
+* _testPrivateConstructeur : génère un test unitaire sur un constructeur privé
+* testmvc : génère un test unitaire avec MockMvc
+* _testJunit5 : génère un test unitaire avec Junit5 avec un formalisme BDD
+
+Il suffit de copier le code ci-dessous dans un fichier `JavaLiveTemplate.xml` et de le placer dans le répertoire `config/templates` de votre installation Intellij. Puis de redémarrer Intellij.
+
+[.source,xml]
+.JavaLiveTemplate.xml
+[source,xml]
+----
+<templateSet group="JavaLiveTemplate">
+   <template name="_testmvc" value="@org.springframework.beans.factory.annotation.Autowired&#10;private org.springframework.test.web.servlet.MockMvc mockMvc;&#10;&#10;@org.junit.jupiter.api.Test&#10;void test$Function$() throws java.lang.Exception {&#10;    org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder request = org.springframework.test.web.servlet.request.MockMvcRequestBuilders&#10;            .get(&quot;&quot;)&#10;            .contentType(org.springframework.http.MediaType.APPLICATION_JSON);&#10;&#10;    mockMvc.perform(request)&#10;            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isOk())&#10;            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.content().contentType(org.springframework.http.MediaType.APPLICATION_JSON))&#10;            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath(&quot;&quot;, org.hamcrest.Matchers.is(&quot;&quot;)));&#10;}" description="JUnit Test Method with MockMvc" toReformat="true" toShortenFQNames="true">
+    <variable name="Function" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="_testJunit5" value="@org.junit.jupiter.api.Test&#10;void $methode$_Lorsque_$scenario$_Attend_$expectation$(){&#10;    //Conditions préalables (given)&#10;    $END$&#10;    //Une action se produit (when)&#10;&#10;    //Vérifier la sortie (then)&#10;    org.assertj.core.api.Assertions.assertThat(&quot;Default test&quot;).isEmpty();&#10;}&#10;" description="junit5" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="methode" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="scenario" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="expectation" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="privateContructor" value="private $className$() {&#10;    throw new UnsupportedOperationException(&quot;$className$ is a utility class and cannot be instantiated&quot;);&#10;}" description="private contructeur" toReformat="false" toShortenFQNames="true">
+    <variable name="className" expression="className()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="testAssertAll" value="SoftAssertions softly = new SoftAssertions();&#10;softly.assertThat($VAR$.$Methode$).isEqualT($VALUE$);&#10;//Ajouter les autres tests&#10;softly.assertAll();&#10;&#10;" description="AssertJ collects all assertion" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="VAR" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="Methode" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="_testPrivateConstructeur" value="@Test&#10;void constructeur_Quand_EstPrivate_Alors_getModifiersEstEgalAModifierPrivate() throws NoSuchMethodException {&#10;    Constructor&lt;$className$&gt; constructor = $className$.class.getDeclaredConstructor();&#10;    assertThat(constructor.getModifiers()).isEqualTo(Modifier.PRIVATE);&#10;}&#10;&#10;@Test()&#10;void constructeur_Quand_ModificationAccessible_Alors_UnsupportedOperationException() throws NoSuchMethodException {&#10;        final Constructor&lt;$className$&gt; constructor = $className$.class.getDeclaredConstructor();&#10;    constructor.setAccessible(true);&#10;    assertThatThrownBy(constructor::newInstance).&#10;            hasCauseExactlyInstanceOf(UnsupportedOperationException.class);&#10;&#10;}&#10;" description="Test unitaire sur un constructeur private" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="className" expression="className()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+</templateSet>
+----

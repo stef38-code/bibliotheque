@@ -10,6 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ForAndContinueTest {
+
     private static final Logger log = LoggerFactory.getLogger(ForAndContinueTest.class);
     private List<Integer> list ;
     @BeforeEach

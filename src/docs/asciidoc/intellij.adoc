@@ -1,6 +1,6 @@
 :doctype: book
 :encoding: utf-8
-:lang: en
+:lang: fr
 :icons: font
 :tip-caption: pass:[&#x1F441;]
 :warning-caption: pass:[&#9888]
@@ -34,19 +34,16 @@ Les fichiers template peuvent-être copiés dans
 |%APPDATA%\JetBrains\<product><version>\fileTemplates
 |~/.config/JetBrains/<product><version>/fileTemplates
 
-|Projet
-|[red]** TODO **
-|[red]** TODO **
 
-|User home
-|[red]** TODO **
-|[red]** TODO **
 
 |===
 
 ==== Templates
+Les templates sont des fichiers de type `*.ft` ou `*.java` qui sont utilisés pour générer des fichiers ou du code.
+https://www.jetbrains.com/help/idea/using-live-templates.html[using live templates]
 
-[red]** TODO **
+[NOTE]
+Un document est disponible dans ce répertoire : liveTemplates.adoc
 
 === Custom Postfix Templates
 https://plugins.jetbrains.com/plugin/9862-custom-postfix-templates[https://plugins.jetbrains.com/]
@@ -70,7 +67,8 @@ Le répertoire de stockage du template est le suivant
 * linux : `/home/{user-home}/.local/share/JetBrains/{Version IntelliJIdea}/intellij-postfix-templates_templates/templates/java/TemplateFileJava.postfixTemplates.xml`
 
 [NOTE]
-Un document est disponible dans ce répertoire : PluginCustomPostfixTemplates.adoc
+Un document est disponible dans ce répertoire : +
+PluginCustomPostfixTemplates.adoc[]
 
 
 

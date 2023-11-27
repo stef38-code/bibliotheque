@@ -1,5 +1,20 @@
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
 == Open/closed
-include::default-preferences.adoc[]
 
 === Un exemple complexe de principe Open/closed
 
@@ -20,19 +35,19 @@ La classe `TaskList` serait alors responsable de la gestion d'une liste de tâch
 .Exemple de code pour mettre en œuvre cette approche
 [source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/openclose/Task.java[]
+include::../../main/java/org/hussard/pattern/openclose/Task.java[]
 ----[source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/openclose/TaskToDo.java[]
+include::../../main/java/org/hussard/pattern/openclose/TaskToDo.java[]
 ----[source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/openclose/TaskMeeting.java[]
+include::../../main/java/org/hussard/pattern/openclose/TaskMeeting.java[]
 ----[source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/openclose/TaskDeadline.java[]
+include::../../main/java/org/hussard/pattern/openclose/TaskDeadline.java[]
 ----[source,java]
 ----
-include::{sourcedir}/org/hussard/pattern/openclose/TaskList.java[]
+include::../../main/java/org/hussard/pattern/openclose/TaskList.java[]
 ----
 
 
@@ -41,7 +56,7 @@ Cette approche respecte le principe ouvert/fermé. Si nous voulons ajouter un no
 .Exemple de code pour utiliser cette approche :
 [source,java]
 ----
-include::{testdir}/org/hussard/pattern/openclose/TaskListTest.java[]
+include::../../test/java/org/hussard/pattern/openclose/TaskListTest.java[]
 ----
 
 Cette approche permet d'ajouter de nouveaux types de tâches sans avoir à modifier le code existant. Cela rend l'application plus flexible et plus facile à maintenir.

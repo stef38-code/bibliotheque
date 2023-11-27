@@ -1,5 +1,21 @@
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
+
 == Le principe Avoid
-include::default-preferences.adoc[]
 
 Le principe Avoid est un principe d'ingénierie logicielle qui stipule qu'il faut éviter d'utiliser des fonctionnalités ou des constructions qui peuvent nuire à la qualité du code.
 

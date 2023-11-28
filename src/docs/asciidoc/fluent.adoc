@@ -230,13 +230,32 @@ Le constructeur de la classe `Data Object(Personne)` ne doit pas être défini c
 [blue]``Une Personne non marié et sans emploi``
 
 Nous allons partir sur la base du TDD, ce qui nous donne le test suivant :
+
 [source,java]
 ----
+import org.hussard.pattern.fluent.PersonneBuilder;
 
+class PersonnBuilderTest {
+    @Test
+    void get_Quand_UnePersonneEstNonMarieSansEmploi_Attend_UnePersonne(){
+        Personn personn = PersonneBuilder.get()
+                        .nom("Eponge")
+                        .prenom("Bob")
+                        .build();
+        AssertThat(personn).isNotNull();
+        AssertThat(personn.getNom()).hasToString("Eponge");
+        AssertThat(personn.getPrenom()).hasToString("Bob");
+        AssertThat(personn.getPrenom()).hasToString("Bob");
+        AssertThat(personn.getPrenom()).hasToString("Bob");
+
+    }
+}
 ----
-
-
 ===== Deuxième cas
-===== Troisième cas
-===== Quatrième cas
+[blue]``Une Personne marié et sans emploi``
 
+===== Troisième cas
+[blue]``Une Personne non marié et un emploi``
+
+===== Quatrième cas
+[blue]``Une Personne marié et un emploi``

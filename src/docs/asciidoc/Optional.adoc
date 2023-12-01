@@ -38,13 +38,13 @@ public class Employee {
 == Débuter avec Optional
 Les méthodes de base de la classe Optional sont :
 
-* empty() : Créer un Optional vide
-* of() : Créer un Optional avec une valeur non null
-* ofNullable() : Créer un Optional avec une valeur pouvant être null
+* [blue]**empty()** : Créer un Optional vide
+* [blue]**of()** : Créer un Optional avec une valeur non null
+* [blue]**ofNullable()** : Créer un Optional avec une valeur pouvant être null
 
 === Création
 
-.link:file://../main/java/org/hussard/snippets/OptionalCreate.java[OptionalCreate.java]
+.OptionalCreate.java
 [source,java]
 ----
 import java.util.Optional;
@@ -81,7 +81,7 @@ public class OptionalCreate {
 }
 ----
 === Tests
-.link:file://../test/java/org/hussard/snippets/OptionalCreateTest.java[OptionalCreateTest.java]
+.OptionalCreateTest.java
 [source,java]
 ----
 import org.assertj.core.api.Assertions;
@@ -170,32 +170,51 @@ class OptionalCreateTest {
 }
 ----
 
+== Quelques méthodes de la classe Optional
+* [blue]**get()** : Retourne la valeur si elle est présente, sinon lance une exception NoSuchElementException
+* [blue]**ifPresentOrElse** : Exécute le bloc de code si la valeur est présente, sinon exécute le bloc de code par défaut
+* [blue]**orElseThrow** : Retourne la valeur si elle est présente, sinon lance une exception
+* [blue]**orElse** : Retourne la valeur si elle est présente, sinon retourne la valeur par défaut
+* [blue]**or** : Retourne la valeur si elle est présente, sinon retourne un Optional avec la valeur par défaut
+* [blue]**map** : Retourne un Optional avec la valeur transformée si elle est présente, sinon retourne un Optional vide
 
 
 
 
-
-
+.OptionalOtherMethods.java
 [source,java]
 ----
 import java.util.Optional;
 
-public class OptionalDemo {
-    /**
-    *  Retourne le nom de l'employé, par défaut "Unknown"
-    * @param employee
-    */
-    public getEmployeeNameWithOfNullable(Employee employee) {
+public class OptionalOtherMethods {
+    public getEmployeeNameWithGet(Employee employee) {
+        Optional<Employee> optional = Optional.ofNullable(employee);
+        return optional.get().getName();
+    }
+    public getEmployeeNameWithIfPresentOrElse(Employee employee) {
+        Optional<Employee> optional = Optional.ofNullable(employee);
+        optional.ifPresentOrElse(
+                (e) -> System.out.println("Employee name : " + e.getName()),
+                () -> System.out.println("Employee not found"));
+    }
+    public getEmployeeNameWithOrElseThrow(Employee employee) {
+        Optional<Employee> optional = Optional.ofNullable(employee);
+        return optional.orElseThrow(() -> new RuntimeException("Employee not found"));
+    }
+    public getEmployeeNameWithOrElse(Employee employee) {
         Optional<Employee> optional = Optional.ofNullable(employee);
         return optional.map(Employee::getName).orElse("Unknown");
     }
-    public getEmployeeNameWithOf(Employee employee) {
-        Optional<Employee> optional = Optional.of(employee);
-        return optional.map(Employee::getName).orElse("Unknown");
+    public getEmployeeNameWithOr(Employee employee) {
+        Optional<Employee> optional = Optional.ofNullable(employee);
+        return optional.map(Employee::getName).or(() -> Optional.of("Unknown"));
     }
-    public getEmployeeNameWithEmpty(Employee employee) {
-        Optional<Employee> optional = Optional.empty();
-        return optional.map(Employee::getName).orElse("Unknown");
+    public getEmployeeNameWithMap(Employee employee) {
+        Optional<Employee> optional = Optional.ofNullable(employee);
+        return optional.map(Employee::getName);
     }
+
 }
 ----
+
+https://levelup.gitconnected.com/optional-in-java-how-and-when-to-use-them-2023-updated-68666c277a6c

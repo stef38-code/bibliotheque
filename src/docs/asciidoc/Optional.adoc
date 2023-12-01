@@ -1,0 +1,201 @@
+= Optional en Java — Comment et quand les utiliser ?
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
+
+La classe Optionnel : +
+Découvrez le concept de Optional, son objectif et comment il représente la présence ou l'absence d'une valeur. Découvrez également les méthodes de la classe Optional et comment les utiliser.
+
+[IMPORTANT]
+====
+En utilisant la classe Optionnel, vous pouvez améliorer la lisibilité, la maintenabilité et la gestion des erreurs de votre code Java.
+====
+
+[source,java]
+----
+public class Employee {
+    private final String name;
+    private final int age;
+    private final String email;
+    // constructeur
+    // getters et setters
+}
+----
+
+== Débuter avec Optional
+Les méthodes de base de la classe Optional sont :
+
+* empty() : Créer un Optional vide
+* of() : Créer un Optional avec une valeur non null
+* ofNullable() : Créer un Optional avec une valeur pouvant être null
+
+=== Création
+
+.link:file://../main/java/org/hussard/snippets/OptionalCreate.java[OptionalCreate.java]
+[source,java]
+----
+import java.util.Optional;
+
+public class OptionalCreate {
+     /**
+     * Retourne un Optional<Employee> avec la méthode ofNullable
+     *
+     * @param employee peut-être null
+     * @return Optional<Employee>
+     */
+    public Optional<Employee> getEmployeeWithOfNullable(Employee employee) {
+        return Optional.ofNullable(employee);
+    }
+
+    /**
+     * Retourne un Optional<Employee> avec la méthode of
+     *
+     * @param employee ne peut pas être null
+     * @return Optional<Employee>
+     */
+    public Optional<Employee> getEmployeeWithOf(Employee employee) {
+        return Optional.of(employee);
+    }
+
+    /**
+     * Retourne un Optional<Employee> avec la méthode empty
+     *
+     * @return Optional<Employee>
+     */
+    public Optional<Employee> getEmployeeWithEmpty() {
+        return Optional.empty();
+    }
+}
+----
+=== Tests
+.link:file://../test/java/org/hussard/snippets/OptionalCreateTest.java[OptionalCreateTest.java]
+[source,java]
+----
+import org.assertj.core.api.Assertions;
+import org.hussard.data.Employee;
+import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+
+class OptionalCreateTest {
+    /**
+     * Test de la méthode ofNullable
+     * avec un paramètre null
+     * En utilisant la methode OfNullable si le paramètre est null
+     * l'Optional retourné est vide
+     * Ce qui peut être utile pour retourner une valeur par défaut
+     * Et éviter de retourner null
+     */
+    @Test
+    void getEmployeeNameWithOfNullable_ParamNull() {
+        OptionalCreate optionalCreate = new OptionalCreate();
+        Optional<Employee> employeeOptional = optionalCreate.getEmployeeWithOfNullable(null);
+        assertThat(employeeOptional).isNotNull();
+        assertThat(employeeOptional).isNotPresent();
+        assertThat(employeeOptional).isEmpty();
+    }
+    /**
+     * Test de la méthode ofNullable
+     * avec un paramètre non null
+     * En utilisant la methode OfNullable si le paramètre est non null
+     * l'Optional retourné est non vide
+     */
+    @Test
+    void getEmployeeNameWithOfNullable_ParamEmployee() {
+        OptionalCreate optionalCreate = new OptionalCreate();
+        Employee employee = new Employee("John", 29, "john@monmail.com");
+        Optional<Employee> optionalEmployee = optionalCreate.getEmployeeWithOfNullable(employee);
+        assertThat(optionalEmployee).isNotNull();
+        assertThat(optionalEmployee).isPresent();
+        assertThat(optionalEmployee).isNotEmpty();
+    }
+    /**
+     * Test de la méthode Of
+     * avec un paramètre null
+     * si le paramètre est null alors une exception est levée
+     */
+    @Test
+    void getEmployeeNameWithOf_ParamNull() {
+        OptionalCreate optionalCreate = new OptionalCreate();
+        Throwable thrown = catchThrowable(() -> optionalCreate.getEmployeeWithOf(null));
+        Assertions.assertThat(thrown)
+                .isInstanceOf(NullPointerException.class);
+    }
+    /**
+     * Test de la méthode Of
+     * avec un paramètre non null
+     * En utilisant la methode Of si le paramètre est non null
+     * l'Optional retourné est non vide
+     */
+    @Test
+    void getEmployeeNameWithOf_ParamEmployee() {
+        OptionalCreate optionalCreate = new OptionalCreate();
+        Employee employee = new Employee("John", 29, "john@monmail.com");
+        Optional<Employee> optionalEmployee = optionalCreate.getEmployeeWithOf(employee);
+        assertThat(optionalEmployee).isNotNull();
+        assertThat(optionalEmployee).isPresent();
+        assertThat(optionalEmployee).isNotEmpty();
+    }
+    /**
+     * Test de la méthode empty
+     * En utilisant la methode empty
+     * l'Optional retourné est vide
+     * Ce qui peut être utile pour initialiser pour retourner une valeur par défaut
+     * Et éviter de retourner null
+     */
+    @Test
+    void getEmployeeNameWithEmpty_ParamNull() {
+        OptionalCreate optionalCreate = new OptionalCreate();
+        Optional<Employee> optionalEmployee = optionalCreate.getEmployeeWithEmpty();
+        assertThat(optionalEmployee).isNotNull();
+        assertThat(optionalEmployee).isNotPresent();
+        assertThat(optionalEmployee).isEmpty();
+    }
+}
+----
+
+
+
+
+
+
+
+[source,java]
+----
+import java.util.Optional;
+
+public class OptionalDemo {
+    /**
+    *  Retourne le nom de l'employé, par défaut "Unknown"
+    * @param employee
+    */
+    public getEmployeeNameWithOfNullable(Employee employee) {
+        Optional<Employee> optional = Optional.ofNullable(employee);
+        return optional.map(Employee::getName).orElse("Unknown");
+    }
+    public getEmployeeNameWithOf(Employee employee) {
+        Optional<Employee> optional = Optional.of(employee);
+        return optional.map(Employee::getName).orElse("Unknown");
+    }
+    public getEmployeeNameWithEmpty(Employee employee) {
+        Optional<Employee> optional = Optional.empty();
+        return optional.map(Employee::getName).orElse("Unknown");
+    }
+}
+----

@@ -4,4 +4,4 @@ Codewars est une communauté d'apprentissage pour les développeurs informatique
 
 https://fr.wikipedia.org/wiki/Codewars[wikipedia]
 
-https://www.codewars.com[Site offciel]
+https://www.codewars.com[Site officiel]

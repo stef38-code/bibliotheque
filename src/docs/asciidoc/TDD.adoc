@@ -59,7 +59,9 @@ Les règles sont les suivantes :
      - 26-64 ans : 600€/an
      - 65 ans et plus : 200€/an
 
-=== 1ʳᵉ étape : Écrire un test unitaire qui échoue
+=== L'accès à la salle de sport est interdit aux moins 16 ans
+
+==== 1ʳᵉ étape : Écrire un test unitaire qui échoue
 [source,java]
 ----
 package org.hussard.tdd.data;
@@ -96,7 +98,7 @@ Pour l'instant, il n'existe pas de code or mis celui du test unitaire. Le test u
 .Vue dans l'IDE
 image::../asciidoc/images/tdd_premier_test.png[Vue dans l'IDE]
 
-=== 2ᵉ étape : Rédiger le code source pour compiler
+==== 2ᵉ étape : Rédiger le code source pour compiler
 
 [NOTE]
 ====
@@ -217,11 +219,125 @@ Le code écrit est le minimum pour compiler
 ====
 image::../asciidoc/images/tdd_premier_test_compile.png[Vue dans l'IDE]
 
-=== 3ᵉ étape : Exécuter le test unitaire
+==== 3ᵉ étape : Exécuter le test unitaire
 Le test unitaire échoue car, l'exception AdherentMineurException n'est pas levée.
 
 image::../asciidoc/images/tdd_premier_test_echou.png[Vue dans l'IDE]
 
-=== 4ᵉ étape : Rédiger le code source pour faire passer le test unitaire
+==== 4ᵉ étape : Rédiger le code source pour faire passer le test unitaire
 
 Maintenant, nous allons écrire le code pour faire passer le test unitaire. Et bien sûr, nous allons écrire le minimum de code pour faire passer le test unitaire.
+Pour ce faire, nous allons modifier la classe AdherentApi pour lever l'exception AdherentMineurException si l'adhérent est mineur.
+
+[source,java]
+----
+public class AdherentApi  implements  AdherentStep, AdherentStep.Builder{
+    private LocalDate dateNaiss;
+   //...
+
+    @Override
+    public Adherent build() {
+        //Ajout du code pour lever l'exception AdherentMineurException si l'adhérent est mineur
+        if(this.dateNaiss.isAfter(LocalDate.now().minusYears(16)))
+            throw new AdherentMineurException();
+        return new Adherent("nom", "prenom", this.dateNaiss, "email", "telephone");
+    }
+}
+----
+
+On peut remarquer que le test unitaire passe.
+
+image::../asciidoc/images/tdd_premier_test_passe.png[]
+
+Maintenant, nous allons écrire un nouveau test unitaire pour tester les tarifs dégressifs en fonction de l'âge pour une année d'abonnement.
+Pour cela, il suffit de reprendre à l'étape 1. pour le test unitaire suivant.
+
+=== Les tarifs sont dégressifs en fonction de l'âge pour une année d'abonnement
+
+==== 1ʳᵉ étape : Écrire des tests unitaires qui échouent
+
+[NOTE]
+====
+Les tarifs sont dégressifs en fonction de l'âge pour une année d'abonnement.
+- 16-17 ans : 200€/an
+- 18-25 ans : 400€/an
+- 26-64 ans : 600€/an
+- 65 ans et plus : 200€/an
+====
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+import org.hussard.tdd.data.AdherentBuilder;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+class AbonnementServiceTest {
+    @Test
+    @DisplayName("16-17 ans : 200€/an")
+    void calculerTarif_Quand_AdherentEstEntre16Et17Ans_Attend_200() {
+
+        LocalDate mineur = LocalDate.now().minusYears(16);
+        Adherent adherent = AdherentBuilder
+                .get()
+                .dateNaiss(mineur)
+                .build();
+        AbonnementService abonnementService = new AbonnementServiceDefault();
+        int tarif = abonnementService.calculerTarif(adherent);
+        assertThat(tarif)
+                .isEqualTo(200);
+    }
+    @Test
+    @DisplayName("18-25 ans : 400€/an")
+    void calculerTarif_Quand_AdherentEstEntre18Et25Ans_Attend_400() {
+        LocalDate mineur = LocalDate.now().minusYears(18);
+        Adherent adherent = AdherentBuilder
+                .get()
+                .dateNaiss(mineur)
+                .build();
+        AbonnementService abonnementService = new AbonnementServiceDefault();
+        int tarif = abonnementService.calculerTarif(adherent);
+        assertThat(tarif)
+                .isEqualTo(400);
+    }
+    @Test
+    @DisplayName("26-64 ans : 600€/an")
+    void calculerTarif_Quand_AdherentEstEntre26Et64Ans_Attend_600() {
+        LocalDate mineur = LocalDate.now().minusYears(26);
+        Adherent adherent = AdherentBuilder
+                .get()
+                .dateNaiss(mineur)
+                .build();
+        AbonnementService abonnementService = new AbonnementServiceDefault();
+        int tarif = abonnementService.calculerTarif(adherent);
+        assertThat(tarif)
+                .isEqualTo(600);
+    }
+    @Test
+    @DisplayName("65 ans et plus : 200€/an")
+    void calculerTarif_Quand_AdherentEstApret65Ans_Attend_200() {
+        LocalDate mineur = LocalDate.now().minusYears(65);
+        Adherent adherent = AdherentBuilder
+                .get()
+                .dateNaiss(mineur)
+                .build();
+        AbonnementService abonnementService = new AbonnementServiceDefault();
+        int tarif = abonnementService.calculerTarif(adherent);
+        assertThat( tarif)
+                .isEqualTo(200);
+    }
+}
+----
+[IMPORTANT]
+====
+Pour l'instant, il n'existe pas de code or mis celui du test unitaire. Le test unitaire ne compile pas car, Les classes AbonnementService, AbonnementServiceDefault n'existent pas et la méthode calculerTarif n'existe pas.
+====
+image::../asciidoc/images/tdd_deuxieme_test.png[Vue dans l'IDE]
+
+==== 2ᵉ étape : Rédiger le code source pour compiler

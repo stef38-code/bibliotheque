@@ -12,6 +12,9 @@ public class AdherentApi  implements  AdherentStep, AdherentStep.Builder{
 
     @Override
     public Adherent build() {
+        if(this.dateNaiss.isAfter(LocalDate.now().minusYears(16)))
+            throw new AdherentMineurException();
+
         return new Adherent("nom", "prenom", this.dateNaiss, "email", "telephone");
     }
 }

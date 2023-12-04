@@ -17,134 +17,211 @@
 :toclevels: 6
 
 == Définition
-le TDD est une pratique de développement logiciel qui consiste à écrire les tests unitaires avant d'écrire le code source d'une fonctionnalité. Le but de cette pratique est de garantir que le code source est testable et de s'assurer que les tests soient complets et passent tous avant de passer à l'écriture d'une nouvelle fonctionnalité.
+Le TDD est une pratique de développement logiciel qui consiste à écrire les tests unitaires avant d'écrire le code source d'une fonctionnalité. Le but de cette pratique est de garantir que le code source est testable et de s'assurer que les tests soient complets et passent tous avant de passer à l'écriture d'une nouvelle fonctionnalité.
 
-== Les 3 lois du TDD
-* 1ère loi : Vous ne pouvez écrire du code de production que pour faire passer un test unitaire qui échoue.
-* 2ème loi : Vous ne pouvez pas écrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire.
-* 3ème loi : Vous ne pouvez pas écrire plus de code de production que nécessaire pour faire passer le test unitaire échouant.
 
-== Les 3 étapes du TDD
-* 1ère étape : Ecrire un test unitaire qui échoue
-* 2ème étape : Ecrire le code de production qui fait passer le test
-* 3ème étape : Refactoriser le code de production et le code de test
 
-== Les 3 règles du TDD
-* 1ère règle : Ne pas écrire de code de production sans avoir un test unitaire qui échoue
-* 2ème règle : Ne pas écrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire
-* 3ème règle : Ne pas écrire plus de code de production que nécessaire pour faire passer le test unitaire échouant
+=== Le processus TDD
 
-== Les 3 principes du TDD
-* 1er principe : Le code de production doit être écrit uniquement pour faire passer un test unitaire
-* 2ème principe : Le code de production doit être écrit uniquement pour faire passer le test unitaire échouant
-* 3ème principe : Le code de production doit être écrit uniquement pour faire passer le test unitaire échouant le plus simple
+Il se déroule en trois étapes
 
-== Les 3 qualités du TDD
-* 1ère qualité : Le code de production est testable
-* 2ème qualité : Le code de production est testé
-* 3ème qualité : Le code de production est simple
+* 1ʳᵉ étape : Écrire un test unitaire qui échoue. Le test unitaire doit spécifier le comportement attendu d'une fonction ou d'une méthode.
+* 2ᵉ étape : Rédiger le code source pour que le test réussisse. Le code source doit être écrit de manière à satisfaire les exigences du test unitaire.
+* 3ᵉ étape : Répéter les étapes 1 et 2 jusqu'à ce que tous les tests unitaires réussissent.
 
-== Les 3 bénéfices du TDD
-* 1er bénéfice : Le code de production est testé
-* 2ème bénéfice : Le code de production est simple
-* 3ème bénéfice : Le code de production est testable
+=== Les 3 lois du TDD
+* 1ʳᵉ loi : Vous ne pouvez écrire du code que pour faire passer un test unitaire qui échoue.
+* 2ᵉ loi : Vous ne pouvez pas écrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire.
+* 3ᵉ loi : Vous ne pouvez pas écrire plus de code que nécessaire pour faire passer le test unitaire échouant.
 
-== Les 3 erreurs du TDD
-* 1ère erreur : Ecrire du code de production sans avoir un test unitaire qui échoue
-* 2ème erreur : Ecrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire
-* 3ème erreur : Ecrire plus de code de production que nécessaire pour faire passer le test unitaire échouant
+=== Les 3 qualités du TDD
+* 1ʳᵉ qualité : Le code est testable
+* 2ᵉ qualité : Le code est testé
+* 3ᵉ qualité : Le code est simple
 
-== Les 3 types de tests
-* 1er type de test : Les tests unitaires
-* 2ème type de test : Les tests d'intégration
-* 3ème type de test : Les tests fonctionnels
 
-== Les 3 types de tests unitaires
-* 1er type de test unitaire : Les tests unitaires de comportement
-* 2ème type de test unitaire : Les tests unitaires de structure
-* 3ème type de test unitaire : Les tests unitaires de performance
+=== Les 3 erreurs du TDD
 
-== Les 3 types de tests d'intégration
-* 1er type de test d'intégration : Les tests d'intégration de comportement
-* 2ème type de test d'intégration : Les tests d'intégration de structure
-* 3ème type de test d'intégration : Les tests d'intégration de performance
+* 1ʳᵉ erreur : Ecrire du code sans avoir un test unitaire qui échoue
+* 2ᵉ erreur : Ecrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire
+* 3ᵉ erreur : Ecrire plus de code que nécessaire pour faire passer le test unitaire échouant
 
-== Les 3 types de tests fonctionnels
-* 1er type de test fonctionnel : Les tests fonctionnels de comportement
-* 2ème type de test fonctionnel : Les tests fonctionnels de structure
-* 3ème type de test fonctionnel : Les tests fonctionnels de performance
 
-== Les 3 types de tests de comportement
-* 1er type de test de comportement : Les tests de comportement de l'utilisateur
-* 2ème type de test de comportement : Les tests de comportement du système
-* 3ème type de test de comportement : Les tests de comportement de l'application
+== Concretisation du TDD
 
-=== Exemple de test unitaire de comportement
+Exemple de la salle de sport(musculation) qui vend des abonnements.
+Les règles sont les suivantes :
+
+* L'accès à la salle de sport est interdit aux moins 16 ans
+* Les tarifs sont dégressifs en fonction de l'âge pour une année d'abonnement.
+     - 16-17 ans : 200€/an
+     - 18-25 ans : 400€/an
+     - 26-64 ans : 600€/an
+     - 65 ans et plus : 200€/an
+
+=== 1ʳᵉ étape : Écrire un test unitaire qui échoue
 [source,java]
 ----
-class AdditionTest {
+package org.hussard.tdd.data;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+
+class AdherentBuilderTest {
     @Test
-    void testAddition() {
-        // GIVEN
-        int a = 1;
-        int b = 2;
-        int expected = 3;
-        // WHEN
-        int actual = a + b;
-        // THEN
-        assertEquals(expected, actual);
+    @DisplayName("L'accès à la salle de sport est interdit aux moins 16 ans")
+    void build_Quand_AdherentEstMineur_Attend_UneErreur() {
+        LocalDate mineur = LocalDate.now().minusYears(15);
+        Throwable thrown = catchThrowable(() -> AdherentBuilder
+                .get()
+                .dateNaiss(mineur)
+                .build());
+        assertThat(thrown)
+                .isInstanceOf(AdherentMineurException.class)
+                .hasMessage("L'accès à la salle de sport est interdit aux moins 16 ans");
     }
 }
 ----
-== Les 3 types de tests de structure
-* 1er type de test de structure : Les tests de structure de l'utilisateur
-* 2ème type de test de structure : Les tests de structure du système
-* 3ème type de test de structure : Les tests de structure de l'application
+[IMPORTANT]
+====
+Pour l'instant, il n'existe pas de code or mis celui du test unitaire. Le test unitaire ne compile pas car, la classe Adherent n'existe pas. Le test unitaire échoue parce que, l'exception AdherentMineurException n'existe pas
+====
 
-=== Exemple de test unitaire de structure
+
+.Vue dans l'IDE
+image::../asciidoc/images/tdd_premier_test.png[Vue dans l'IDE]
+
+=== 2ᵉ étape : Rédiger le code source pour compiler
+
+[NOTE]
+====
+Sous l'IDE, il est possible de générer le code source de la classe AdherentBuilder et de l'exception AdherentMineurException avec les raccourcis clavier suivants en se positionnant sur les noms de classes :
+* AdherentBuilder : Alt + Entrée
+* AdherentMineurException : Alt + Entrée
+
+image::../asciidoc/images/tdd_premier_test_cheat.png[]
+====
+Voici le code écrit pour lancer le test unitaire
+
 [source,java]
 ----
-class AdditionTest {
-    @Test
-    void testAddition() {
-        // GIVEN
-        int a = 1;
-        int b = 2;
-        // WHEN
-        int actual = a + b;
-        // THEN
-        assertTrue(actual > 0);
+package org.hussard.tdd.data;
+
+public class AdherentBuilder{
+    private AdherentBuilder() {
+        throw new UnsupportedOperationException("AdherentBuilder is a utility class and cannot be instantiated");
+    }
+    public static AdherentStep get() {
+        return new AdherentApi();
     }
 }
 ----
-== Les 3 types de tests de performance
-* 1er type de test de performance : Les tests de performance de l'utilisateur
-* 2ème type de test de performance : Les tests de performance du système
-* 3ème type de test de performance : Les tests de performance de l'application
-
-=== Exemple de test unitaire de performance
 [source,java]
 ----
-class AdditionTest {
-    @Test
-    void testAddition() {
-        // GIVEN
-        int a = 1;
-        int b = 2;
-        // WHEN
-        int actual = a + b;
-        // THEN
-        assertTrue(actual < 100);
+package org.hussard.tdd.data;
+
+public class AdherentMineurException extends RuntimeException {
+    public AdherentMineurException() {
+        super("L'accès à la salle de sport est interdit aux moins 16 ans");
     }
 }
 ----
-== Les 3 types de tests de l'utilisateur
-* 1er type de test de l'utilisateur : Les tests de l'utilisateur de comportement
-* 2ème type de test de l'utilisateur : Les tests de l'utilisateur de structure
-* 3ème type de test de l'utilisateur : Les tests de l'utilisateur de performance
+[source,java]
+----
+package org.hussard.tdd.data;
 
-== Les 3 types de tests du système
-* 1er type de test du système : Les tests du système de comportement
-* 2ème type de test du système : Les tests du système de structure
-* 3ème type de test du système : Les tests du système de performance
+import java.time.LocalDate;
 
+public interface AdherentStep {
+    Builder dateNaiss(LocalDate dateNaiss);
+    public interface Builder {
+        Adherent build();
+    }
+}
+----
+[source,java]
+----
+package org.hussard.tdd.data;
+
+import java.time.LocalDate;
+
+public class AdherentApi  implements  AdherentStep, AdherentStep.Builder{
+    private LocalDate dateNaiss;
+    @Override
+    public AdherentStep.Builder dateNaiss(LocalDate dateNaiss) {
+        this.dateNaiss = dateNaiss;
+        return this;
+    }
+
+    @Override
+    public Adherent build() {
+        return new Adherent("nom", "prenom", this.dateNaiss, "email", "telephone");
+    }
+}
+----
+[source,java]
+----
+package org.hussard.tdd.data;
+
+import java.time.LocalDate;
+
+public class Adherent {
+    private final String nom;
+    private final String prenom;
+    private final LocalDate dateNaiss;
+    private final String email;
+    private final String telephone;
+
+    Adherent(String nom,
+                    String prenom,
+                    LocalDate dateNaiss,
+                    String email,
+                    String telephone) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaiss = dateNaiss;
+        this.email = email;
+        this.telephone = telephone;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public LocalDate getDateNaiss() {
+        return dateNaiss;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+}
+----
+
+[IMPORTANT]
+====
+Le code écrit est le minimum pour compiler
+====
+image::../asciidoc/images/tdd_premier_test_compile.png[Vue dans l'IDE]
+
+=== 3ᵉ étape : Exécuter le test unitaire
+Le test unitaire échoue car, l'exception AdherentMineurException n'est pas levée.
+
+image::../asciidoc/images/tdd_premier_test_echou.png[Vue dans l'IDE]
+
+=== 4ᵉ étape : Rédiger le code source pour faire passer le test unitaire
+
+Maintenant, nous allons écrire le code pour faire passer le test unitaire. Et bien sûr, nous allons écrire le minimum de code pour faire passer le test unitaire.

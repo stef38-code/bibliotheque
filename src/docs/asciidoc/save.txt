@@ -1,0 +1,162 @@
+AbonnementService abonnementService = new AbonnementServiceDefault();
+        Throwable thrown = catchThrowable(() -> abonnementService.creerAbonnement(adherent));
+        assertThat(thrown)
+                .isInstanceOf(AbonnnementServiceException.class)
+                .hasMessage("L'accès à la salle de sport est interdit aux moins 16 ans");
+
+
+== Les 3 types de tests
+* 1ʳ type de test : Les tests unitaires
+* 2ᵉ type de test : Les tests d'intégration
+* 3ᵉ type de test : Les tests fonctionnels
+
+== Les 3 types de tests unitaires
+* 1ʳ type de test unitaire : Les tests unitaires de comportement
+* 2ᵉ type de test unitaire : Les tests unitaires de structure
+* 3ᵉ type de test unitaire : Les tests unitaires de performance
+
+== Les 3 types de tests d'intégration
+* 1ʳ type de test d'intégration : Les tests d'intégration de comportement
+* 2ᵉ type de test d'intégration : Les tests d'intégration de structure
+* 3ᵉ type de test d'intégration : Les tests d'intégration de performance
+
+== Les 3 types de tests de comportement
+* 1ʳ type de test de comportement : Les tests de comportement de l'utilisateur
+* 2ᵉ type de test de comportement : Les tests de comportement du système
+* 3ᵉ type de test de comportement : Les tests de comportement de l'application
+
+=== Exemples de test unitaire de comportement
+[source,java]
+----
+import org.junit.jupiter.api.Test;
+
+public class CalculatorTests {
+
+    @Test
+    public void addShouldReturnTheSumOfTwoNumbers() {
+        // Arrange
+        int firstNumber = 10;
+        int secondNumber = 20;
+
+        // Act
+        int result = Calculator.add(firstNumber, secondNumber);
+
+        // Assert
+        assertEquals(30, result);
+    }
+}
+----
+[NOTE]
+====
+Le test unitaire de comportement est un test unitaire qui vérifie que le comportement d'une méthode est correct.
+====
+
+[source,java]
+----
+import org.junit.jupiter.api.Test;
+
+public class PersonTests {
+
+    @Test
+    public void ageShouldIncreaseByOneEachYear() {
+        // Arrange
+        Person person = new Person(10);
+
+        // Act
+        person.age++;
+
+        // Assert
+        assertEquals(11, person.age);
+    }
+}
+----
+[NOTE]
+====
+Le test unitaire de comportement est un test unitaire qui vérifie que le comportement d'une méthode est correct.
+====
+
+== Les 3 types de tests de structure
+* 1ʳ type de test de structure : Les tests de structure de l'utilisateur
+* 2ᵉ type de test de structure : Les tests de structure du système
+* 3ᵉ type de test de structure : Les tests de structure de l'application
+
+=== Exemple de test unitaire de structure
+[source,java]
+----
+import org.junit.jupiter.api.Test;
+
+public class PersonTests {
+
+    @Test
+    public void classNamingConventionsAreCorrect() {
+        // Arrange
+        Person person = new Person();
+
+        // Act
+
+        // Assert
+        assertEquals("Person", person.getClass().getName());
+        assertEquals("firstName", person.firstNamePropertyName);
+        assertEquals("age", person.agePropertyName);
+    }
+}
+----
+[NOTE]
+====
+Le test unitaire de structure est un test unitaire qui vérifie que les conventions de nommage des classes sont correctes.
+====
+
+== Les 3 types de tests de performance
+* 1ʳ type de test de performance : Les tests de performance de l'utilisateur
+* 2ᵉ type de test de performance : Les tests de performance du système
+* 3ᵉ type de test de performance : Les tests de performance de l'application
+
+=== Exemple de test unitaire de performance
+[source,java]
+----
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+
+public class CalculatorTests {
+
+    @Test
+    @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
+    public void addShouldPerformWell() {
+        // Arrange
+        int firstNumber = 100000;
+        int secondNumber = 200000;
+
+        // Act
+        long start = System.currentTimeMillis();
+        int result = Calculator.add(firstNumber, secondNumber);
+        long end = System.currentTimeMillis();
+
+        // Assert
+        assertEquals(300000, result);
+        assertTrue(end - start < 100);
+    }
+}
+----
+[NOTE]
+====
+Le test unitaire de performance est un test unitaire qui vérifie que le temps d'exécution d'une méthode est inférieur à une certaine valeur.
+====
+
+
+== Les 3 types de tests de l'utilisateur
+* 1ʳ type de test de l'utilisateur : Les tests de l'utilisateur de comportement
+* 2ᵉ type de test de l'utilisateur : Les tests de l'utilisateur de structure
+* 3ᵉ type de test de l'utilisateur : Les tests de l'utilisateur de performance
+
+=== Exemple de test fonctionnel de comportement
+
+Les tests unitaires de l'utilisateur (UTs) sont des tests qui vérifient le comportement du logiciel du point de vue de l'utilisateur. Ils sont généralement écrits à l'aide d'un framework d'automatisation des tests, tel que Selenium WebDriver ou Appium.
+
+Les UTs peuvent être utilisés pour tester une grande variété d'aspects du comportement de l'utilisateur, notamment :
+
+* L'interaction avec l'interface utilisateur
+* Le traitement des entrées de l'utilisateur
+* La génération des sorties pour l'utilisateur
+* La prise en charge des erreurs
+
+Les UTs de l'utilisateur sont un moyen important de garantir que le logiciel répond aux besoins des utilisateurs. Ils peuvent aider à identifier les bogues et les problèmes de conception avant que le logiciel ne soit déployé auprès des utilisateurs finaux.

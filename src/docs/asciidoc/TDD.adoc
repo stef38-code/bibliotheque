@@ -1,0 +1,150 @@
+= TDD : Test Driven Development
+:doctype: book
+:encoding: utf-8
+:lang: fr
+:icons: font
+:tip-caption: pass:[&#x1F441;]
+:warning-caption: pass:[&#9888]
+:important-caption: pass:[&#9763;]
+:note-caption: pass:[&#33;]
+:caution-caption: pass:[&#9761;]
+:source-highlighter: rouge
+:rouge-style: github
+:includedir: _includes
+:author: Stéphane BETTON
+:email: stéphane.betton@ag2rlamondiale.fr
+:toc: left
+:toclevels: 6
+
+== Définition
+le TDD est une pratique de développement logiciel qui consiste à écrire les tests unitaires avant d'écrire le code source d'une fonctionnalité. Le but de cette pratique est de garantir que le code source est testable et de s'assurer que les tests soient complets et passent tous avant de passer à l'écriture d'une nouvelle fonctionnalité.
+
+== Les 3 lois du TDD
+* 1ère loi : Vous ne pouvez écrire du code de production que pour faire passer un test unitaire qui échoue.
+* 2ème loi : Vous ne pouvez pas écrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire.
+* 3ème loi : Vous ne pouvez pas écrire plus de code de production que nécessaire pour faire passer le test unitaire échouant.
+
+== Les 3 étapes du TDD
+* 1ère étape : Ecrire un test unitaire qui échoue
+* 2ème étape : Ecrire le code de production qui fait passer le test
+* 3ème étape : Refactoriser le code de production et le code de test
+
+== Les 3 règles du TDD
+* 1ère règle : Ne pas écrire de code de production sans avoir un test unitaire qui échoue
+* 2ème règle : Ne pas écrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire
+* 3ème règle : Ne pas écrire plus de code de production que nécessaire pour faire passer le test unitaire échouant
+
+== Les 3 principes du TDD
+* 1er principe : Le code de production doit être écrit uniquement pour faire passer un test unitaire
+* 2ème principe : Le code de production doit être écrit uniquement pour faire passer le test unitaire échouant
+* 3ème principe : Le code de production doit être écrit uniquement pour faire passer le test unitaire échouant le plus simple
+
+== Les 3 qualités du TDD
+* 1ère qualité : Le code de production est testable
+* 2ème qualité : Le code de production est testé
+* 3ème qualité : Le code de production est simple
+
+== Les 3 bénéfices du TDD
+* 1er bénéfice : Le code de production est testé
+* 2ème bénéfice : Le code de production est simple
+* 3ème bénéfice : Le code de production est testable
+
+== Les 3 erreurs du TDD
+* 1ère erreur : Ecrire du code de production sans avoir un test unitaire qui échoue
+* 2ème erreur : Ecrire plus de code de test unitaire que nécessaire pour faire échouer un test unitaire
+* 3ème erreur : Ecrire plus de code de production que nécessaire pour faire passer le test unitaire échouant
+
+== Les 3 types de tests
+* 1er type de test : Les tests unitaires
+* 2ème type de test : Les tests d'intégration
+* 3ème type de test : Les tests fonctionnels
+
+== Les 3 types de tests unitaires
+* 1er type de test unitaire : Les tests unitaires de comportement
+* 2ème type de test unitaire : Les tests unitaires de structure
+* 3ème type de test unitaire : Les tests unitaires de performance
+
+== Les 3 types de tests d'intégration
+* 1er type de test d'intégration : Les tests d'intégration de comportement
+* 2ème type de test d'intégration : Les tests d'intégration de structure
+* 3ème type de test d'intégration : Les tests d'intégration de performance
+
+== Les 3 types de tests fonctionnels
+* 1er type de test fonctionnel : Les tests fonctionnels de comportement
+* 2ème type de test fonctionnel : Les tests fonctionnels de structure
+* 3ème type de test fonctionnel : Les tests fonctionnels de performance
+
+== Les 3 types de tests de comportement
+* 1er type de test de comportement : Les tests de comportement de l'utilisateur
+* 2ème type de test de comportement : Les tests de comportement du système
+* 3ème type de test de comportement : Les tests de comportement de l'application
+
+=== Exemple de test unitaire de comportement
+[source,java]
+----
+class AdditionTest {
+    @Test
+    void testAddition() {
+        // GIVEN
+        int a = 1;
+        int b = 2;
+        int expected = 3;
+        // WHEN
+        int actual = a + b;
+        // THEN
+        assertEquals(expected, actual);
+    }
+}
+----
+== Les 3 types de tests de structure
+* 1er type de test de structure : Les tests de structure de l'utilisateur
+* 2ème type de test de structure : Les tests de structure du système
+* 3ème type de test de structure : Les tests de structure de l'application
+
+=== Exemple de test unitaire de structure
+[source,java]
+----
+class AdditionTest {
+    @Test
+    void testAddition() {
+        // GIVEN
+        int a = 1;
+        int b = 2;
+        // WHEN
+        int actual = a + b;
+        // THEN
+        assertTrue(actual > 0);
+    }
+}
+----
+== Les 3 types de tests de performance
+* 1er type de test de performance : Les tests de performance de l'utilisateur
+* 2ème type de test de performance : Les tests de performance du système
+* 3ème type de test de performance : Les tests de performance de l'application
+
+=== Exemple de test unitaire de performance
+[source,java]
+----
+class AdditionTest {
+    @Test
+    void testAddition() {
+        // GIVEN
+        int a = 1;
+        int b = 2;
+        // WHEN
+        int actual = a + b;
+        // THEN
+        assertTrue(actual < 100);
+    }
+}
+----
+== Les 3 types de tests de l'utilisateur
+* 1er type de test de l'utilisateur : Les tests de l'utilisateur de comportement
+* 2ème type de test de l'utilisateur : Les tests de l'utilisateur de structure
+* 3ème type de test de l'utilisateur : Les tests de l'utilisateur de performance
+
+== Les 3 types de tests du système
+* 1er type de test du système : Les tests du système de comportement
+* 2ème type de test du système : Les tests du système de structure
+* 3ème type de test du système : Les tests du système de performance
+

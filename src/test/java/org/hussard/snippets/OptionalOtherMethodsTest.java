@@ -5,20 +5,8 @@ import org.hussard.data.Employee;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class OptionalOtherMethods {
-    /**
-     * Mapper qui permet de transformer le nom de l'Employee en majuscule
-     * si le nom est null alors on retourne "Unknown" en majuscule
-     *
-     * @return Function<Employee, String>
-     */
-    private static Function<Employee, String> getMapper() {
-        Function<Employee, String> getName = Employee::getName;
-        getName = getName.andThen(String::toUpperCase);
-        return getName;
-    }
+public class OptionalOtherMethodsTest {
 
-    @SuppressWarnings("squid:S3655")
     public String get(Employee employee) {
         Optional<Employee> optional = Optional.ofNullable(employee);
         //sonarlint va détecter une violation de règle
@@ -38,16 +26,13 @@ public class OptionalOtherMethods {
                 this::getEmployeeNotFound);
     }
 
-    @SuppressWarnings("squid:S106")
     private void getEmployeeNotFound() {
         System.out.println("Employee not found");
     }
 
-    @SuppressWarnings("squid:S106")
     private void upperCaseName(String name) {
         System.out.println(name.toUpperCase());
     }
-
     /**
      * Retourne un Employee avec la méthode orElseThrow
      * si l'optional est vide alors on aura une exception
@@ -60,7 +45,6 @@ public class OptionalOtherMethods {
         Optional<Employee> optional = Optional.ofNullable(employee);
         return optional.orElseThrow(() -> new RuntimeException("Employee not found"));
     }
-
     /**
      * Retourne le nom d'un Employee avec la méthode ifPresentOrElse
      * si l'optional est vide alors, on retourne un nom par défaut
@@ -78,7 +62,6 @@ public class OptionalOtherMethods {
      * Retourne le nom d'un Employee avec la méthode or
      * si l'optional est vide alors, on retourne un nom par défaut
      * sinon, on retourne le nom de l'Employee
-     *
      * @param employee peut-être null
      * @return Optional<String>
      */
@@ -91,7 +74,6 @@ public class OptionalOtherMethods {
      * Retourne le nom d'un Employee avec la méthode ifPresentOrElse
      * si l'optional est vide alors, on retourne un nom par défaut
      * sinon, on retourne le nom de l'Employee
-     *
      * @param employee peut-être null
      * @return String
      */
@@ -99,4 +81,16 @@ public class OptionalOtherMethods {
         Optional<Employee> optional = Optional.ofNullable(employee);
         return optional.map(getMapper()).orElse("Valeur par défaut");
     }
+
+    /**
+     * Mapper qui permet de transformer le nom de l'Employee en majuscule
+     * si le nom est null alors on retourne "Unknown" en majuscule
+     * @return Function<Employee, String>
+     */
+    private static Function<Employee, String> getMapper() {
+        Function<Employee, String> getName = Employee::getName;
+        getName = getName.andThen(String::toUpperCase);
+        return getName;
+    }
 }
+

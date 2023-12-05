@@ -141,7 +141,7 @@ import java.time.LocalDate;
 
 public interface AdherentStep {
     Builder dateNaiss(LocalDate dateNaiss);
-    public interface Builder {
+    interface Builder {
         Adherent build();
     }
 }
@@ -277,7 +277,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@DisplayName("Les tarifs sont dégressifs en fonction de l âge pour une année d abonnement.")
 class AbonnementServiceTest {
     @Test
     @DisplayName("16-17 ans : 200€/an")
@@ -341,3 +341,256 @@ Pour l'instant, il n'existe pas de code or mis celui du test unitaire. Le test u
 image::../asciidoc/images/tdd_deuxieme_test.png[Vue dans l'IDE]
 
 ==== 2ᵉ étape : Rédiger le code source pour compiler
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+public interface AbonnementService {
+    int calculerTarif(Adherent adherent);
+}
+----
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+public class AbonnementServiceDefault implements AbonnementService {
+    @Override
+    public int calculerTarif(Adherent adherent) {
+        return 0;
+    }
+}
+----
+[IMPORTANT]
+====
+Le code écrit est le minimum pour compiler et lancer les tests unitaires
+====
+
+==== 3ᵉ étape : Exécuter les tests unitaires
+Tous les tests unitaires échouent car, la méthode calculerTarif retourne 0.
+
+image::../asciidoc/images/tdd_deuxieme_test_tous_ko.png[]
+
+=== 4ᵉ étape : Rédiger le code source pour faire passer les tests unitaires
+
+Maintenant, nous allons écrire le code pour faire passer les tests unitaires. Et bien sûr, nous allons écrire le minimum de code pour faire passer les tests unitaires.
+
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+
+public class AbonnementServiceDefault implements AbonnementService {
+    @Override
+    public int calculerTarif(Adherent adherent) {
+        return 200; //Le minimum de code pour faire un test
+    }
+}
+----
+[NOTE]
+====
+On peut remarquer que deux tests unitaires passent.
+====
+image::../asciidoc/images/tdd_deuxieme_test_retourne_200.png[]
+
+==== 5ᵉ étape : Rédiger le code source pour faire passer un autre test unitaire
+
+Toujours écrire le minimum de code pour faire passer le test unitaire.
+
+.18-25 ans : 400€/an
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+
+public class AbonnementServiceDefault implements AbonnementService {
+    @Override
+    public int calculerTarif(Adherent adherent) {
+        int age = adherent.getDateNaiss().until(LocalDate.now()).getYears();
+        if(age >= 18 && age <= 25)
+            return 400;
+        return 200;
+    }
+}
+----
+
+image::../asciidoc/images/tdd_deuxieme_test_retourne_200_400.png[]
+
+.26-64 ans : 600€/an
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+
+public class AbonnementServiceDefault implements AbonnementService {
+    @Override
+    public int calculerTarif(Adherent adherent) {
+        int age = adherent.getDateNaiss().until(LocalDate.now()).getYears();
+        if(age >= 26 && age <= 64)
+            return 600;
+        if(age >= 18 && age <= 25)
+            return 400;
+        return 200;
+    }
+}
+----
+
+[IMPORTANT]
+====
+On peut remarquer que tous les tests unitaires passent. Ce qui veut dire que le code écrit est suffisant.
+====
+
+image::../asciidoc/images/tdd_deuxieme_test_tous_ok.png[]
+
+=== Dernière étape : Refactoring
+
+Le code écrit est fonctionnel mais, il n'est pas forcément propre. +
+Il faut le refactorer mais il est aussi possible de ne pas avoir besoin de réfactorer.
+
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+
+import java.time.LocalDate;
+
+public class AbonnementServiceDefault implements AbonnementService {
+    @Override
+    public int calculerTarif(Adherent adherent) {
+        int age = adherent.getDateNaiss().until(LocalDate.now()).getYears();
+        if(age >= 26 && age <= 64)
+            return 600;
+        if(age >= 18 && age <= 25)
+            return 400;
+        return 200;
+    }
+}
+----
+
+Personnellement, je ferais juste un petit refactoring/clean code pour
+
+* Extraire la méthode calculerAge
+* Extraire les constantes pour les tarifs
+* Les tests des if
+
+Cela va ajouter des méthodes et des constantes mais, le code sera plus lisible.
+
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+
+import java.time.LocalDate;
+
+public class AbonnementServiceDefault implements AbonnementService {
+    private static final int TARIF_16_17_SUP_65 = 200;
+    private static final int TARIF_18_25 = 400;
+    private static final int TARIF_26_64 = 600;
+    @Override
+    public int calculerTarif(Adherent adherent) {
+        int age = calculerAge(adherent);
+
+        if(isAdulte(age))
+            return TARIF_26_64;
+        if(isEtudiant(age))
+            return TARIF_18_25;
+
+        return TARIF_16_17_SUP_65;
+    }
+
+
+
+    /**
+     * Calculer l'age d'un adhérent
+     * @param adherent l'adhérent
+     * @return l'âge
+     */
+    private int calculerAge(Adherent adherent) {
+        return adherent.getDateNaiss().until(LocalDate.now()).getYears();
+    }
+
+    /**
+     * Verifier si l'adhérent est un étudiant avec un âge entre 18 et 25 ans
+     * @param age l'age de l'adhérent
+     * @return true si l'adhérent est un étudiant
+     */
+    private boolean isEtudiant(int age) {
+        return age >= 18 && age <= 25;
+    }
+
+    /**
+     * Verifier si l'adhérent est un adulte avec un âge entre 26 et 64 ans
+     * @param age l'age de l'adhérent
+     * @return true si l'adhérent est un adulte
+     */
+    private boolean isAdulte(int age) {
+        return age >= 26 && age <= 64;
+    }
+}
+----
+
+image::../asciidoc/images/tdd_deuxieme_test_tous_ok_refacto.png[]
+
+[IMPORTANT]
+====
+Après chaque refactoring, il faut relancer les tests unitaires pour vérifier que le code fonctionne toujours.
+C'est le principe du baby step. Ce qui veut dire qu'après chaque refactoring, il faut relancer les tests unitaires.
+Si le code ne fonctionne plus, il faut revenir en arrière(ctr-z).
+====
+
+== En Bonus
+
+Il est aussi possible de faire du refactoring sur le code des tests unitaires.
+
+[source,java]
+----
+package org.hussard.tdd.services;
+
+import org.hussard.tdd.data.Adherent;
+import org.hussard.tdd.data.AdherentBuilder;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.time.LocalDate;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("Les tarifs sont dégressifs en fonction de l âge pour une année d abonnement.")
+class AbonnementServiceTest {
+    private final AbonnementService abonnementService = new AbonnementServiceDefault();
+
+    @ParameterizedTest(name = "Adherent de {0} ans : {1}€/an")
+    @MethodSource("reglesTarifs")
+    void calculerTarif(int annee,
+                       int tarif) {
+        LocalDate dateNaissance = LocalDate.now().minusYears(annee);
+        Adherent adherent = AdherentBuilder
+                .get()
+                .dateNaiss(dateNaissance)
+                .build();
+
+        int tarifColcule = abonnementService.calculerTarif(adherent);
+        assertThat(tarifColcule)
+                .isEqualTo(tarif);
+    }
+
+    private static Stream<Arguments> reglesTarifs() {
+        return Stream.of(
+                Arguments.of(16, 200),
+                Arguments.of(18, 400),
+                Arguments.of(26, 600),
+                Arguments.of(65, 200)
+        );
+    }
+}
+
+----

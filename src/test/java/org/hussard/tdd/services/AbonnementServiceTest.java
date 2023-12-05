@@ -3,65 +3,40 @@ package org.hussard.tdd.services;
 import org.hussard.tdd.data.Adherent;
 import org.hussard.tdd.data.AdherentBuilder;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.LocalDate;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@DisplayName("Les tarifs sont dégressifs en fonction de l âge pour une année d abonnement.")
 class AbonnementServiceTest {
-    @Test
-    @DisplayName("16-17 ans : 200€/an")
-    void calculerTarif_Quand_AdherentEstEntre16Et17Ans_Attend_200() {
+    private final AbonnementService abonnementService = new AbonnementServiceDefault();
 
-        LocalDate mineur = LocalDate.now().minusYears(16);
+    @ParameterizedTest(name = "Adherent de {0} ans : {1}€/an")
+    @MethodSource("reglesTarifs")
+    void calculerTarif(int annee,
+                       int tarif) {
+        LocalDate dateNaissance = LocalDate.now().minusYears(annee);
         Adherent adherent = AdherentBuilder
                 .get()
-                .dateNaiss(mineur)
+                .dateNaiss(dateNaissance)
                 .build();
-        AbonnementService abonnementService = new AbonnementServiceDefault();
-        int tarif = abonnementService.calculerTarif(adherent);
-        assertThat(tarif)
-                .isEqualTo(200);
+
+        int tarifCalcule = abonnementService.calculerTarif(adherent);
+        assertThat(tarifCalcule)
+                .isEqualTo(tarif);
     }
-    @Test
-    @DisplayName("18-25 ans : 400€/an")
-    void calculerTarif_Quand_AdherentEstEntre18Et25Ans_Attend_400() {
-        LocalDate mineur = LocalDate.now().minusYears(18);
-        Adherent adherent = AdherentBuilder
-                .get()
-                .dateNaiss(mineur)
-                .build();
-        AbonnementService abonnementService = new AbonnementServiceDefault();
-        int tarif = abonnementService.calculerTarif(adherent);
-        assertThat(tarif)
-                .isEqualTo(400);
-    }
-    @Test
-    @DisplayName("26-64 ans : 600€/an")
-    void calculerTarif_Quand_AdherentEstEntre26Et64Ans_Attend_600() {
-        LocalDate mineur = LocalDate.now().minusYears(26);
-        Adherent adherent = AdherentBuilder
-                .get()
-                .dateNaiss(mineur)
-                .build();
-        AbonnementService abonnementService = new AbonnementServiceDefault();
-        int tarif = abonnementService.calculerTarif(adherent);
-        assertThat(tarif)
-                .isEqualTo(600);
-    }
-    @Test
-    @DisplayName("65 ans et plus : 200€/an")
-    void calculerTarif_Quand_AdherentEstApret65Ans_Attend_200() {
-        LocalDate mineur = LocalDate.now().minusYears(65);
-        Adherent adherent = AdherentBuilder
-                .get()
-                .dateNaiss(mineur)
-                .build();
-        AbonnementService abonnementService = new AbonnementServiceDefault();
-        int tarif = abonnementService.calculerTarif(adherent);
-        assertThat( tarif)
-                .isEqualTo(200);
+
+    private static Stream<Arguments> reglesTarifs() {
+        return Stream.of(
+                Arguments.of(16, 200),
+                Arguments.of(18, 400),
+                Arguments.of(26, 600),
+                Arguments.of(65, 200)
+        );
     }
 }

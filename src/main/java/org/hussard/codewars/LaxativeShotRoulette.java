@@ -1,7 +1,7 @@
 package org.hussard.codewars;
 
 /**
- *<p>
+ * <p>
  * Peter aime prendre des risques, et cette fois-ci, il a décidé de passer à la vitesse supérieure !
  * <br>
  * <br>
@@ -12,7 +12,7 @@ package org.hussard.codewars;
  * <br>Un seul verre suffit à donner à Pierre un ventre qui coule.
  * <br><br>Quelle est la probabilité que Pierre n'ait pas besoin de courir aux toilettes ?
  * </p>
- *<p>
+ * <p>
  * On vous donne :
  * <br>
  * <ul>
@@ -24,7 +24,7 @@ package org.hussard.codewars;
  * <br> n sera toujours supérieur à x, et a sera toujours inférieur à n.
  * <br><br>
  * <b>Vous devez renvoyer la probabilité arrondie à deux décimales, c'est-à-dire 0,05 ou 0,81.</b>
- *</p>
+ * </p>
  * <p>
  *  <br> P = n/N
  * <ul>
@@ -38,9 +38,14 @@ public class LaxativeShotRoulette {
     private LaxativeShotRoulette() {
         throw new UnsupportedOperationException("LaxativeShotRoulette is a utility class and cannot be instantiated");
     }
-    public static double getChance(int n, int x, int a) {
-        //
-        double resultat = (double) (n - a) / n;
-        return resultat;
+
+    public static double getChance(int n,
+                                   int x,
+                                   int a) {
+        double p = 1.0;
+        for (int i = a; i > 0; i--) {
+            p *= (double) (n - x - i + 1) / (n - i + 1);
+        }
+        return Math.round(100 * p) / 100.;
     }
 }

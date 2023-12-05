@@ -91,7 +91,7 @@ class AdherentBuilderTest {
 ----
 [IMPORTANT]
 ====
-Pour l'instant, il n'existe pas de code or mis celui du test unitaire. Le test unitaire ne compile pas car, la classe Adherent n'existe pas. Le test unitaire échoue parce que, l'exception AdherentMineurException n'existe pas
+Pour l'instant, il n'existe pas de code or mis celui du test unitaire. Le test unitaire ne compile pas car, les classes Adherent, AdherentBuilder AdherentMineurException n'existent pas
 ====
 
 
@@ -102,7 +102,7 @@ image::../asciidoc/images/tdd_premier_test.png[Vue dans l'IDE]
 
 [NOTE]
 ====
-Sous l'IDE, il est possible de générer le code source de la classe AdherentBuilder et de l'exception AdherentMineurException avec les raccourcis clavier suivants en se positionnant sur les noms de classes :
+Sous l'IDE, il est possible de générer le code source des classes Adherent, AdherentBuilder et de l'exception AdherentMineurException avec les raccourcis clavier suivants en se positionnant sur les noms de classes :
 * AdherentBuilder : Alt + Entrée
 * AdherentMineurException : Alt + Entrée
 
@@ -259,6 +259,7 @@ Pour cela, il suffit de reprendre à l'étape 1. pour le test unitaire suivant.
 [NOTE]
 ====
 Les tarifs sont dégressifs en fonction de l'âge pour une année d'abonnement.
+
 - 16-17 ans : 200€/an
 - 18-25 ans : 400€/an
 - 26-64 ans : 600€/an

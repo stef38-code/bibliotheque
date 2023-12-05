@@ -373,7 +373,7 @@ Tous les tests unitaires échouent car, la méthode calculerTarif retourne 0.
 
 image::../asciidoc/images/tdd_deuxieme_test_tous_ko.png[]
 
-=== 4ᵉ étape : Rédiger le code source pour faire passer les tests unitaires
+==== 4ᵉ étape : Rédiger le code source pour faire passer les tests unitaires
 
 Maintenant, nous allons écrire le code pour faire passer les tests unitaires. Et bien sûr, nous allons écrire le minimum de code pour faire passer les tests unitaires.
 
@@ -396,7 +396,7 @@ On peut remarquer que deux tests unitaires passent.
 ====
 image::../asciidoc/images/tdd_deuxieme_test_retourne_200.png[]
 
-=== 5ᵉ étape : Rédiger le code source pour faire passer un autre test unitaire
+==== 5ᵉ étape : Rédiger le code source pour faire passer un autre test unitaire
 
 Toujours écrire le minimum de code pour faire passer le test unitaire.
 
@@ -447,7 +447,7 @@ On peut remarquer que tous les tests unitaires passent. Ce qui veut dire que le 
 
 image::../asciidoc/images/tdd_deuxieme_test_tous_ok.png[]
 
-=== Dernière étape : Refactoring
+==== Dernière étape : Refactoring
 
 Le code écrit est fonctionnel mais, il n'est pas forcément propre. +
 Il faut le refactorer mais il est aussi possible de ne pas avoir besoin de réfactorer.

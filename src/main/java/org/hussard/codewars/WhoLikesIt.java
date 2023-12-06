@@ -20,12 +20,26 @@ package org.hussard.codewars;
  * </p>
  */
 public class WhoLikesIt {
+    public static final String NO_ONE_LIKES_THIS = "no one likes this";
+
     private WhoLikesIt() {
         throw new UnsupportedOperationException("WhoLikesIt is a utility class and cannot be instantiated");
     }
 
     public static String whoLikesIt(String... names) {
-        //Do your magic here
-        return "";
+        if (names.length == 0) {
+            return NO_ONE_LIKES_THIS;
+        }
+        if (names.length == 1) {
+            return "%s likes this".formatted(names[0]);
+        }
+        if (names.length == 2) {
+            return "%s and %s like this".formatted(names[0],names[1]);
+        }
+
+        if (names.length == 3) {
+            return "%s, %s and %s like this".formatted(names[0],names[1],names[2]);
+        }
+        return "%s, %s and %d others like this".formatted(names[0], names[1], names.length - 2);
     }
 }

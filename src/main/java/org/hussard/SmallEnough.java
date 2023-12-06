@@ -1,4 +1,4 @@
-package org.hussard.codewars;
+package org.hussard;
 
 /**
  * https://www.codewars.com/kata/57cc981a58da9e302a000214/train/java

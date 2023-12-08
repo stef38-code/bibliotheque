@@ -39,9 +39,19 @@ public class LaxativeShotRoulette {
         throw new UnsupportedOperationException("LaxativeShotRoulette is a utility class and cannot be instantiated");
     }
 
+    /**
+     * Calcule la probabilité que Pierre n'ait pas besoin d'aller aux toilettes après avoir bu un certain nombre de verres.
+     *
+     * @param n le nombre total de verres
+     * @param x le nombre de verres contenant des laxatifs
+     * @param a le nombre de verres que Pierre boit
+     * @return la probabilité que Pierre n'ait pas besoin d'aller aux toilettes, arrondie à deux décimales
+     */
     public static double getChance(int n,
                                    int x,
                                    int a) {
+
+
         double p = 1.0;
         for (int i = a; i > 0; i--) {
             p *= (double) (n - x - i + 1) / (n - i + 1);

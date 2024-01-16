@@ -3,14 +3,17 @@ package org.hussard.pattern.fluent;
 import java.time.LocalDate;
 
 public class Personne {
-    private final String nom;
-    private final String prenom;
-    private final LocalDate dNaiss;
+    private String nom;
+    private String prenom;
+    private LocalDate dNaiss;
 
-    private final String emploi;
-    private final boolean marie;
+    private String emploi;
+    private boolean marie;
 
-    public Personne(String nom, String prenom, LocalDate dNaiss, String emploi, boolean marie) {
+    @Deprecated
+    Personne() {}
+
+    Personne(String nom, String prenom, LocalDate dNaiss, String emploi, boolean marie) {
         this.nom = nom;
         this.prenom = prenom;
         this.dNaiss = dNaiss;
@@ -36,5 +39,8 @@ public class Personne {
 
     public boolean isMarie() {
         return marie;
+    }
+    public static PersonneFluent.PersonnePrenom nom(String name) {
+        return PersonneFluent.name(name);
     }
 }

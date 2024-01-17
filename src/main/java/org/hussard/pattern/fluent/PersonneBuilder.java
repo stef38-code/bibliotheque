@@ -9,12 +9,13 @@ public class PersonneBuilder
         implements PersonneFluent,
                 PersonneFluent.PersonnePrenom,
                 PersonneFluent.PersonneDateNaiss,
+                PersonneFluent.PersonneMarieOrEmploi,
                 PersonneFluent.PersonneCreate {
     private String nom;
     private String prenom;
     private LocalDate dNaiss;
-    private String emploi;
-    private boolean marie;
+    private String emploi = StringUtils.EMPTY;
+    private boolean marie = false;
     PersonneBuilder(String nom) {
         this.nom = nom;
     }
@@ -30,7 +31,7 @@ public class PersonneBuilder
     }
 
     @Override
-    public PersonneCreate dateNaiss(LocalDate dNaiss) {
+    public PersonneMarieOrEmploi dateNaiss(LocalDate dNaiss) {
         if (Objects.isNull(dNaiss)) {
             throw new PersonneException("La date de naissance est obligatoirement renseigné !!");
         }
@@ -43,6 +44,18 @@ public class PersonneBuilder
 
     @Override
     public Personne create() {
-        return new Personne(nom, prenom, dNaiss, null, false);
+        return new Personne(nom, prenom, dNaiss, emploi, marie);
+    }
+
+    @Override
+    public PersonneCreate marie(boolean isMarie) {
+        this.marie = isMarie;
+        return this;
+    }
+
+    @Override
+    public PersonneCreate emploi(String emploi) {
+        this.emploi = emploi;
+        return this;
     }
 }

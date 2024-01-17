@@ -42,7 +42,7 @@ class PersonneFluentPremierCasTest {
         softly.assertThat(personne.getNom()).isEqualTo(nom);
         softly.assertThat(personne.getPrenom()).isEqualTo(prenom);
         softly.assertThat(personne.getdNaiss()).isEqualTo(dNaiss);
-        softly.assertThat(personne.getEmploi()).isNull();
+        softly.assertThat(personne.getEmploi()).isEmpty();
         softly.assertThat(personne.isMarie()).isFalse();
        // Ajouter les autres tests
         softly.assertAll();

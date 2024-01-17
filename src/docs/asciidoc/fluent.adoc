@@ -81,32 +81,7 @@ Mais cela demande aussi à la personne qui va créer cette solution un apprentis
 
 Je vous propose de voir ensemble comme faire cela
 
-==== Schemas && Tests unitaires
 
-===== Deuxième cas
-[blue]``Une personne marié sans emploi``
-
-image::../asciidoc/images/fluentCas2.png[]
-
-[source,java]
-----
-class CreatePersonne{
-    @Test
-    @Display("Une personne marié sans emploi")
-    void create_UnePersonneMarieSansEmploi(){
-        Personne personne = Personne
-                .nom("Bob")
-                .prenom("Eponge")
-                .dNaiss(LocalDate.of(2000, 2, 25))
-                .marie(true)
-                .create();
-    }
-}
-----
-===== Troisième cas
-[blue]``Une personne pas marié avec emploi``
-
-image::../asciidoc/images/fluentCas3.png[]
 
 [source,java]
 ----
@@ -253,7 +228,7 @@ class PersonneFluentPremierCasTest {
         softly.assertThat(personne.getNom()).isEqualTo(nom);
         softly.assertThat(personne.getPrenom()).isEqualTo(prenom);
         softly.assertThat(personne.getdNaiss()).isEqualTo(dNaiss);
-        softly.assertThat(personne.getEmploi()).isNull();
+        softly.assertThat(personne.getEmploi()).isEmpty();
         softly.assertThat(personne.isMarie()).isFalse();
        // Ajouter les autres tests
         softly.assertAll();
@@ -350,8 +325,8 @@ public class PersonneBuilder
     private String nom;
     private String prenom;
     private LocalDate dNaiss;
-    private String emploi;
-    private boolean marie;
+    private String emploi = StringUtils.EMPTY;
+    private boolean marie = false;
     PersonneBuilder(String nom) {
         this.nom = nom;
     }
@@ -380,7 +355,7 @@ public class PersonneBuilder
 
     @Override
     public Personne create() {
-        return new Personne(nom, prenom, dNaiss, null, false);
+        return new Personne(nom, prenom, dNaiss, emploi, marie);
     }
 }
 ----
@@ -437,8 +412,224 @@ public class Personne {
 ===== Deuxième cas
 [blue]``Une Personne marié et sans emploi``
 
+image::../asciidoc/images/fluentCas2.png[]
+
+[IMPORTANT]
+====
+Les tests unitaires de la classe `PersonneFluentPremierCasTest` doivent toujours être **vert**
+====
+
+====== Le test
+
+[source,java]
+----
+package org.hussard.pattern.fluent;
+
+import com.github.javafaker.Faker;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+import static org.hussard.pattern.fluent.Personne.nom;
+
+class PersonneFluentDeuxiemeCasTest {
+    private Faker faker;
+    @BeforeEach
+    void setUp() {
+        faker = new Faker();
+    }
+    @Test
+    @DisplayName("Une Personne marié et sans emploi")
+    void creerUnePersonne_deuxiemeCas(){
+//Conditions préalables (given)
+        String prenom = faker.name().firstName();
+        String nom = faker.name().lastName();
+        LocalDate dNaiss = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        //Une action se produit (when)
+        Personne personne = nom(nom)
+                .prenom(prenom)
+                .dateNaiss(dNaiss)
+                .marie(true)
+                .create();
+        // Vérifier la sortie (then)
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(personne).isNotNull();
+        softly.assertThat(personne.getNom()).isEqualTo(nom);
+        softly.assertThat(personne.getPrenom()).isEqualTo(prenom);
+        softly.assertThat(personne.getdNaiss()).isEqualTo(dNaiss);
+        softly.assertThat(personne.getEmploi()).isEmpty();
+        softly.assertThat(personne.isMarie()).isTrue();
+        // Ajouter les autres tests
+        softly.assertAll();
+    }
+}
+----
+
+====== Les modifications
+
+La première étape est de définir dans l'interface `PersonneFluent` une nouvelle interface
+[source,java]
+----
+interface PersonneMarie{
+        PersonneCreate Marie(boolean isMarie);
+}
+----
+À ce moment-là, nous n'avons pas modifié le comportement de notre builder. +
+Pour rappel la saisie `dNaiss` doit aboutir à la saisie de `marie` donc il faut modifier l'interface  `PersonneDateNaiss` afin que la méthode `dateNaiss` retourne l'interface `PersonneMarie`
+
+[source,java]
+----
+interface PersonneDateNaiss{
+        //PersonneCreate dateNaiss(LocalDate dNaiss);
+        PersonneMarie dateNaiss(LocalDate dNaiss);
+    }
+interface PersonneMarie{
+        PersonneCreate marie(boolean isMarie);
+}
+----
+Pour l'instant, nous avons notre IDE qui nous indique qu'il y a des erreurs
+
+image::images/fluentCas2_erreurIDE1.png[]
+
+. `PersonneBuilder`
+    .. modification `public PersonneCreate dateNaiss(LocalDate dNaiss)`
+    .. Ajout de l'interface dans l'implémentation  `PersonneFluent.PersonneMarie,`
+    .. Surcharge de la nouvelle méthode `PersonneCreate marie(boolean isMarie)`
+
+
+[source,java]
+----
+public class PersonneBuilder
+        implements PersonneFluent,
+                PersonneFluent.PersonnePrenom,
+                PersonneFluent.PersonneDateNaiss,
+                PersonneFluent.PersonneMarie,
+                PersonneFluent.PersonneCreate {
+    private String nom;
+    private String prenom;
+    private LocalDate dNaiss;
+    private String emploi = StringUtils.EMPTY;
+    private boolean marie = false;
+    PersonneBuilder(String nom) {
+        this.nom = nom;
+    }
+
+    @Override
+    public PersonneDateNaiss prenom(String prenom) {
+        if (StringUtils.isBlank(prenom)) {
+            //
+            throw new PersonneException("Le prenom est obligatoirement renseigné !!");
+        }
+        this.prenom = prenom;
+        return this;
+    }
+
+    @Override
+    //public PersonneCreate dateNaiss(LocalDate dNaiss) {
+    public PersonneCreate dateNaiss(LocalDate dNaiss) {
+        if (Objects.isNull(dNaiss)) {
+            throw new PersonneException("La date de naissance est obligatoirement renseigné !!");
+        }
+        if (dNaiss.isAfter(LocalDate.now())) {
+            throw new PersonneException("La date de naissance ne peut pas être supérieur à date du jour");
+        }
+        this.dNaiss = dNaiss;
+        return this; //ici, une erreur apparaît
+    }
+
+    @Override
+    public Personne create() {
+        return new Personne(nom, prenom, dNaiss, emploi, marie);
+    }
+    @Override
+    public PersonneCreate marie(boolean isMarie) {
+        this.marie = isMarie;
+        return this;
+    }
+}
+----
+
+Maintenant, le nombre d'erreurs a baissé.
+
+image::images/fluentCas2_erreurIDE2.png[]
+
+Elles sont toutes dans le test unitaire `PersonneFluentPremierCasTest`
+
+image::images/fluentCas2_erreurIDE3.png[]
+
+[red]*Il est plus possible de respecter les conditions du premier test unitaire*
+
+[arabic,start=2]
+. Modifier l'interface `PersonneMarie` afin qu'elle donne la possibilité de respecter le premier test unitaire.
+Pour cela, il suffit juste de lui ajouter `extends PersonneCreate`
+
+====== Résultats des tests unitaires
+
+
+.PersonneFluentPremierCasTest
+image::images/fluentCas2_TU1_OK.png[]
+
+.PersonneFluentDeuxiemeCasTest
+image::images/fluentCas2_TU2_OK.png[]
+
 ===== Troisième cas
-[blue]``Une Personne non marié et un emploi``
+[blue]``Une personne pas marié avec emploi``
+
+image::../asciidoc/images/fluentCas3.png[]
+
+====== Le test unitaire
+[source,java]
+----
+package org.hussard.pattern.fluent;
+
+import com.github.javafaker.Faker;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+class PersonneFluentTroisiemeCasTest {
+    private Faker faker;
+    @BeforeEach
+    void setUp() {
+        faker = new Faker();
+    }
+    @Test
+    @DisplayName("Une personne pas marié avec emploi")
+    void creerUnePersonne_deuxiemeCas(){
+//Conditions préalables (given)
+        String prenom = faker.name().firstName();
+        String nom = faker.name().lastName();
+        LocalDate dNaiss = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String emploi = faker.company().profession();
+        //Une action se produit (when)
+        Personne personne = Personne.nom(nom)
+                .prenom(prenom)
+                .dateNaiss(dNaiss)
+                .emploi(emploi)
+                .create();
+        // Vérifier la sortie (then)
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(personne).isNotNull();
+        softly.assertThat(personne.getNom()).isEqualTo(nom);
+        softly.assertThat(personne.getPrenom()).isEqualTo(prenom);
+        softly.assertThat(personne.getdNaiss()).isEqualTo(dNaiss);
+        softly.assertThat(personne.getEmploi()).hasToString(emploi);
+        softly.assertThat(personne.isMarie()).isFalse();
+        // Ajouter les autres tests
+        softly.assertAll();
+    }
+}
+----
+
 
 ===== Quatrième cas
 [blue]``Une Personne marié et un emploi``

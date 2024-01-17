@@ -15,9 +15,21 @@ public interface PersonneFluent {
     interface PersonnePrenom{
         PersonneDateNaiss prenom(String prenom);
     }
-    interface PersonneDateNaiss{
-        PersonneCreate dateNaiss(LocalDate dNaiss);
+    interface PersonneDateNaiss extends PersonneCreate{
+        PersonneMarieOrEmploi dateNaiss(LocalDate dNaiss);
     }
+    interface PersonneMarieOrEmploi extends PersonneCreate{
+        PersonneCreate marie(boolean isMarie);
+        PersonneCreate emploi(String emploi);
+    }
+
+//    interface PersonneMarie extends PersonneCreate {
+//        PersonneCreate marie(boolean isMarie);
+//    }
+//
+//    interface PersonneEmploi extends PersonneCreate {
+//        PersonneCreate emploi(String emploi);
+//    }
     interface PersonneCreate{
         Personne create();
     }

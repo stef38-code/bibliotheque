@@ -12,17 +12,29 @@ public interface PersonneFluent {
         }
         return new PersonneBuilder(nom);
     }
-    interface PersonnePrenom{
+
+    interface PersonnePrenom {
         PersonneDateNaiss prenom(String prenom);
     }
-    interface PersonneDateNaiss extends PersonneCreate{
+
+    interface PersonneDateNaiss extends PersonneCreate {
         PersonneMarieOrEmploi dateNaiss(LocalDate dNaiss);
     }
-    interface PersonneMarieOrEmploi extends PersonneCreate{
+
+    interface PersonneMarieOrEmploi extends PersonneCreate {
         PersonneCreate marie(boolean isMarie);
+
         PersonneCreate emploi(String emploi);
     }
 
+    interface PersonneCreate {
+        Personne create();
+    }
+//    interface PersonneMarieOrEmploi extends PersonneCreate{
+//        PersonneEmploi marie(boolean isMarie);
+//        PersonneMarie emploi(String emploi);
+//    }
+//
 //    interface PersonneMarie extends PersonneCreate {
 //        PersonneCreate marie(boolean isMarie);
 //    }
@@ -30,7 +42,5 @@ public interface PersonneFluent {
 //    interface PersonneEmploi extends PersonneCreate {
 //        PersonneCreate emploi(String emploi);
 //    }
-    interface PersonneCreate{
-        Personne create();
-    }
+
 }

@@ -1,0 +1,17 @@
+@startuml
+
+left to right direction
+circle Personne
+circle nom
+circle prenom
+circle dNaiss
+circle marie
+circle create
+Personne --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> marie
+dNaiss --> create
+marie --> create
+
+@enduml

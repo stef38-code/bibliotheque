@@ -1,0 +1,24 @@
+@startuml
+
+left to right direction
+circle Personne
+circle nom
+circle prenom
+circle dNaiss
+circle marie
+circle emploi
+circle create
+Personne --> nom
+nom --> prenom
+prenom --> dNaiss
+dNaiss --> marie
+dNaiss --> emploi
+
+marie --> emploi
+emploi --> marie
+
+dNaiss --> create
+marie --> create
+emploi --> create
+
+@enduml

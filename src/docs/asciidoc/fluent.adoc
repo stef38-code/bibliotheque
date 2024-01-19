@@ -100,18 +100,6 @@ class CreatePersonne{
 }
 ----
 
-===== Quatrième cas
-
-[blue]``Une personne pas marié avec emploi``
-Ce cas est intéressant, car il doit être possible de saisir soit :
-
-* Marié puis emploi
-
-image::../asciidoc/images/fluentCas4_1.png[]
-
-* Emploi puis marié
-
-image::../asciidoc/images/fluentCas4_2.png[]
 
 [source,java]
 ----
@@ -414,6 +402,14 @@ public class Personne {
 
 image::../asciidoc/images/fluentCas2.png[]
 
+[red]** Rappel du premier cas **
+
+image::../asciidoc/images/fluentCas1.png[]
+
+Du coup, si nous reprenons le schema de notre premier cas, nous avons le schéma final suivant :
+
+image::../asciidoc/images/fluentCas1PlusCas2.png[]
+
 [IMPORTANT]
 ====
 Les tests unitaires de la classe `PersonneFluentPremierCasTest` doivent toujours être **vert**
@@ -582,6 +578,11 @@ image::images/fluentCas2_TU2_OK.png[]
 
 image::../asciidoc/images/fluentCas3.png[]
 
+Du coup, si nous reprenons le schema précédent, nous avons le schéma final suivant :
+
+image::../asciidoc/images/fluentCas1PlusCas2PLusCas3.png[]
+
+
 ====== Le test unitaire
 [source,java]
 ----
@@ -629,7 +630,109 @@ class PersonneFluentTroisiemeCasTest {
     }
 }
 ----
+====== Les modifications
 
+Afin de pouvoir répondre à ce cas, il faut modifier l'interface `PersonneFluent`.
 
+Supprimer l'interface `PersonneMarie`
+
+[source,java]
+----
+interface PersonneMarie{
+        PersonneCreate marie(boolean isMarie);
+}
+----
+
+Et ajouter, afin de donner la possibilité de saisir l'emploi ou marie
+
+[source,java]
+----
+interface PersonneMarieOrEmploi extends PersonneCreate {
+        PersonneCreate marie(boolean isMarie);
+
+        PersonneCreate emploi(String emploi);
+    }
+----
+
+Et `PersonneBuilder`
+
+[source,java]
+----
+package org.hussard.pattern.fluent;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.time.LocalDate;
+import java.util.Objects;
+
+public class PersonneBuilder
+        implements PersonneFluent,
+                PersonneFluent.PersonnePrenom,
+                PersonneFluent.PersonneDateNaiss,
+                PersonneFluent.PersonneMarieOrEmploi,
+                PersonneFluent.PersonneCreate {
+    private String nom;
+    private String prenom;
+    private LocalDate dNaiss;
+    private String emploi = StringUtils.EMPTY;
+    private boolean marie = false;
+    PersonneBuilder(String nom) {
+        this.nom = nom;
+    }
+
+    @Override
+    public PersonneDateNaiss prenom(String prenom) {
+        if (StringUtils.isBlank(prenom)) {
+            //
+            throw new PersonneException("Le prenom est obligatoirement renseigné !!");
+        }
+        this.prenom = prenom;
+        return this;
+    }
+
+    @Override
+    public PersonneMarieOrEmploi dateNaiss(LocalDate dNaiss) {
+        if (Objects.isNull(dNaiss)) {
+            throw new PersonneException("La date de naissance est obligatoirement renseigné !!");
+        }
+        if (dNaiss.isAfter(LocalDate.now())) {
+            throw new PersonneException("La date de naissance ne peut pas être supérieur à date du jour");
+        }
+        this.dNaiss = dNaiss;
+        return this;
+    }
+
+    @Override
+    public Personne create() {
+        return new Personne(nom, prenom, dNaiss, emploi, marie);
+    }
+
+    @Override
+    public PersonneCreate marie(boolean isMarie) {
+        this.marie = isMarie;
+        return this;
+    }
+
+    @Override
+    public PersonneCreate emploi(String emploi) {
+        this.emploi = emploi;
+        return this;
+    }
+}
+
+----
 ===== Quatrième cas
-[blue]``Une Personne marié et un emploi``
+
+[blue]``Une personne pas marié avec emploi``
+Ce cas est intéressant, car il doit être possible de saisir soit :
+
+* Marié puis emploi
+
+image::../asciidoc/images/fluentCas4_1.png[]
+
+* Emploi puis marié
+
+image::../asciidoc/images/fluentCas4_2.png[]
+
+Du coup, si nous reprenons le schema précédent, nous avons le schéma final suivant :
+

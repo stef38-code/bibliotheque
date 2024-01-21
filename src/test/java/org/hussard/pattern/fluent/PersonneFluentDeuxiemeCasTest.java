@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
-import static org.hussard.pattern.fluent.Personne.nom;
 
 class PersonneFluentDeuxiemeCasTest {
     private Faker faker;
@@ -26,7 +25,7 @@ class PersonneFluentDeuxiemeCasTest {
         LocalDate dNaiss = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
         //Une action se produit (when)
-        Personne personne = nom(nom)
+        Personne personne = Personne.nom(nom)
                 .prenom(prenom)
                 .dateNaiss(dNaiss)
                 .marie(true)

@@ -580,7 +580,7 @@ image::../asciidoc/images/fluentCas3.png[]
 
 Du coup, si nous reprenons le schema précédent, nous avons le schéma final suivant :
 
-image::../asciidoc/images/fluentCas1PlusCas2PLusCas3.png[]
+image::../asciidoc/images/fluentCas1PlusCas2PlusCas3.png[]
 
 
 ====== Le test unitaire
@@ -647,7 +647,7 @@ Et ajouter, afin de donner la possibilité de saisir l'emploi ou marie
 
 [source,java]
 ----
-interface PersonneMarieOrEmploi extends PersonneCreate {
+interface PersonneMarieOrEmploi {
         PersonneCreate marie(boolean isMarie);
 
         PersonneCreate emploi(String emploi);
@@ -721,6 +721,11 @@ public class PersonneBuilder
 }
 
 ----
+
+====== Résultats des tests unitaires
+
+image::images/fluentTestCas3OK.png[]
+
 ===== Quatrième cas
 
 [blue]``Une personne pas marié avec emploi``
@@ -736,3 +741,187 @@ image::../asciidoc/images/fluentCas4_2.png[]
 
 Du coup, si nous reprenons le schema précédent, nous avons le schéma final suivant :
 
+image::../asciidoc/images/fluentCas1PlusCas2PlusCas3PlusCas4.png[]
+
+====== Le test unitaire
+
+[source,java]
+----
+import com.github.javafaker.Faker;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+class PersonneFluentQuatriemeCasTest {
+    private Faker faker;
+    @BeforeEach
+    void setUp() {
+        faker = new Faker();
+    }
+    @Test
+    @DisplayName("Cas 1: Une personne marié avec un emploi")
+    void create_Cas1__UnePersonneMarieAvecUnEmploi(){
+        String prenom = faker.name().firstName();
+        String nom = faker.name().lastName();
+        LocalDate dNaiss = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String emploi = faker.company().profession();
+
+        Personne personne = Personne.nom(nom)
+                .prenom(prenom)
+                .dateNaiss(dNaiss)
+                .emploi(emploi)
+                .marie(true)
+                .create();
+
+        // Vérifier la sortie (then)
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(personne).isNotNull();
+        softly.assertThat(personne.getNom()).isEqualTo(nom);
+        softly.assertThat(personne.getPrenom()).isEqualTo(prenom);
+        softly.assertThat(personne.getdNaiss()).isEqualTo(dNaiss);
+        softly.assertThat(personne.getEmploi()).hasToString(emploi);
+        softly.assertThat(personne.isMarie()).isTrue();
+        // Ajouter les autres tests
+        softly.assertAll();
+
+    }
+    @Test
+    @DisplayName("Cas 2: Une personne marié avec un emploi")
+    void create_Cas2_UnePersonneMarieAvecUnEmploi(){
+        String prenom = faker.name().firstName();
+        String nom = faker.name().lastName();
+        LocalDate dNaiss = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String emploi = faker.company().profession();
+
+        Personne personne = Personne.nom(nom)
+                .prenom(prenom)
+                .dateNaiss(dNaiss)
+                .marie(true)
+                .emploi(emploi)
+                .create();
+
+        // Vérifier la sortie (then)
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(personne).isNotNull();
+        softly.assertThat(personne.getNom()).isEqualTo(nom);
+        softly.assertThat(personne.getPrenom()).isEqualTo(prenom);
+        softly.assertThat(personne.getdNaiss()).isEqualTo(dNaiss);
+        softly.assertThat(personne.getEmploi()).hasToString(emploi);
+        softly.assertThat(personne.isMarie()).isTrue();
+        // Ajouter les autres tests
+        softly.assertAll();
+
+    }
+}
+
+----
+
+====== Les modifications
+
+Il ne reste à mettre en place la possibilité de passer :
+
+* marie -> emploi -> create
+* emploi -> marie -> create
+
+Dans l'interface `PersonneFluent`, nous allons ajouter les deux interfaces :
+[source,java]
+----
+interface PersonneMarie extends PersonneCreate {
+        PersonneCreate marie(boolean isMarie);
+    }
+
+interface PersonneEmploi extends PersonneCreate {
+    PersonneCreate emploi(String emploi);
+}
+----
+
+Pour donner l'enchainement respecter l'enchaînement cité plus haut, il suffit de modifier l'interface `PersonneMarieOrEmploi`
+
+[source,java]
+----
+interface PersonneMarieOrEmploi {
+        //PersonneCreate marie(boolean isMarie);
+        PersonneEmploi marie(boolean isMarie);
+        //PersonneCreate emploi(String emploi);
+        PersonneMarie emploi(String emploi);
+    }
+----
+
+Passons à la classe `PersonneBuilder`
+
+[source,java]
+----
+@Override
+// public PersonneCreate marie(boolean isMarie) {
+public PersonneEmploi marie(boolean isMarie) {
+    this.marie = isMarie;
+    return this;
+}
+
+@Override
+// public PersonneCreate emploi(String emploi) {
+public PersonneMarie emploi(String emploi) {
+    this.emploi = emploi;
+    return this;
+}
+----
+
+====== Résultats des tests unitaires
+
+image::images/fluentCas4OK.png[]
+
+==== Sources finales
+
+.Personne.java
+[source,java]
+----
+include::../../../src/main/java/org/hussard/pattern/fluent/Personne.java[]
+----
+
+.PersonneFluent.java
+[source,java]
+----
+include::../../../src/main/java/org/hussard/pattern/fluent/PersonneFluent.java[]
+----
+
+.PersonneBuilder.java
+[source,java]
+----
+include::../../../src/main/java/org/hussard/pattern/fluent/PersonneBuilder.java[]
+----
+
+.PersonneException.java
+[source,java]
+----
+include::../../../src/main/java/org/hussard/pattern/fluent/PersonneException.java[]
+----
+
+==== Les Tests unitaires
+
+.PersonneFluentPremierCasTest.java
+[source,java]
+----
+include::../../../src/test/java/org/hussard/pattern/fluent/PersonneFluentPremierCasTest.java[]
+----
+
+.PersonneFluentDeuxiemeCasTest.java
+[source,java]
+----
+include::../../../src/test/java/org/hussard/pattern/fluent/PersonneFluentDeuxiemeCasTest.java[]
+----
+
+.PersonneFluentTroisiemeCasTest.java
+[source,java]
+----
+include::../../../src/test/java/org/hussard/pattern/fluent/PersonneFluentTroisiemeCasTest.java[]
+----
+
+.PersonneFluentQuatriemeCasTest.java
+[source,java]
+----
+include::../../../src/test/java/org/hussard/pattern/fluent/PersonneFluentQuatriemeCasTest.java[]
+----

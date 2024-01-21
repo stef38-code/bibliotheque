@@ -12,7 +12,6 @@ import java.time.ZoneId;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
-import static org.hussard.pattern.fluent.Personne.nom;
 
 class PersonneFluentPremierCasTest {
     private Faker faker;
@@ -31,7 +30,7 @@ class PersonneFluentPremierCasTest {
         LocalDate dNaiss = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
         //Une action se produit (when)
-        Personne personne = nom(nom)
+        Personne personne = Personne.nom(nom)
                 .prenom(prenom)
                 .dateNaiss(dNaiss)
                 .create();
@@ -57,7 +56,7 @@ class PersonneFluentPremierCasTest {
 
         // Une action se produit (when)
         Throwable thrown =
-                catchThrowable(() -> nom(nom).prenom(prenom).dateNaiss(dNaiss).create());
+                catchThrowable(() -> Personne.nom(nom).prenom(prenom).dateNaiss(dNaiss).create());
         assertThat(thrown).isInstanceOf(PersonneException.class).hasMessage("Le nom est obligatoirement renseigné !!");
         //
     }
@@ -71,7 +70,7 @@ class PersonneFluentPremierCasTest {
 
         // Une action se produit (when)
         Throwable thrown =
-                catchThrowable(() -> nom(nom).prenom(prenom).dateNaiss(dNaiss).create());
+                catchThrowable(() -> Personne.nom(nom).prenom(prenom).dateNaiss(dNaiss).create());
         assertThat(thrown).isInstanceOf(PersonneException.class).hasMessage("Le prenom est obligatoirement renseigné !!");
         //
     }
@@ -85,7 +84,7 @@ class PersonneFluentPremierCasTest {
 
         // Une action se produit (when)
         Throwable thrown =
-                catchThrowable(() -> nom(nom).prenom(prenom).dateNaiss(dNaiss).create());
+                catchThrowable(() -> Personne.nom(nom).prenom(prenom).dateNaiss(dNaiss).create());
         assertThat(thrown).isInstanceOf(PersonneException.class).hasMessage("La date de naissance ne peut pas être supérieur à date du jour");
         //
     }

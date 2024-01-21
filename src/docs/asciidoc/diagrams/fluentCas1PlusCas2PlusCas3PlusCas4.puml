@@ -14,8 +14,8 @@ prenom --> dNaiss
 dNaiss --> marie
 dNaiss --> emploi
 
-marie --> emploi
-emploi --> marie
+marie -up-> emploi
+emploi -left-> marie
 
 dNaiss --> create
 marie --> create

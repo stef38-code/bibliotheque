@@ -1,10 +1,13 @@
 package org.hussard.pattern.fluent;
 
+import org.hussard.pattern.fluent.annotations.Model;
+
 import java.time.LocalDate;
 
 /**
  * Classe de données
  */
+@Model
 public class Personne {
     /**
      * Nom de la personne

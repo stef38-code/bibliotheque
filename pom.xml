@@ -94,6 +94,12 @@
             <artifactId>scala-stringutils_sjs1_2.13</artifactId>
             <version>0.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+            <version>1.2.1</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -156,6 +162,7 @@
                                         <include>org.slf4j:slf4j-jdk14:jar</include>
                                         <!-- -->
                                         <include>org.junit.jupiter:junit-jupiter:jar</include>
+                                        <include>com.tngtech.archunit:archunit-junit5:jar</include>
                                         <!-- -->
                                         <include>org.assertj:assertj-core:jar</include>
                                         <!-- -->

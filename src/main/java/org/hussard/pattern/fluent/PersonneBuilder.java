@@ -7,6 +7,14 @@ import java.util.Objects;
 
 /**
  * Classe Builder qui va permettre de mettre les restrictions/contrôles pour la création d'une nouvelle personne
+ *  - Le nom est obligatoire
+ *  - Le prénom est obligatoire
+ *  - La date de naissance est obligatoire
+ *  - La date de naissance ne peut pas être supérieur à la date du jour
+ *  - L'emploi est optionnel
+ *  - La personne est mariée est optionnel
+ *
+ * @see PersonneFluent
  */
 public class PersonneBuilder
         implements PersonneFluent,
@@ -16,7 +24,7 @@ public class PersonneBuilder
                 PersonneFluent.PersonneMarie,
                 PersonneFluent.PersonneEmploi,
                 PersonneFluent.PersonneCreate {
-    private String nom;
+    private final String nom;
     private String prenom;
     private LocalDate dNaiss;
     private String emploi = StringUtils.EMPTY;
@@ -26,6 +34,13 @@ public class PersonneBuilder
         this.nom = nom;
     }
 
+    /**
+     * Méthode statique pour créer une nouvelle personne
+     *
+     * @param prenom le prénom de la personne
+     * @return PersonnePrenom
+     * @throws PersonneException si le prénom est null ou vide
+     */
     @Override
     public PersonneDateNaiss prenom(String prenom) {
         if (StringUtils.isBlank(prenom)) {
@@ -36,6 +51,14 @@ public class PersonneBuilder
         return this;
     }
 
+    /**
+     * date de naissance de la personne
+     * @param dNaiss la date de naissance
+     * @return PersonneMarieOrEmploi
+     * @throws PersonneException si la date de naissance est null ou si la date de naissance est supérieur à la date du jour
+     * @see PersonneException
+     * @see PersonneFluent
+     */
     @Override
     public PersonneMarieOrEmploi dateNaiss(LocalDate dNaiss) {
         if (Objects.isNull(dNaiss)) {
@@ -47,18 +70,28 @@ public class PersonneBuilder
         this.dNaiss = dNaiss;
         return this;
     }
-
+    /**
+     * Méthode pour créer une personne mariée
+     * @return PersonneEmploi
+     */
     @Override
     public Personne create() {
         return new Personne(nom, prenom, dNaiss, emploi, marie);
     }
-
+    /**
+     * Méthode pour créer une personne mariée
+     * @return PersonneEmploi
+     */
     @Override
     public PersonneEmploi marie(boolean isMarie) {
         this.marie = isMarie;
         return this;
     }
-
+    /**
+     * Méthode pour créer une personne mariée
+     * @return PersonneMarie
+     *
+     */
     @Override
     public PersonneMarie emploi(String emploi) {
         this.emploi = emploi;

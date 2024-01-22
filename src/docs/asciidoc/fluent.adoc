@@ -874,6 +874,12 @@ public PersonneMarie emploi(String emploi) {
 
 image::images/fluentCas4OK.png[]
 
+==== Enchaînement final
+
+Si on regarde via l'IDE, on peut voir que l'enchaînement est respecté
+
+image::../asciidoc/images/fluentEnchainementFinal.png[]
+
 ==== Sources finales
 
 .Personne.java
